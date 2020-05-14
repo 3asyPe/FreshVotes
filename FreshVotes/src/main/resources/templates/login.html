@@ -8,9 +8,9 @@
 
 <th:url value="/login" var="loginProcessingUrl" />
 <form action="" method="post">
+	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 	<fieldset>
-	
-		Please Login
+		<legend>Please Login</legend>
 		<div th:if="${param.error != null}">
 			Failed to login.
 			<div th:if="${SPRING_SECURITY_LAST_EXCEPTION != null}">
