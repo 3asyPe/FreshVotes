@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,7 +21,10 @@ public class User {
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	
+	@Column(unique=true)
 	private String username;
+	
 	private String password;
 	private String name;
 	
@@ -56,6 +60,11 @@ public class User {
 	}
 	public void setAuthorities(Set<Authority> authorities) {
 		this.authorities = authorities;
+	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", name=" + name
+				+ ", authorities=" + authorities + "]";
 	}
 	
 }
