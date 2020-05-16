@@ -13,6 +13,10 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" th:href="@{css/login.css}" />
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+	integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+	crossorigin="anonymous"></script>
+
 </head>
 <body>
 
@@ -24,7 +28,7 @@
 		</div>
 
 		<div class="card-body">
-			<form action="" method="post">
+			<form action="" method="post" id="myForm">
 				
 				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 				
@@ -37,7 +41,7 @@
 					</div>
 					
 					<div class="form-group row">
-						<label for="name" class="col-lg-4 col-xl-3 col-form-label">Name</label>
+						<label for="name" c>Name</label>
 						<div class="col-lg-8 col-xl-9">
 							<input type="text" th:field="${user.name}" class="form-control" th:required="required">
 						</div>
@@ -59,10 +63,13 @@
 				</div>
 					
 					<a href="login" class="btn btn-info">Back</a>
-					<button type="submit" class="btn btn-primary float-right">Create Account</button>
+					<button type="submit" class="btn btn-primary float-right" id="createAccount">Create Account</button>
 			</form>
 		</div>
 	</div>
 </div>
+
+<script th:src="@{JavaScript/registration.js}"></script>
+
 </body>
 </html>
