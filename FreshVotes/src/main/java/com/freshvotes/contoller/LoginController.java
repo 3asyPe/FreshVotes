@@ -30,6 +30,6 @@ public class LoginController {
 	@PostMapping("/register")
 	public String registerPost(User user) {
 		userService.save(user);
-		return "redirect:/login";
+		return "redirect:/login?registered";
 	}
 }
