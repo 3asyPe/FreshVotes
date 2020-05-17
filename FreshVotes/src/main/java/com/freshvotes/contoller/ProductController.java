@@ -1,7 +1,6 @@
 package com.freshvotes.contoller;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
