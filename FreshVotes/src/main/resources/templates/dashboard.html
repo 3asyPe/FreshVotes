@@ -30,11 +30,17 @@
 		</div>
 	</div>
 	
-	<div class="raw">
-		<form action="/products" method="post">
+	<div class="row">
+		<form action="" method="post">
 			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 			<button type="submit" class="btn btn-primary">Create a Product</button>		
 		</form>
+	</div>
+	
+	<div th:if="${products != null}">
+		<div th:each="product : ${products}">
+			<a th:href="@{/products/{productId}(productId=${product.id})}" th:text="${product.name}"></a>
+		</div>
 	</div>
 </div>
 

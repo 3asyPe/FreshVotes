@@ -1,6 +1,7 @@
 package com.freshvotes.contoller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +12,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -25,10 +25,6 @@ public class ProductController {
 	@Autowired
 	private ProductRepository productRepo;
 	
-	@GetMapping("/products")
-	public String getProducts(Model model) {
-		return "products";
-	}
 	
 	@GetMapping("/products/{productId}")
 	public String getProduct(@PathVariable int productId,
@@ -48,18 +44,9 @@ public class ProductController {
 	
 	@PostMapping("/products/{productId}")
 	public String saveProduct(Product product, @PathVariable int productId) {
+		System.out.println(product);
 		productRepo.save(product);
-		return "redirect:/products";
+		return "redirect:/dashboard";
 	}
 	
-	@PostMapping("/products")
-	public String createProduct(@AuthenticationPrincipal User user) {
-		Product product = new Product(); 
-		product.setPublished(false);
-		product.setUser(user);
-		
-		product = productRepo.save(product);
-		
-		return "redirect:/products/" + product.getId();
-	}
 }
