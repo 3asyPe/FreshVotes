@@ -7,16 +7,14 @@
 
 <title>Fresh Votes Login Page</title>
 
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-	crossorigin="anonymous">
+<script th:replace="fragments/header :: headerElement"></script>
+
 <link rel="stylesheet" type="text/css" th:href="@{css/login.css}" />
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 	integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
 	crossorigin="anonymous"></script>
-	
+
 <script type="text/javascript">
 	$(function() {
 		$("#createAccount").click(function() {
@@ -28,7 +26,10 @@
 </head>
 <body>
 	
+<div th:replace="fragments/header :: header"></div>
+	
 <div class="container">
+
 		<div class="col-sm-10 col-md-8 col-lg-6 container-inner card">
 		
 			<div class="card-header">
@@ -66,9 +67,9 @@
 					</div>
 					
 					<div>
-						<button type="submit" class="btn btn-primary">Log in</button>
+						<button type="submit" class="btn btn-primary btn-main">Log in</button>
 			
-						<button type="button" class="btn btn-info btn-create" id="createAccount" >Create
+						<button type="button" class="btn btn-info btn-create btn-main" id="createAccount" >Create
 							Account</button>
 					</div>
 				
