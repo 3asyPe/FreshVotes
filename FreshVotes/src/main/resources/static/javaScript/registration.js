@@ -38,9 +38,12 @@ function matchingTheUsernames(){
 		})
 		.then(response => response.json())
 		.then(function(json){
+			console.log(json);
 			if(json === false){
-				console.log(json);
 				usernameEl.setCustomValidity("This username is already taken");
+			}
+			else{
+				usernameEl.setCustomValidity("");
 			}
 		});
 
