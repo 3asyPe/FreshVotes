@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,7 +39,30 @@ public class FeatureController {
 	
 	@GetMapping("/{featureId}")
 	public String getFeature(@PathVariable int productId,
-							 @PathVariable int featureId) {
+							 @PathVariable int featureId,
+							 HttpServletResponse response,
+							 Model model) throws IOException {
+		try {
+			Feature feature = featureService.findById(featureId);
+			model.addAttribute("feature", feature);
+		}
+		catch(Exception exc) {
+			response.sendError(HttpStatus.NOT_FOUND.value(), "There is no product with id " + productId);
+		}
 		return "feature";
 	}
+	
+	@PostMapping("/{featureId}")
+	public String updateFeature(@PathVariable int productId,
+								@PathVariable int featureId,
+								Feature feature) {
+		feature = featureService.save(feature);
+		return "redirect:/products/" + productId + "/features/" + feature.getId();
+	}
 }
+
+
+
+
+
+

@@ -39,4 +39,21 @@ public class FeatureService {
 		
 		return feature;
 	}
+
+	public Feature save(Feature feature) {
+		return featureRepo.save(feature);
+	}
+
+	public Feature findById(int featureId) {
+		Optional<Feature> featureOpt = featureRepo.findById(featureId);
+		Feature feature = null;
+		
+		if(featureOpt.isPresent()) {
+			feature = featureOpt.get();
+		}
+		else {
+			throw new RuntimeException("There is no feature with id - " + featureId);
+		}
+		return feature;
+	}
 }
