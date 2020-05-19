@@ -7,7 +7,7 @@
 
 	<script th:replace="fragments/header :: headerElement"></script>
 	
-	<link rel="stylesheet" type="text/css" th:href="@{/css/product.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/feature.css}" />
 
 </head>
 <body>
@@ -16,7 +16,13 @@
 	
 <div class="container">	
 	
-	<h1>Feature</h1>
+	<div class="row">
+		<h1 class="feature">Feature</h1>
+		
+		<div class="badge-status">
+			<h3><span class="badge badge-secondary" th:text="${feature.status}"></span></h3>
+		</div>
+	</div>
 	
 	<form action="" method="post">
 	
@@ -25,14 +31,14 @@
 		<input type="hidden" th:field="${feature.product}">
 		<input type="hidden" th:field="${feature.status}">
 		
-		<div>
-			<label>Title</label>
-			<input type="text" th:field="${feature.title}">
+		<div class="form-group">
+			<label for="title">Title</label>
+			<input type="text" th:field="${feature.title}" class="form-control">
 		</div>
 		
-		<div>
-			<label>Description</label>
-			<input type="text" th:field="${feature.description}">
+		<div class="form-group">
+			<label for="description">Description</label>
+			<textarea th:field="${feature.description}" class="form-control"></textarea>
 		</div>	
 		
 		<button type="submit" class="btn btn-primary">Save</button>

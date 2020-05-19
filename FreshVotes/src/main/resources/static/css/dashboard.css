@@ -1,3 +1,59 @@
 .container{
-	padding-top: 15px;
+	
 }
+
+.dashboard-title{
+	font-size: 50px;
+}
+
+.header{
+	padding: 15px 15px;
+	position: relative;
+}
+
+.form{
+	position: absolute;
+	right: 30px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.create-product{
+	top: 20px;
+	margin: auto;
+}
+
+.btn-open{
+	min-width: 120px;
+}
+
+.jumbotron{
+	padding-top: 16px;
+	padding-bottom: 16px;
+}
+
+.card{
+	margin-bottom: 20px;	
+}
+
+.card-text{
+	min-height: 100%;
+}
+
+.size{
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -moz-box;
+      -moz-box-orient: vertical;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      line-clamp: 3;
+      box-orient: vertical;
+}
+   
+/* .size:hover { */
+/*     background: #f0f0f0; ÷вет фона */
+/*     border-radius: 5px; */
+/*     white-space: normal; ќбычный перенос текста */
+/* } */

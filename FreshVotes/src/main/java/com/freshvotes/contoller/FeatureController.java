@@ -1,6 +1,8 @@
 package com.freshvotes.contoller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -55,9 +57,10 @@ public class FeatureController {
 	@PostMapping("/{featureId}")
 	public String updateFeature(@PathVariable int productId,
 								@PathVariable int featureId,
-								Feature feature) {
+								Feature feature) throws UnsupportedEncodingException {
 		feature = featureService.save(feature);
-		return "redirect:/products/" + productId + "/features/" + feature.getId();
+		return "redirect:/p/" + URLEncoder.encode(feature.getProduct().getName(),
+												  "UTF-8");
 	}
 }
 

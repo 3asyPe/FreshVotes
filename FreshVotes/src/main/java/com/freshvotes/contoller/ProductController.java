@@ -56,7 +56,7 @@ public class ProductController {
 				Optional<Product> productOpt = productRepo.findByName(decodedProductName);
 				
 				if(productOpt.isPresent()) {
-					model.addAttribute(productOpt.get());
+					model.addAttribute("product", productOpt.get());
 				}
 				else {
 					response.sendError(HttpStatus.NOT_FOUND.value(), "There is no product with name " + productName);
@@ -77,4 +77,22 @@ public class ProductController {
 		return "redirect:/dashboard";
 	}
 	
+	@PostMapping("/products/{productId}/delete")
+	public String deleteProduct(@PathVariable int productId) {
+		productRepo.deleteById(productId);
+		return "redirect:/dashboard";
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

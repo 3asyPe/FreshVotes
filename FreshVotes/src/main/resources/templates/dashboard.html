@@ -17,27 +17,36 @@
 <div th:replace="fragments/header :: header"></div>
 
 <div class="container">
-	<div class="row">
-			<h1>FreshVotes Dashboard</h1>
-	</div>
-	
-	<div class="jumbotron">
+	<div class="row header">
+		<div class="dashboard-title">FreshVotes Dashboard</div>
 		
-		<div th:if="${products != null}">
-			<h1>Products</h1>
-			
-			<div th:each="product : ${products}">
-				<a th:href="@{/products/{productId}(productId=${product.id})}" th:text="${product.name}"></a>
-			</div>
+		<div class="row form">
+			<form action="" method="post">
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+				<button type="submit" class="btn btn-primary create-product">Create a Product</button>		
+			</form>
 		</div>
 	</div>
 	
-	<div class="row">
-		<form action="" method="post">
-			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-			<button type="submit" class="btn btn-primary">Create a Product</button>		
-		</form>
+	<div class="jumbotron">
+		<div th:if="${products != null}">
+		
+			<h1>Products</h1>
+			
+			<div th:each="product : ${products}">
+				<div class="card">
+				    <h5 class="card-header" th:text="${product.name}"></h5>
+				    <div class="card-body">
+				        <h5 class="card-title size" th:text="${product.shortDescription}">Main description</h5>
+			        	<p class="card-text size" th:text="${product.fullDescription}">Long description with full information</p>
+					        
+				        <a th:href="@{/products/{productId}(productId=${product.id})}" class="btn btn-primary btn-open">Open</a>
+				    </div>
+				</div>
+			</div>		
+		</div>
 	</div>
+
 </div>
 
 </body>

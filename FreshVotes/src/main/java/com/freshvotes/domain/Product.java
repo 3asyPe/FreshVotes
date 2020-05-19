@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,6 +19,10 @@ public class Product {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String name;
+	private String shortDescription;
+	
+	@Column(length=5000)
+	private String fullDescription;
 	private boolean published;
 	
 	@ManyToOne
@@ -55,6 +60,19 @@ public class Product {
 	}
 	public void setPublished(boolean published) {
 		this.published = published;
+	}
+	
+	public String getShortDescription() {
+		return shortDescription;
+	}
+	public void setShortDescription(String shortDescription) {
+		this.shortDescription = shortDescription;
+	}
+	public String getFullDescription() {
+		return fullDescription;
+	}
+	public void setFullDescription(String fullDescription) {
+		this.fullDescription = fullDescription;
 	}
 	@Override
 	public String toString() {

@@ -1,3 +1,41 @@
-.custom-switch{
+.switcher{
 	cursor: pointer;
+}
+
+.custom-switch-label{
+	padding-left: 0;
+}
+
+.custom-switch{
+	margin-left: 15px;
+}
+
+.header{
+	position: relative;
+}
+
+.header-form{
+	position: absolute;
+	right: 15px;
+	top:50%;
+	transform: translateY(-50%);
+}
+
+.my-textarea{
+	line-height: 1.5;
+	height: auto;
+	resize: none;
+	overflow: hidden
+}
+
+.row-bottom{
+	position: relative;
+}
+
+.btn-save{
+	position: absolute;
+	right: 15px;
+	top:50%;
+	transform: translateY(-50%);
+	min-width: 120px;
 }
