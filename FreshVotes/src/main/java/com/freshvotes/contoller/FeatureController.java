@@ -51,7 +51,8 @@ public class FeatureController {
 		try {
 			Feature feature = featureService.findById(featureId);
 			model.addAttribute("feature", feature);
-			model.addAttribute("user", user);
+			model.addAttribute("user", user);	
+			model.addAttribute("comments", feature.getComments());
 		}
 		catch(Exception exc) {
 			response.sendError(HttpStatus.NOT_FOUND.value(), "There is no product with id " + productId);
