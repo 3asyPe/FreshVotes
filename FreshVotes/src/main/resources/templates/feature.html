@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 
 	<meta charset="UTF-8">
@@ -49,8 +50,24 @@
 	<div class="comments">
 		<h2>Comments</h2>
 		
+		<div class="media" sec:authorize="isAuthenticated()">
+		  <img src="..." class="mr-3" alt="...">
+		  <div class="media-body">
+		    <h5 class="mt-0" th:text="${user.name}">Media heading</h5>
+			<textarea class="form-control my-textarea" id="textarea-comment" rows="3"></textarea>
+		  </div>
+		</div>
+		
 		<div th:each="comment : ${comments}">
-			<div th:text="${comment.text}"></div>
+			
+			<div class="media">
+			  <img src="..." class="mr-3" alt="...">
+			  <div class="media-body">
+			    <h5 class="mt-0" th:text="comment.user.name">Media heading</h5>
+			    <div th:text="${comment.text}">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</div>
+			  </div>
+			</div>
+			
 		</div>
 	</div>
 	
