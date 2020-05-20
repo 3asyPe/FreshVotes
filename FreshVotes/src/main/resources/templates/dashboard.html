@@ -35,12 +35,18 @@
 			
 			<div th:each="product : ${products}">
 				<div class="card">
-				    <h5 class="card-header" th:text="${product.name}"></h5>
+				    <div class="card-header">
+				    	<h5 th:text="${product.name}"></h5>
+
+						<h6><span class="badge badge-secondary" th:if="${product.published}">Published</span></h6>
+
+				    </div>
 				    <div class="card-body">
 				        <h5 class="card-title size" th:text="${product.shortDescription}">Main description</h5>
 			        	<p class="card-text size" th:text="${product.fullDescription}">Long description with full information</p>
 					        
-				        <a th:href="@{/products/{productId}(productId=${product.id})}" class="btn btn-primary btn-open">Open</a>
+				        <a th:href="@{/products/{productId}(productId=${product.id})}" class="btn btn-primary btn-open">Edit</a>
+				        <a th:href="@{/p/{productName}(productName=${product.name})}" class="btn btn-primary btn-open">View</a>
 				    </div>
 				</div>
 			</div>		

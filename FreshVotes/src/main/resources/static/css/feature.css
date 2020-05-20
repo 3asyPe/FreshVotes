@@ -5,3 +5,10 @@
 .feature{
 	margin-left: 15px;
 }
+
+.my-textarea{
+	line-height: 1.5;
+	height: auto;
+	resize: none;
+	overflow: hidden
+}

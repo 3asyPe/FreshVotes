@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.freshvotes.domain.Feature;
+import com.freshvotes.domain.User;
 import com.freshvotes.service.FeatureService;
 
 @Controller
@@ -26,10 +28,11 @@ public class FeatureController {
 	private FeatureService featureService;
 	
 	@PostMapping("")
-	public String createFeatures(@PathVariable int productId,
+	public String createFeatures(@AuthenticationPrincipal User user,
+								 @PathVariable int productId,
 								 HttpServletResponse response) throws IOException {
 		try {
-			Feature feature = featureService.createFeature(productId);
+			Feature feature = featureService.createFeature(productId, user);
 			return "redirect:/products/" + productId + "/features/" + feature.getId();
 		}
 		catch(Exception exc) {
@@ -40,13 +43,15 @@ public class FeatureController {
 	}
 	
 	@GetMapping("/{featureId}")
-	public String getFeature(@PathVariable int productId,
+	public String getFeature(@AuthenticationPrincipal User user,
+							 @PathVariable int productId,
 							 @PathVariable int featureId,
 							 HttpServletResponse response,
 							 Model model) throws IOException {
 		try {
 			Feature feature = featureService.findById(featureId);
 			model.addAttribute("feature", feature);
+			model.addAttribute("user", user);
 		}
 		catch(Exception exc) {
 			response.sendError(HttpStatus.NOT_FOUND.value(), "There is no product with id " + productId);

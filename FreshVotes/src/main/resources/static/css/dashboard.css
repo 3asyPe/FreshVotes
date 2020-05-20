@@ -37,8 +37,10 @@
 }
 
 .card-text{
-	min-height: 100%;
+	min-height: 70px;
 }
+
+
 
 .size{
       overflow: hidden;
@@ -52,8 +54,27 @@
       box-orient: vertical;
 }
    
-/* .size:hover { */
-/*     background: #f0f0f0; ÷вет фона */
-/*     border-radius: 5px; */
-/*     white-space: normal; ќбычный перенос текста */
-/* } */
+.card-header{
+	display: flex;
+	justify-content: space-between;
+	position: relative;
+}
+
+.badge{
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
