@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.freshvotes.domain.User;
 
 @Entity
@@ -20,6 +21,7 @@ public class Authority implements GrantedAuthority{
 	private String authority;
 	
 	@ManyToOne
+	@JsonIgnore
 	private User user;
 	
 	@Override

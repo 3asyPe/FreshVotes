@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.freshvotes.domain.Feature;
 import com.freshvotes.domain.User;
+import com.freshvotes.service.CommentService;
 import com.freshvotes.service.FeatureService;
 
 @Controller
@@ -26,6 +27,9 @@ public class FeatureController {
 	
 	@Autowired
 	private FeatureService featureService;
+	
+	@Autowired
+	private CommentService commentService;
 	
 	@PostMapping("")
 	public String createFeatures(@AuthenticationPrincipal User user,
@@ -52,7 +56,7 @@ public class FeatureController {
 			Feature feature = featureService.findById(featureId);
 			model.addAttribute("feature", feature);
 			model.addAttribute("user", user);	
-			model.addAttribute("comments", feature.getComments());
+			model.addAttribute("comments", commentService.findByIdAndComment(featureId, null));
 		}
 		catch(Exception exc) {
 			response.sendError(HttpStatus.NOT_FOUND.value(), "There is no product with id " + productId);

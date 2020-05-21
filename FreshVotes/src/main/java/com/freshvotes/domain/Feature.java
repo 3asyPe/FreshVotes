@@ -12,7 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Feature {
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -22,12 +27,15 @@ public class Feature {
 	private String status;
 	
 	@ManyToOne
+	@JsonIgnore
 	private Product product;
 	
 	@ManyToOne
+	@JsonIgnore
 	private User user;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="feature")
+	@JsonIgnore
 	private Set<Comment> comments = new HashSet<>();
 	
 	public int getId() {

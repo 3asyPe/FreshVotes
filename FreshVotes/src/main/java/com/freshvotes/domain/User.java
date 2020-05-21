@@ -13,10 +13,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.freshvotes.security.Authority;
 
 @Entity
 @Table(name="users")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class User {
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -29,12 +33,15 @@ public class User {
 	private String name;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="user")
+	@JsonIgnore
 	private Set<Authority> authorities = new HashSet<>();
 	
 	@OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.LAZY, mappedBy="user")
+	@JsonIgnore
 	private Set<Product> products = new HashSet<>();
 	
 	@OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.LAZY, mappedBy="user")
+	@JsonIgnore
 	private Set<Feature> features = new HashSet<>();
 	
 	public int getId() {
