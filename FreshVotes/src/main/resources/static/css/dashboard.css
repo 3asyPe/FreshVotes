@@ -38,6 +38,7 @@
 
 .card-text{
 	min-height: 70px;
+	white-space: pre-line;
 }
 
 

@@ -4,12 +4,14 @@
 <head>
 
 	<meta charset="UTF-8">
+	
 	<title>FreshVotes Feature</title>
 
 	<script th:replace="fragments/header :: headerElement"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	
 	<link rel="stylesheet" type="text/css" th:href="@{/css/feature.css}" />
-
+	
 </head>
 <body>
 	
@@ -27,7 +29,7 @@
 	
 	<form action="" method="post">
 	
-		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" id="csrfToken"/>
 		<input type="hidden" th:field="${feature.id}">
 		<input type="hidden" th:field="${feature.product}">
 		<input type="hidden" th:field="${feature.status}">
@@ -50,28 +52,33 @@
 	<div class="comments">
 		<h2>Comments</h2>
 		
-		<form th:action="@{comments}" method="post">
-			<div class="media" sec:authorize="isAuthenticated()">
-			  <img src="..." class="mr-3" alt="...">
-			  <div class="media-body">
-			    <h5 class="mt-0" th:text="${user.name}">Media heading</h5>
-				<textarea class="form-control my-textarea" id="textarea-comment" rows="3"></textarea>
-			  </div>
-			  <button type="submit" class="btn btn-primary">Send</button>
-			</div>
-		</form>
+
+		<div class="media" sec:authorize="isAuthenticated()">
+		  <img src="..." class="mr-3" alt="...">
+		  <div class="media-body">
+		    <h5 class="mt-0" th:text="${user.name}">Media heading</h5>
+			<textarea class="form-control my-textarea" id="textarea-comment" rows="3"></textarea>
+		  </div>
+		  <button type="submit" class="btn btn-primary" id="send-button">Send</button>
+		</div>	
 		
-		<div class="other-comments">
+		<input type="hidden" id="name" th:value="${user.name}">
+
+		<div class="other-comments" id="commentsDiv">
 			<div th:fragment="fragment-comment" th:remove="tag">
 				<div th:if="${not #lists.isEmpty(comments)}">
-					<ul th:each="comment : ${comments}" th:with="comments = ${comment.comments}">	
-						<li class="media">
-						  <img src="..." class="mr-3" alt="...">
-						  <div class="media-body">
-						    <h5 class="mt-0" th:text="${comment.user.name}">Media heading</h5>
-						    <div th:text="${comment.text}">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</div>
-						  </div>
-						</li>
+					<ul th:each="comment : ${comments}"
+						th:with="comments = ${comment.comments}">
+						<li class="media"><img src="..." class="mr-3" alt="...">
+							<div class="media-body">
+								<h5 class="mt-0" th:text="${comment.user.name}">Media
+									heading</h5>
+								<div th:text="${comment.text}" class="comment-text">Cras sit amet nibh libero,
+									in gravida nulla. Nulla vel metus scelerisque ante
+									sollicitudin. Cras purus odio, vestibulum in vulputate at,
+									tempus viverra turpis. Fusce condimentum nunc ac nisi
+									vulputate fringilla. Donec lacinia congue felis in faucibus.</div>
+							</div></li>
 						<li th:replace="this::fragment-comment">List Item</li>
 					</ul>
 				</div>
