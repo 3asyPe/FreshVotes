@@ -10,7 +10,8 @@
 	line-height: 1.5;
 	height: auto;
 	resize: none;
-	overflow: hidden
+	overflow: hidden;
+	min-height: 36px;
 }
 
 .comments{
@@ -24,4 +25,5 @@
 
 .comment-text{
 	white-space: pre-line;
+	word-break: break-all;
 }

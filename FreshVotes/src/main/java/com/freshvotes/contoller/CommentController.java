@@ -3,6 +3,7 @@ package com.freshvotes.contoller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -19,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.freshvotes.domain.Comment;
 import com.freshvotes.domain.User;
 import com.freshvotes.repository.CommentRepository;
+import com.freshvotes.service.CommentService;
 import com.freshvotes.service.FeatureService;
 
 @Controller
@@ -26,7 +28,7 @@ import com.freshvotes.service.FeatureService;
 public class CommentController {
 	
 	@Autowired
-	private CommentRepository commentRepo;
+	private CommentService commentService;
 	
 	@Autowired
 	private FeatureService featureService;
@@ -37,22 +39,31 @@ public class CommentController {
 	@GetMapping("/comments")
 	@ResponseBody
 	public List<Comment> getComments(@PathVariable int featureId){
-		return commentRepo.findByFeatureId(featureId);
+		return commentService.findByFeatureId(featureId);
 	}
 	
 	@PostMapping("/comments")
 	@ResponseBody
-	public String createComment(@AuthenticationPrincipal User user,
-							    @RequestBody Comment comment,
+	public Integer createComment(@AuthenticationPrincipal User user,
+							    @RequestBody Object obj,
 							    @PathVariable int featureId) throws JsonProcessingException {
+		Comment comment = new Comment();
+
 		Date date = new Date();  
-
-
+		Map<String, String> json = (Map<String, String>)obj;
+		String text = json.get("text");
+		String commentId = json.get("commentId");
+		
+		if(commentId != null) {
+			comment.setComment(commentService.findById(Integer.parseInt(commentId)));
+		}
+		
+		comment.setText(text);
 		comment.setFeature(featureService.findById(featureId));
 		comment.setUser(user);
 		comment.setCreatedDate(date);
 		
-		return objectMapper.writeValueAsString(commentRepo.save(comment));
+		return commentService.save(comment).getId();
 		
 	}
 }

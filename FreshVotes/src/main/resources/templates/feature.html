@@ -68,17 +68,34 @@
 			<div th:fragment="fragment-comment" th:remove="tag">
 				<div th:if="${not #lists.isEmpty(comments)}">
 					<ul th:each="comment : ${comments}"
-						th:with="comments = ${comment.comments}">
-						<li class="media"><img src="..." class="mr-3" alt="...">
+						th:with="comments = ${comment.comments}" th:id="|comment-div-${comment.id}|">
+						<li class="media" th:id="|comment-${comment.id}|">
+							<img src="..." class="mr-3" alt="...">
 							<div class="media-body">
-								<h5 class="mt-0" th:text="${comment.user.name}">Media
-									heading</h5>
+								<div class="row">
+									<h5 class="mt-0" th:text="${comment.user.name}">Media heading</h5>
+									<button type="button" class="btn btn-sm btn-info reply-button" sec:authorize="isAuthenticated()" th:id="|reply-button-${comment.id}|">reply</button>
+								</div>
 								<div th:text="${comment.text}" class="comment-text">Cras sit amet nibh libero,
 									in gravida nulla. Nulla vel metus scelerisque ante
 									sollicitudin. Cras purus odio, vestibulum in vulputate at,
 									tempus viverra turpis. Fusce condimentum nunc ac nisi
 									vulputate fringilla. Donec lacinia congue felis in faucibus.</div>
-							</div></li>
+							</div>
+						</li>
+						<div class="d-none" th:id="|reply-textarea-div-${comment.id}|">
+							<ul>
+								<li class="media">
+								  <img src="..." class="mr-3" alt="...">
+								  <div class="media-body">
+								    <h5 class="mt-0" th:text="${user.name}">Media heading</h5>
+									<textarea class="form-control my-textarea" th:id="|reply-textarea-${comment.id}|" rows="1"></textarea>
+								  </div>
+								  <button type="submit" class="btn btn-primary send-button-reply" th:id="|send-button-${comment.id}|">Send</button>
+								  <button type="button" class="btn btn-info close-button" th:id="|close-button-${comment.id}|">Close</button>
+								</li>	
+							</ul>
+						</div>
 						<li th:replace="this::fragment-comment">List Item</li>
 					</ul>
 				</div>
