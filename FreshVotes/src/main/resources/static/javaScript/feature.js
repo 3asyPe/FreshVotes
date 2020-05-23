@@ -1,39 +1,32 @@
-var textareas = document.getElementsByClassName("my-textarea");
-
-for (var textarea of textareas){
-	textarea.addEventListener('input', autoResize, false);
-	textarea.style.height = 'auto';
-	textarea.style.height = textarea.scrollHeight + 'px';
-};
-
-  
-function autoResize() { 
-    this.style.height = 'auto'; 
-    this.style.height = this.scrollHeight + 'px';
-} 
-
 window.onload=function() {
-    var comments = document.getElementById("commentsDiv");
-    var commentsHTML= comments.innerHTML;
-    var textarea = document.getElementById("textarea-comment");
-    
-    var name=$("#name");
-    var text=$("#textarea-comment");
-    
-    var sendButton=$("#send-button");
-    var replyButtons = document.getElementsByClassName("reply-button");
-    var closeButtons = document.getElementsByClassName("close-button");
-    var sendButtonsReply = document.getElementsByClassName("send-button-reply");
-    
-    var postUrl = window.location.href + "/comments";
-    const csrfToken = document.getElementById("csrfToken").value;
-
+	var textareas = document.getElementsByClassName("my-textarea");
+	
+	for (var textarea of textareas){
+		textarea.addEventListener('input', autoResize, false);
+		textarea.style.height = 'auto';
+		textarea.style.height = textarea.scrollHeight + 'px';
+	};
+	
+	var comments = document.getElementById("commentsDiv");
+	var textarea = document.getElementById("textarea-comment");
+	
+	var sendButton=$("#send-button");
+	var replyButtons = document.getElementsByClassName("reply-button");
+	var closeButtons = document.getElementsByClassName("close-button");
+	var sendButtonsReply = document.getElementsByClassName("send-button-reply");
+	
+	const postUrl = window.location.href + "/comments";
+	const csrfToken = document.getElementById("csrfToken").value
+	
+	var name=$("#name");
+	
     sendButton.click(function( event ) {
+    	var text=$("#textarea-comment");
+    	
     	if(text.val() == ""){
         	return;
         }
         var parameters={
-            name: name.val(),
             text: text.val()
         };
 		
@@ -87,6 +80,11 @@ window.onload=function() {
     
     bindButtons();
     
+    function autoResize() { 
+	    this.style.height = 'auto'; 
+	    this.style.height = this.scrollHeight + 'px';
+	} 
+    
     function bindButtons(){
     	bindSendButtons();
     	bindClose();
@@ -102,12 +100,10 @@ window.onload=function() {
     
     function sendReplyComment(){
     	commentIdVal = this.getAttribute("id").split("-")[2];
-    	var text=$("#reply-textarea-" + commentIdVal);
-    	console.log(text);
+    	var text=$("#reply-textarea-" + commentIdVal)
     	if(text.val() == ""){
         	return;
         }
-    	
     	
         var parameters={
             text: text.val(),
