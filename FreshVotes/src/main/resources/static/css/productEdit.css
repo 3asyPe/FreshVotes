@@ -7,11 +7,16 @@
 }
 
 .custom-switch{
+	margin: auto 0;
 	margin-left: 15px;
 }
 
 .header{
 	position: relative;
+}
+
+.header-title{
+	display: flex;
 }
 
 .header-form{
@@ -21,6 +26,11 @@
 	transform: translateY(-50%);
 }
 
+.row-bottom{
+	display: flex;
+	justify-content: space-between;
+}
+
 .my-textarea{
 	line-height: 1.5;
 	height: auto;
@@ -28,14 +38,3 @@
 	overflow: hidden
 }
 
-.row-bottom{
-	position: relative;
-}
-
-.btn-save{
-	position: absolute;
-	right: 15px;
-	top:50%;
-	transform: translateY(-50%);
-	min-width: 120px;
-}

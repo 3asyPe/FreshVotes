@@ -9,7 +9,7 @@
 
 <script th:replace="fragments/header :: headerElement"></script>
 
-<link rel="stylesheet" th:href="@{css/dashboard.css}"/>
+<link rel="stylesheet" th:href="@{/css/dashboard.css}"/>
 
 </head>
 <body>
@@ -18,7 +18,7 @@
 
 <div class="container">
 	<div class="row header">
-		<div class="dashboard-title">FreshVotes Dashboard</div>
+		<div class="dashboard-title">My products</div>
 		
 		<div class="row form">
 			<form action="" method="post">
@@ -28,27 +28,30 @@
 		</div>
 	</div>
 	
-	<div class="jumbotron">
+
 		<div th:if="${products != null}">
 		
-			<h1>Products</h1>
+
 			
 			<div th:each="product : ${products}">
 				<div class="card">
 				    <div class="card-header">
 				    	<h5 th:text="${product.name}"></h5>
+				    	
+				    	<h6><span class="badge badge-secondary" th:if="${product.published}">Published</span></h6>
 
 				    </div>
 				    <div class="card-body">
 				        <h5 class="card-title size" th:text="${product.shortDescription}">Main description</h5>
 			        	<p class="card-text size" th:text="${product.fullDescription}">Long description with full information</p>
-					        
+					    
+					    <a th:href="@{/products/{productId}/edit(productId=${product.id})}" class="btn btn-info btn-open">Edit</a>
 				        <a th:href="@{/products/{productName}(productName=${product.name})}" class="btn btn-primary btn-open">View</a>
 				    </div>
 				</div>
 			</div>		
 		</div>
-	</div>
+
 
 </div>
 

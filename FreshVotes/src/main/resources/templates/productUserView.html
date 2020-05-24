@@ -7,7 +7,7 @@
 
 	<script th:replace="fragments/header :: headerElement"></script>
 	
-	<link rel="stylesheet" type="text/css" th:href="@{/css/product.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/productView.css}" />
 
 </head>
 <body>
@@ -15,14 +15,17 @@
 <div th:replace="fragments/header :: header"></div>
 	
 <div class="container" th:if="${product != null}">	
-	<h1 th:text="${product.name}">Product</h1>
-	
-	<form th:action="@{/products/{productId}/features(productId=${product.id})}" method="post">
-	
-		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />			
-		<button type="submit" class="btn btn-primary">Create Feature Request</button>
 
-	</form>
+	<div class="title">
+		<h1 th:text="${product.name}">Product</h1>
+		<div class="title-buttons">
+			<a th:href="@{/products/{productId}/edit(productId=${product.id})}" th:if="${user != null and user.id == product.user.id}" class="btn btn-primary btn-open">Edit</a>
+			<form th:action="@{/products/{productId}/features(productId=${product.id})}" method="post" class="btn-create-form">
+				<button type="submit" class="btn btn-primary btn-create">Create Feature Request</button>
+			</form>
+		</div>
+	</div>
+	
 	
 	<div th:each="feature : ${product.features}">
 		

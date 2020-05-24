@@ -41,4 +41,20 @@ public class DashboardController {
 		
 		return "redirect:/products/" + product.getId() + "/edit";
 	}
+	
+	@GetMapping("/dashboard/private")
+	public String getMyProducts(Model model,
+			@AuthenticationPrincipal User user) {
+		List<Product> products = productRepo.findByUser(user);
+		model.addAttribute("products", products);
+		return "dashboard-private";
+	}
 }
+
+
+
+
+
+
+
+

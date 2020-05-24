@@ -69,7 +69,7 @@ public class FeatureController {
 								@PathVariable int featureId,
 								Feature feature) throws UnsupportedEncodingException {
 		feature = featureService.save(feature);
-		return "redirect:/p/" + URLEncoder.encode(feature.getProduct().getName(),
+		return "redirect:/products/" + URLEncoder.encode(feature.getProduct().getName(),
 												  "UTF-8");
 	}
 }

@@ -1,0 +1,26 @@
+.btn-open{
+	min-width: 120px;
+	height: 38px;
+	margin: auto 0;
+	margin-right: 15px;
+}
+
+.btn-create{
+	min-width: 120px;
+	height: 38px;
+
+}
+
+.title{
+	display: flex;
+	justify-content: space-between;
+	text-align: center;	
+}
+
+.title-buttons{
+	display: flex;
+}
+
+.btn-create-form{
+	margin: auto 0;
+}

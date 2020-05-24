@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.freshvotes.domain.Product;
+import com.freshvotes.domain.User;
 import com.freshvotes.repository.ProductRepository;
 
 import java.nio.charset.StandardCharsets;
@@ -49,7 +51,8 @@ public class ProductController {
 	
 	@GetMapping("/products/{productName}")
 	public String productUserView(@PathVariable String productName, Model model,
-								  HttpServletResponse response) throws IOException {
+								  HttpServletResponse response,
+								  @AuthenticationPrincipal User user) throws IOException {
 		if(productName != null) {
 			try {
 				String decodedProductName = URLDecoder.decode(productName, StandardCharsets.UTF_8.name());
@@ -57,6 +60,7 @@ public class ProductController {
 				
 				if(productOpt.isPresent()) {
 					model.addAttribute("product", productOpt.get());
+					model.addAttribute("user", user);
 				}
 				else {
 					response.sendError(HttpStatus.NOT_FOUND.value(), "There is no product with name " + productName);
@@ -71,10 +75,10 @@ public class ProductController {
 	}
 	
 	@PostMapping("/products/{productId}/edit")
-	public String saveProduct(Product product, @PathVariable int productId) {
+	public String saveProduct(Product product, @PathVariable int productId) throws UnsupportedEncodingException {
 		System.out.println(product);
 		productRepo.save(product);
-		return "redirect:/dashboard";
+		return "redirect:/products/" + URLEncoder.encode(product.getName(), StandardCharsets.UTF_8.name());
 	}
 	
 	@PostMapping("/products/{productId}/delete")
