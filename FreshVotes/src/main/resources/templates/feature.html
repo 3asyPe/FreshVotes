@@ -37,16 +37,16 @@
 		
 		<div class="form-group">
 			<label for="title">Title</label>
-			<input type="text" th:field="${feature.title}" class="form-control" th:attrappend="disabled=${user.id == feature.user.id ? null : 'disabled'}">
+			<input type="text" th:field="${feature.title}" class="form-control" th:attrappend="disabled=${user != null and user.id == feature.user.id ? null : 'disabled'}">
 		</div>
 		
 		<div class="form-group">
 			<label for="description">Description</label>
 			<textarea class="form-control my-textarea" id="textarea" rows="3"
-					  th:field="${feature.description}" th:attrappend="disabled=${user.id == feature.user.id ? null : 'disabled'}"></textarea>
+					  th:field="${feature.description}" th:attrappend="disabled=${user != null and user.id == feature.user.id ? null : 'disabled'}"></textarea>
 		</div>	
 		
-		<button type="submit" class="btn btn-primary" th:if="${user.id == feature.user.id}">Save</button>
+		<button type="submit" class="btn btn-primary" th:if="${user != null and user.id == feature.user.id}">Save</button>
 	</form>
 	
 	<div class="comments">
@@ -62,7 +62,7 @@
 		  <button type="submit" class="btn btn-primary" id="send-button">Send</button>
 		</div>	
 		
-		<input type="hidden" id="name" th:value="${user.name}">
+		<input sec:authorize="isAuthenticated()" type="hidden" id="name" th:value="${user.name}">
 
 		<div class="other-comments" id="commentsDiv">
 			<div th:fragment="fragment-comment" th:remove="tag">
@@ -83,7 +83,7 @@
 									vulputate fringilla. Donec lacinia congue felis in faucibus.</div>
 							</div>
 						</li>
-						<div class="d-none" th:id="|reply-textarea-div-${comment.id}|">
+						<div sec:authorize="isAuthenticated()" class="d-none" th:id="|reply-textarea-div-${comment.id}|">
 							<ul>
 								<li class="media">
 								  <img src="..." class="mr-3" alt="...">

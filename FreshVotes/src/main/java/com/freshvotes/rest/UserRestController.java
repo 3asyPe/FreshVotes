@@ -1,5 +1,7 @@
 package com.freshvotes.rest;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,15 +12,16 @@ import com.freshvotes.domain.User;
 import com.freshvotes.repository.UserRepository;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/user")
 public class UserRestController {
 	
 	@Autowired
 	private UserRepository userRepo;
 	
 	@PostMapping("/username/match")
-	public boolean checkTheUsername(@RequestBody Username username) {
-		User result = userRepo.findByUsername(username.getUsername());
+	public boolean checkUsernameMatching(@RequestBody Object obj) {
+		Map<String, String> json = (Map<String, String>)obj;
+		User result = userRepo.findByUsername(json.get("username"));
 		
 		if(result == null) {
 			return true;

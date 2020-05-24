@@ -21,12 +21,12 @@ public class DashboardController {
 	
 	@GetMapping("/")
 	public String rootView() {
-		return "index";
+		return "redirect:/dashboard";
 	}
 	
 	@GetMapping("/dashboard")
-	public String dashboard(Model model, @AuthenticationPrincipal User user) {
-		List<Product> products = productRepo.findByUser(user);
+	public String dashboard(Model model) {
+		List<Product> products = productRepo.findByPublished(true);
 		model.addAttribute("products", products);
 		return "dashboard";
 	}
@@ -39,6 +39,6 @@ public class DashboardController {
 		
 		product = productRepo.save(product);
 		
-		return "redirect:/products/" + product.getId();
+		return "redirect:/products/" + product.getId() + "/edit";
 	}
 }

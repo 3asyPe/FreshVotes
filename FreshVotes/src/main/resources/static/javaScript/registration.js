@@ -20,7 +20,7 @@ function validatingPasswords(){
 
 function matchingTheUsernames(){
 	var usernameEl = document.getElementById("username");
-	const url = "http://localhost:8080/api/username/match";
+	const url = "http://localhost:8080/api/user/username/match";
 	const csrfToken = document.getElementById("csrfToken").value;
 	
 	function matchUsername(){
@@ -49,7 +49,7 @@ function matchingTheUsernames(){
 
 	}
 	
-	username.onchange = matchUsername;
+	usernameEl.onchange = matchUsername;
 }
 
 validatingPasswords();

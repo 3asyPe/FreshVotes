@@ -31,8 +31,8 @@ public class ProductController {
 	@Autowired
 	private ProductRepository productRepo;
 	
-	@GetMapping("/products/{productId}")
-	public String getProduct(@PathVariable int productId,
+	@GetMapping("/products/{productId}/edit")
+	public String editProduct(@PathVariable int productId,
 							 Model model, HttpServletResponse response) throws IOException {
 		Optional<Product> productOpt = productRepo.findById(productId);
 		
@@ -47,7 +47,7 @@ public class ProductController {
 		return "product";
 	}
 	
-	@GetMapping("/p/{productName}")
+	@GetMapping("/products/{productName}")
 	public String productUserView(@PathVariable String productName, Model model,
 								  HttpServletResponse response) throws IOException {
 		if(productName != null) {
@@ -70,7 +70,7 @@ public class ProductController {
 		return "productUserView";
 	}
 	
-	@PostMapping("/products/{productId}")
+	@PostMapping("/products/{productId}/edit")
 	public String saveProduct(Product product, @PathVariable int productId) {
 		System.out.println(product);
 		productRepo.save(product);
