@@ -11,6 +11,37 @@
 	position: relative;
 }
 
+.header-left{
+	display: flex;
+}
+
+.search{
+	margin: auto 0;
+	margin-left: 15px;
+	color: #212529;
+}
+
+.search-text:focus,
+.search-button:focus {
+    outline: none;
+}
+
+.search-text{
+	border: none;
+	border-bottom: 2px solid #212529;
+	
+	font-size: 16px;
+	line-height: 2.1;
+	
+	width: 200px;
+}
+
+.search-button{
+	padding: 0;
+	border: none;
+	background: none;
+}
+
 .form{
 	position: absolute;
 	right: 30px;

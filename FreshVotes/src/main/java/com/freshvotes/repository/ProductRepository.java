@@ -15,4 +15,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	public Optional<Product> findByName(String name);
 	
 	public List<Product> findByPublished(boolean published);
+
+	public List<Product> findByUserAndNameContaining(User user, String name);
+
+	public List<Product> findByPublishedAndNameContaining(boolean b, String search);
 }

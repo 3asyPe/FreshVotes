@@ -10,6 +10,7 @@
 <script th:replace="fragments/header :: headerElement"></script>
 
 <link rel="stylesheet" th:href="@{/css/dashboard.css}"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 <body>
@@ -18,10 +19,17 @@
 
 <div class="container">
 	<div class="row header">
-		<div class="dashboard-title">My products</div>
+		<div class="header-left">
+			<div class="dashboard-title">My products</div>
+			
+			<form class="search" th:action="@{/dashboard/private}" method="get">
+			  <input type="text" placeholder="Search.." th:name="search" class="search-text" th:value="${param.search}">
+			  <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
+			</form>
+		</div>
 		
 		<div class="row form">
-			<form action="" method="post">
+			<form th:action="@{/dashboard}" method="post">
 				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 				<button type="submit" class="btn btn-primary create-product">Create a Product</button>		
 			</form>
@@ -29,10 +37,7 @@
 	</div>
 	
 
-		<div th:if="${products != null}">
-		
-
-			
+		<div th:if="${not #lists.isEmpty(products)}">
 			<div th:each="product : ${products}">
 				<div class="card">
 				    <div class="card-header">
@@ -50,6 +55,10 @@
 				    </div>
 				</div>
 			</div>		
+		</div>
+		
+		<div th:if="${#lists.isEmpty(products)}">
+			error
 		</div>
 
 

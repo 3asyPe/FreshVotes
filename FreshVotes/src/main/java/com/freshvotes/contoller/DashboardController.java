@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.freshvotes.domain.Product;
 import com.freshvotes.domain.User;
@@ -25,8 +26,16 @@ public class DashboardController {
 	}
 	
 	@GetMapping("/dashboard")
-	public String dashboard(Model model) {
-		List<Product> products = productRepo.findByPublished(true);
+	public String dashboard(@RequestParam(value="search", required=false) String search,
+							Model model) {
+		List<Product> products;
+		
+		if(search != null) {
+			products = productRepo.findByPublishedAndNameContaining(true, search);
+		}
+		else {			
+			products = productRepo.findByPublished(true);
+		}
 		model.addAttribute("products", products);
 		return "dashboard";
 	}
@@ -43,12 +52,22 @@ public class DashboardController {
 	}
 	
 	@GetMapping("/dashboard/private")
-	public String getMyProducts(Model model,
-			@AuthenticationPrincipal User user) {
-		List<Product> products = productRepo.findByUser(user);
+	public String getMyProducts(@RequestParam(value="search", required=false) String search,
+								Model model,
+								@AuthenticationPrincipal User user) {
+		List<Product> products;
+		
+		if(search != null) {
+			products = productRepo.findByUserAndNameContaining(user, search);
+		}
+		else {			
+			products = productRepo.findByUser(user);
+		}
+		
 		model.addAttribute("products", products);
 		return "dashboard-private";
 	}
+
 }
 
 
