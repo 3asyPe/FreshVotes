@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
@@ -19,11 +21,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.freshvotes.domain.Feature;
 import com.freshvotes.domain.Product;
 import com.freshvotes.domain.User;
 import com.freshvotes.repository.ProductRepository;
-
-import java.nio.charset.StandardCharsets;
+import com.freshvotes.service.FeatureService;
 
 @Controller
 public class ProductController {
@@ -32,6 +34,9 @@ public class ProductController {
 	
 	@Autowired
 	private ProductRepository productRepo;
+	
+	@Autowired
+	private FeatureService featureService;
 	
 	@GetMapping("/products/{productId}/edit")
 	public String editProduct(@PathVariable int productId,
@@ -59,8 +64,15 @@ public class ProductController {
 				Optional<Product> productOpt = productRepo.findByName(decodedProductName);
 				
 				if(productOpt.isPresent()) {
+					featureService.cleaning();
+					
+					Product product = productOpt.get();
+					List<Feature> features = featureService.findByProduct(product);
+					
 					model.addAttribute("product", productOpt.get());
 					model.addAttribute("user", user);
+					model.addAttribute("features", features);
+					
 				}
 				else {
 					response.sendError(HttpStatus.NOT_FOUND.value(), "There is no product with name " + productName);

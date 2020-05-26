@@ -1,10 +1,12 @@
 package com.freshvotes.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.freshvotes.domain.Feature;
 import com.freshvotes.domain.Product;
@@ -58,5 +60,14 @@ public class FeatureService {
 			throw new RuntimeException("There is no feature with id - " + featureId);
 		}
 		return feature;
+	}
+
+	public List<Feature> findByProduct(Product product) {
+		return featureRepo.findByProduct(product);
+	}
+
+	@Transactional
+	public void cleaning() {
+		featureRepo.deleteByTitle(null);
 	}
 }

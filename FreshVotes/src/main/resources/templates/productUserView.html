@@ -16,20 +16,34 @@
 	
 <div class="container" th:if="${product != null}">	
 
-	<div class="title">
-		<h1 th:text="${product.name}">Product</h1>
-		<div class="title-buttons">
-			<a th:href="@{/products/{productId}/edit(productId=${product.id})}" th:if="${user != null and user.id == product.user.id}" class="btn btn-primary btn-open">Edit</a>
-			<form th:action="@{/products/{productId}/features(productId=${product.id})}" method="post" class="btn-create-form">
-				<button type="submit" class="btn btn-primary btn-create">Create Feature Request</button>
-			</form>
+	<div class="description-header">
+		<div class="title">
+			<h1 th:text="${product.name}">Product</h1>
+			<div class="title-buttons">
+				<a th:href="@{/products/{productId}/edit(productId=${product.id})}" th:if="${user != null and user.id == product.user.id}" class="btn btn-primary btn-open">Edit</a>
+				<form th:action="@{/products/{productId}/features(productId=${product.id})}" method="post" class="btn-create-form">
+					<button type="submit" class="btn btn-primary btn-create">Create Feature Request</button>
+				</form>
+			</div>
 		</div>
+		
+		<div class="short-description" th:text="${product.shortDescription}">Short Description</div>
+		<div class="description" th:text="${product.fullDescription}">Full Description</div>
+		
 	</div>
 	
-	
-	<div th:each="feature : ${product.features}">
+	<div class="cards">
 		
-		<a th:href="@{/products/{productId}/features/{featureId}(productId=${product.id},featureId=${feature.id})}" th:text="${feature.title}"></a>
+		<div class="card-place" th:each="feature : ${features}">
+			<div class="card">
+			  <div class="card-body">
+			    <h5 class="card-title" th:text="${feature.title}">Card title</h5>
+			    <h6 class="card-subtitle mb-2 text-muted" th:text="|in ${feature.status}|">Card subtitle</h6>
+			    <p class="card-text size" th:text="${feature.description}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+			    <a th:href="@{/products/{productId}/features/{featureId}(productId=${product.id},featureId=${feature.id})}" class="card-link">View</a>
+			  </div>
+			</div>
+		</div>
 		
 	</div>
 	
