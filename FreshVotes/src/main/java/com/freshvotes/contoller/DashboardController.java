@@ -1,5 +1,8 @@
 package com.freshvotes.contoller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,15 +43,22 @@ public class DashboardController {
 		return "dashboard";
 	}
 	
-	@PostMapping("/dashboard")
-	public String createProduct(@AuthenticationPrincipal User user) {
+	@GetMapping("/dashboard/createProduct")
+	public String showCreateProduct(@AuthenticationPrincipal User user,
+								Model model) {
 		Product product = new Product(); 
 		product.setPublished(false);
 		product.setUser(user);
+	
+		model.addAttribute("product", product);
 		
+		return "product";
+	}
+	
+	@PostMapping("/dashboard/createProduct")
+	public String createProduct(Product product) throws UnsupportedEncodingException {
 		product = productRepo.save(product);
-		
-		return "redirect:/products/" + product.getId() + "/edit";
+		return "redirect:/products/" + URLEncoder.encode(product.getName(), StandardCharsets.UTF_8.name());
 	}
 	
 	@GetMapping("/dashboard/private")

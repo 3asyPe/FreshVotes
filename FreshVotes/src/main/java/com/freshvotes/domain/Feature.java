@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,6 +24,8 @@ public class Feature {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String title;
+	
+	@Column(length=5000)
 	private String description;
 	private String status;
 	

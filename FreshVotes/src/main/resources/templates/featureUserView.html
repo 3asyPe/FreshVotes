@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+
+	<meta charset="UTF-8">
+	
+	<title>FreshVotes Feature</title>
+
+	<script th:replace="fragments/header :: headerElement"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" th:href="@{/css/feature.css}" />
+	
+</head>
+<body>
+	
+<div th:replace="fragments/header :: header"></div>
+	
+<div class="container">	
+	
+	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" id="csrfToken"/>
+	
+	<div class="description-header">
+		<div class="title">
+			<div class="row">
+				<h1 th:text="${feature.title}">Product</h1>
+				
+				<div class="badge-status">
+					<h3><span class="badge badge-secondary" th:text="${feature.status}"></span></h3>
+				</div>
+			</div>
+		</div>
+		
+		<div class="description" th:text="${feature.description}">Full Description</div>
+	</div>
+	
+	<div class="comments">
+		<h2>Comments</h2>
+		
+
+		<div class="media" sec:authorize="isAuthenticated()">
+		  <img src="..." class="mr-3" alt="...">
+		  <div class="media-body">
+		    <h5 class="mt-0" th:text="${user.name}">Media heading</h5>
+			<textarea class="form-control my-textarea" id="textarea-comment" rows="3"></textarea>
+		  </div>
+		  <button type="submit" class="btn btn-primary" id="send-button">Send</button>
+		</div>	
+		
+		<input sec:authorize="isAuthenticated()" type="hidden" id="name" th:value="${user.name}">
+
+		<div class="other-comments" id="commentsDiv">
+			<div th:fragment="fragment-comment" th:remove="tag">
+				<div th:if="${not #lists.isEmpty(comments)}">
+					<ul th:each="comment : ${comments}"
+						th:with="comments = ${comment.comments}" th:id="|comment-div-${comment.id}|">
+						<li class="media" th:id="|comment-${comment.id}|">
+							<img src="..." class="mr-3" alt="...">
+							<div class="media-body">
+								<div class="row">
+									<h5 class="mt-0" th:text="${comment.user.name}">Media heading</h5>
+									<button type="button" class="btn btn-sm btn-info reply-button" sec:authorize="isAuthenticated()" th:id="|reply-button-${comment.id}|">reply</button>
+								</div>
+								<div th:text="${comment.text}" class="comment-text">Cras sit amet nibh libero,
+									in gravida nulla. Nulla vel metus scelerisque ante
+									sollicitudin. Cras purus odio, vestibulum in vulputate at,
+									tempus viverra turpis. Fusce condimentum nunc ac nisi
+									vulputate fringilla. Donec lacinia congue felis in faucibus.</div>
+							</div>
+						</li>
+						<div sec:authorize="isAuthenticated()" class="d-none" th:id="|reply-textarea-div-${comment.id}|">
+							<ul>
+								<li class="media">
+								  <img src="..." class="mr-3" alt="...">
+								  <div class="media-body">
+								    <h5 class="mt-0" th:text="${user.name}">Media heading</h5>
+									<textarea class="form-control my-textarea" th:id="|reply-textarea-${comment.id}|" rows="1"></textarea>
+								  </div>
+								  <button type="submit" class="btn btn-primary send-button-reply" th:id="|send-button-${comment.id}|">Send</button>
+								  <button type="button" class="btn btn-info close-button" th:id="|close-button-${comment.id}|">Close</button>
+								</li>	
+							</ul>
+						</div>
+						<li th:replace="this::fragment-comment">List Item</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+<script th:src="@{/javaScript/feature.js}"></script>
+
+</body>
+</html>

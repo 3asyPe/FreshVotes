@@ -55,8 +55,11 @@
 	padding: 1em;
 }
 
-.card{
+.card-title{
+	white-space: pre-line;
+	font-size: 18px;
 }
+
 
 .card-text{
 	min-height: 100px;
@@ -64,6 +67,21 @@
 }
 
 .size{
+	overflow: hidden;
+    text-overflow: ellipsis;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+}
+
+.size-title{
+    -webkit-line-clamp: 1;
+	line-clamp: 1;
+}
+
+.size-desc{
       overflow: hidden;
       text-overflow: ellipsis;
       display: -moz-box;
@@ -73,6 +91,11 @@
       -webkit-box-orient: vertical;
       line-clamp: 4;
       box-orient: vertical;
+}
+
+.no-features{
+	margin: 40px auto;
+	text-align: center;
 }
 
 @media(max-width: 1200px){
@@ -85,7 +108,7 @@
 		min-height: 70px;
 	}
 	
-	.size{
+	.size-desc{
 	      -webkit-line-clamp: 3;
 	      line-clamp: 3;
 	}
@@ -123,7 +146,7 @@
 		min-height: 125px;
 	}
 	
-	.size{
+	.size-desc{
 	      -webkit-line-clamp: 5;
 	      line-clamp: 5;
 	}

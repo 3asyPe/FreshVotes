@@ -64,8 +64,6 @@ public class ProductController {
 				Optional<Product> productOpt = productRepo.findByName(decodedProductName);
 				
 				if(productOpt.isPresent()) {
-					featureService.cleaning();
-					
 					Product product = productOpt.get();
 					List<Feature> features = featureService.findByProduct(product);
 					
@@ -88,7 +86,6 @@ public class ProductController {
 	
 	@PostMapping("/products/{productId}/edit")
 	public String saveProduct(Product product, @PathVariable int productId) throws UnsupportedEncodingException {
-		System.out.println(product);
 		productRepo.save(product);
 		return "redirect:/products/" + URLEncoder.encode(product.getName(), StandardCharsets.UTF_8.name());
 	}

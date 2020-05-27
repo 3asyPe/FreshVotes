@@ -27,3 +27,15 @@
 	white-space: pre-line;
 	word-break: break-all;
 }
+
+.description-header{
+	border-bottom: 1px black solid;
+	margin-bottm: 20px;
+}
+
+.description{
+	white-space: pre-line;
+	word-break: break-all;
+	
+	margin: 15px 0;
+}

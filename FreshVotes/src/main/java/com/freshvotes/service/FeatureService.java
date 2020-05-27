@@ -23,9 +23,7 @@ public class FeatureService {
 	@Autowired
 	private FeatureRepository featureRepo;
 	
-	public Feature createFeature(int productId, User user) {
-		Feature feature = new Feature();
-		
+	public Feature createFeature(Feature feature, int productId, User user) {	
 		Optional<Product> productOpt = productRepo.findById(productId);
 		
 		if(productOpt.isPresent()) {

@@ -22,7 +22,7 @@ import com.freshvotes.service.CommentService;
 import com.freshvotes.service.FeatureService;
 
 @Controller
-@RequestMapping("/products/{productId}/features")
+@RequestMapping("/products/{productId}")
 public class FeatureController {
 	
 	@Autowired
@@ -31,12 +31,20 @@ public class FeatureController {
 	@Autowired
 	private CommentService commentService;
 	
-	@PostMapping("")
+	@GetMapping("/createFeature")
+	public String showCreateFeature(Model model) {
+		Feature feature = new Feature();
+		model.addAttribute("feature", feature);
+		return "feature";
+	}
+	
+	@PostMapping("/createFeature")
 	public String createFeatures(@AuthenticationPrincipal User user,
 								 @PathVariable int productId,
-								 HttpServletResponse response) throws IOException {
+								 HttpServletResponse response,
+								 Feature feature) throws IOException {
 		try {
-			Feature feature = featureService.createFeature(productId, user);
+			feature = featureService.createFeature(feature, productId, user);
 			return "redirect:/products/" + productId + "/features/" + feature.getId();
 		}
 		catch(Exception exc) {
@@ -46,7 +54,7 @@ public class FeatureController {
 		return "redirect:/";
 	}
 	
-	@GetMapping("/{featureId}")
+	@GetMapping("/features/{featureId}")
 	public String getFeature(@AuthenticationPrincipal User user,
 							 @PathVariable int productId,
 							 @PathVariable int featureId,
@@ -61,10 +69,10 @@ public class FeatureController {
 		catch(Exception exc) {
 			response.sendError(HttpStatus.NOT_FOUND.value(), "There is no product with id " + productId);
 		}
-		return "feature";
+		return "featureUserView";
 	}
 	
-	@PostMapping("/{featureId}")
+	@PostMapping("/features/{featureId}")
 	public String updateFeature(@PathVariable int productId,
 								@PathVariable int featureId,
 								Feature feature) throws UnsupportedEncodingException {
@@ -72,6 +80,7 @@ public class FeatureController {
 		return "redirect:/products/" + URLEncoder.encode(feature.getProduct().getName(),
 												  "UTF-8");
 	}
+	
 }
 
 
