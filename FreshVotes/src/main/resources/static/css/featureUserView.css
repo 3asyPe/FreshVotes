@@ -32,14 +32,17 @@
 }
 
 .rate-label:hover{
-	fill: #50585f;
-	color: #50585f;
+	fill: black;
+	color: black;
 }
 
 .rate-label{
 	display: inline-block;
 	
 	cursor: pointer;
+	
+	fill: #50585f;
+	color: #50585f;
 }
 
 .rate-num{
@@ -49,6 +52,10 @@
 	transition: color .1s linear;
 }
 
+.active-rate{
+	fill: black;
+	color: black;
+}
 
 
 
