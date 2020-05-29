@@ -1,0 +1,64 @@
+.header-top{
+	position: relative;
+}
+
+.rates{
+	display: flex;
+	
+	position: absolute;
+	right: 30px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+/* .rates-row{ */
+/* 	display: flex; */
+/* } */
+
+.radio-input{
+	height: 0;
+	width: 0;
+}
+
+.rate-icon{
+	width: 25px;
+	height: 25px;
+	
+	transition: fill .1s linear;
+}
+
+.dislike-icon{
+	transform: rotate(180deg);
+}
+
+.rate-label:hover{
+	fill: #50585f;
+	color: #50585f;
+}
+
+.rate-label{
+	display: inline-block;
+	
+	cursor: pointer;
+}
+
+.rate-num{
+	margin: auto 5px auto 0;
+	font-size: 13px;
+	
+	transition: color .1s linear;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

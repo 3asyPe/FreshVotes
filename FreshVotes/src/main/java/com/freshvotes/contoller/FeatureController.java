@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.freshvotes.domain.Feature;
 import com.freshvotes.domain.User;
+import com.freshvotes.repository.VoteRepository;
 import com.freshvotes.service.CommentService;
 import com.freshvotes.service.FeatureService;
+import com.sun.istack.Nullable;
 
 @Controller
 @RequestMapping("/products/{productId}")
@@ -30,6 +32,9 @@ public class FeatureController {
 	
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private VoteRepository voteRepo;
 	
 	@GetMapping("/createFeature")
 	public String showCreateFeature(Model model) {
@@ -62,9 +67,34 @@ public class FeatureController {
 							 Model model) throws IOException {
 		try {
 			Feature feature = featureService.findById(featureId);
+			Integer upvotes = voteRepo.countVotes(true, feature);
+			Integer downvotes = voteRepo.countVotes(false, feature);
+			
+			@Nullable
+			Boolean isUpvoted = voteRepo.findByUserAndFeature(user, feature);
+			
+			boolean like = false;
+			boolean dislike = false;
+			
+			// NullPointerException
+			if(isUpvoted == null) {
+				
+			}
+			else if(isUpvoted == true) {
+				like = true;
+			}
+			else {
+				dislike = true;
+			}
+			
 			model.addAttribute("feature", feature);
 			model.addAttribute("user", user);	
 			model.addAttribute("comments", commentService.findByIdAndComment(featureId, null));
+			model.addAttribute("upvotes", upvotes);
+			model.addAttribute("downvotes", downvotes);
+			model.addAttribute("like", like);
+			model.addAttribute("dislike", dislike);
+			
 		}
 		catch(Exception exc) {
 			response.sendError(HttpStatus.NOT_FOUND.value(), "There is no product with id " + productId);

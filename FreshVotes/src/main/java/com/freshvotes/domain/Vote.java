@@ -1,5 +1,6 @@
 package com.freshvotes.domain;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
@@ -9,13 +10,14 @@ public class Vote {
 	@EmbeddedId
 	private VoteId primaryKey;
 	
-	private boolean upvote;
+	@Column(nullable = true)
+	private Boolean upvote;
 
-	public boolean isUpvote() {
+	public Boolean isUpvote() {
 		return upvote;
 	}
 
-	public void setUpvote(boolean upvote) {
+	public void setUpvote(Boolean upvote) {
 		this.upvote = upvote;
 	}
 
