@@ -70,7 +70,6 @@ public class ProductController {
 					model.addAttribute("product", productOpt.get());
 					model.addAttribute("user", user);
 					model.addAttribute("features", features);
-					
 				}
 				else {
 					response.sendError(HttpStatus.NOT_FOUND.value(), "There is no product with name " + productName);

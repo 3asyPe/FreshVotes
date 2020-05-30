@@ -98,6 +98,30 @@
 	text-align: center;
 }
 
+.card-bottom{
+	display:flex;
+	justify-content: space-between
+}
+
+.feature-rates{
+	display: flex;
+	margin-right: -10px;
+}
+
+.rate-icon{
+	width: 20px;
+	height: 20px;
+}
+
+.rate-num{
+	font-size: 12px;
+	margin: auto 5px auto 0;
+}
+
+.dislike-icon{
+	transform: rotate(180deg);
+}
+
 @media(max-width: 1200px){
 	
 	.card-place{

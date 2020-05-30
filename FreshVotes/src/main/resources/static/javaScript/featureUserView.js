@@ -11,13 +11,16 @@ function checkStateLike(){
 	if(likeBtn.checked){
 		if(dislikeBtn.checked){
 			dislikeNum.innerHTML = parseInt(dislikeNum.innerHTML, 10) - 1;
+			doVote(true, false);
+		}
+		else{
+			doVote(true, null);
 		}
 		likeNum.innerHTML = parseInt(likeNum.innerHTML, 10) + 1;
 		dislikeBtn.checked = false;
-		doVote(true);
 	}
 	else{
-		doVote(null);
+		doVote(null, true);
 		likeNum.innerHTML = parseInt(likeNum.innerHTML, 10) - 1;
 	}
 	consoleState();
@@ -28,13 +31,16 @@ function checkStateDislike(){
 	if(dislikeBtn.checked){
 		if(likeBtn.checked){
 			likeNum.innerHTML = parseInt(likeNum.innerHTML, 10) - 1;
+			doVote(false, true);
+		}
+		else{
+			doVote(false, null);
 		}
 		dislikeNum.innerHTML = parseInt(dislikeNum.innerHTML, 10) + 1;
 		likeBtn.checked = false;
-		doVote(false);
 	}
 	else{
-		doVote(null);
+		doVote(null, false);
 		dislikeNum.innerHTML = parseInt(dislikeNum.innerHTML, 10) - 1;
 	}
 	consoleState();
@@ -61,13 +67,16 @@ function checkActiveClasses(){
 	}
 }
 
-function doVote(upvote){
+function doVote(upvote, previousUpvote){
 	const postUrl = window.location.href + "/vote";
 	const csrfToken = document.getElementById("csrfToken").value;
 	
 	var parameters={
-            upvote: upvote
+            upvote: upvote,
+            previousUpvote: previousUpvote
     };
+	
+	console.log(parameters);
 	
     $.ajaxSetup({
         beforeSend: function(xhr) {

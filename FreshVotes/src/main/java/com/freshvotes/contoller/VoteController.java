@@ -39,12 +39,15 @@ public class VoteController {
 		Feature feature = featureService.findById(featureId);
 		Map<String, Boolean> json = (Map<String, Boolean>)obj;
 		Boolean upvote = json.get("upvote");
+		Boolean previousUpvote = json.get("previousUpvote");
 		
 		vote.setUpvote(upvote);
 		vote.setPrimaryKey(voteId);
 		voteId.setUser(user);
 		voteId.setFeature(feature);
 		
-		voteRepository.save(vote);
+		vote = voteRepository.save(vote);
+		
+		featureService.doVote(feature, upvote, previousUpvote);
 	}
 }

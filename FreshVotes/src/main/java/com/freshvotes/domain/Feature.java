@@ -41,6 +41,25 @@ public class Feature {
 	@JsonIgnore
 	private Set<Comment> comments = new HashSet<>();
 	
+	private Integer upvotes = 0;
+	private Integer downvotes = 0;
+	
+	public void addUpvote() {
+		upvotes += 1;
+	}
+	
+	public void removeUpvote() {
+		upvotes -= 1;
+	}
+	
+	public void addDownvote() {
+		downvotes += 1;
+	}
+	
+	public void removeDownvote() {
+		downvotes -= 1;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -83,5 +102,22 @@ public class Feature {
 	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
 	}
+
+	public Integer getUpvotes() {
+		return upvotes;
+	}
+
+	public void setUpvotes(Integer upvotes) {
+		this.upvotes = upvotes;
+	}
+
+	public Integer getDownvotes() {
+		return downvotes;
+	}
+
+	public void setDownvotes(Integer downvotes) {
+		this.downvotes = downvotes;
+	}
+
 
 }

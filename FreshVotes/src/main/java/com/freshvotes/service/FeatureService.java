@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.freshvotes.domain.Feature;
 import com.freshvotes.domain.Product;
 import com.freshvotes.domain.User;
+import com.freshvotes.domain.Vote;
 import com.freshvotes.repository.FeatureRepository;
 import com.freshvotes.repository.ProductRepository;
 
@@ -64,8 +65,46 @@ public class FeatureService {
 		return featureRepo.findByProduct(product);
 	}
 
-	@Transactional
-	public void cleaning() {
-		featureRepo.deleteByTitle(null);
+	public void doVote(Feature feature, Boolean upvote, Boolean previousUpvote) {
+		if(upvote == null) {
+			if(previousUpvote == null) {
+				throw new RuntimeException("upvote and previousUpvote are both null");
+			}
+			else if(previousUpvote == false){
+				feature.removeDownvote();
+			}
+			else {
+				feature.removeUpvote();
+			}
+		}
+		else if(upvote == true) {
+			feature.addUpvote();
+			
+			// NullException
+			if(previousUpvote == null) {
+				
+			}
+			else if(previousUpvote == false) {
+				feature.removeDownvote();
+			}
+			else if(previousUpvote == true) {
+				throw new RuntimeException("upvote and previousUpvote are both true");
+			}
+		}
+		else {
+			feature.addDownvote();
+			
+			// NullException
+			if(previousUpvote == null) {
+				
+			}
+			else if(previousUpvote == true) {
+				feature.removeUpvote();
+			}
+			else if(previousUpvote == false) {
+				throw new RuntimeException("upvote and previousUpvote are both false");
+			}
+		}
+		save(feature);
 	}
 }
