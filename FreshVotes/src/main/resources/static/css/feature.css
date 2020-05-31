@@ -11,27 +11,13 @@
 	height: auto;
 	resize: none;
 	overflow: hidden;
-	min-height: 36px;
+	min-height: 30px;
 }
 
 .comments{
 	margin-top: 30px;
 }
 
-.other-comments{
-	margin-left: -40px;
-	margin-top: 30px;
-}
-
-.comment-text{
-	white-space: pre-line;
-	word-break: break-all;
-}
-
-.description-header{
-	border-bottom: 1px black solid;
-	margin-bottm: 20px;
-}
 
 .description{
 	white-space: pre-line;

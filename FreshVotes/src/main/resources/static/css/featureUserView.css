@@ -1,5 +1,64 @@
+ul{
+	padding-left: 45px;
+	margin-bottom: 1.5rem;
+	list-style-type: none;
+}
+
 .header-top{
 	position: relative;
+	
+	margin-top: 15px;
+}
+
+.header-title{
+	margin: auto 15px;
+}
+
+.description-header{
+	border-bottom: 1px rgba(0, 0, 0, 0.3) solid;
+}
+
+.btn-feature{
+	min-width: 90px;
+	padding: 4px 0;
+	
+	border-color: transparent;
+}
+
+.send-button{
+	background-color: #17a2b8;		
+}
+
+.reply-button{
+	display: inline-block;
+	margin: auto 5px;
+	
+	height: 18px;
+	width: 33px;
+	padding: 0;
+	
+	border-color: transparent;
+	border-radius: 0.25rem;
+	
+	font-size: 10px;
+	line-height: 1;
+	
+	color: #fff;
+	background-color: #6c757d;
+	text-transform: uppercase;
+}
+
+.close-button{
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.close-button:hover{
+	background-color: #17a2b8;
+	border-color: transparent;
+}
+
+.new-close-button{
+	margin-right: 4.36px;
 }
 
 .rates{
@@ -9,6 +68,10 @@
 	right: 30px;
 	top: 50%;
 	transform: translateY(-50%);
+}
+
+.rates-row{
+	margin-right: -15px;
 }
 
 .radio-input{
@@ -53,9 +116,88 @@
 	color: black;
 }
 
+.user-image{
+	width: 45px;
+	border-radius: 50%;
+	
+	margin-right: 1rem;
+}
 
+.comments{
+	margin-top: 30px;
+}
+	
+.other-comments{
+	margin-left: -45px;
+	margin-top: 30px;
+}
 
+.comments-header{
+	margin: 10px 0;
+}
 
+.comments-title{
+	font-size: 22px;
+	font-weight: 500;
+}
+
+.new-comment-buttons{
+	float: right;
+}
+
+.my-textarea{
+	width: 100%;
+	
+	border: none;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+	border-radius: 0;
+	
+	transition: border-color .2s linear;
+}
+
+.my-textarea:focus{
+    outline: none;
+    box-shadow: none;
+    
+    border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+}
+
+.no-comments{
+	margin: 20px auto;
+	text-align: center;
+	font-size: 20px;
+}
+
+.comment-header{
+	display: flex;
+}
+
+.comment-title{
+	
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.comment-text{
+	font-size: 16px;
+	
+	white-space: pre-line;
+	word-break: break-all;
+}
+
+.comment-date{
+	font-size: 11px;
+	color: rgba(0, 0, 0, 0.5);
+	margin: auto 0;
+}
+
+.media{
+	margin: 10px 0;
+}
+
+.media-body{
+	margin-top: -5px;
+}
 
 
 

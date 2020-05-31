@@ -56,7 +56,7 @@
     <div class="description-header">
         <div class="title">
             <div class="row header-top">
-                <div class="row">
+                <div class="row header-title">
                     <h1 th:text="${feature.title}">Product</h1>
 
                     <div class="badge-status">
@@ -92,16 +92,19 @@
     </div>
 
     <div class="comments">
-        <h2>Comments</h2>
+        <div class="comments-header">
+        	<div class="comments-title">Comments</div>
+        </div>
 
 
         <div class="media" sec:authorize="isAuthenticated()">
-          <img src="..." class="mr-3" alt="...">
-          <div class="media-body">
-            <h5 class="mt-0" th:text="${user.name}">Media heading</h5>
-            <textarea class="form-control my-textarea" id="textarea-comment" rows="3"></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary" id="send-button">Send</button>
+            <img th:src="@{${user.imageURL}}" class="user-image" id="userImage">
+            <div class="media-body">
+                <textarea class="my-textarea" id="textarea-comment" rows="1"></textarea>
+				<div class="new-comment-buttons">
+	          		<button type="submit" class="btn btn-primary btn-feature send-button" id="send-button">Send</button>	
+				</div>          
+            </div>
         </div>
 
         <input sec:authorize="isAuthenticated()" type="hidden" id="name" th:value="${user.name}">
@@ -112,11 +115,12 @@
                     <ul th:each="comment : ${comments}"
                         th:with="comments = ${comment.comments}" th:id="|comment-div-${comment.id}|">
                         <li class="media" th:id="|comment-${comment.id}|">
-                            <img src="..." class="mr-3" alt="...">
+                            <img th:src="@{${comment.user.imageURL}}" class="user-image">
                             <div class="media-body">
-                                <div class="row">
-                                    <h5 class="mt-0" th:text="${comment.user.name}">Media heading</h5>
-                                    <button type="button" class="btn btn-sm btn-info reply-button" sec:authorize="isAuthenticated()" th:id="|reply-button-${comment.id}|">reply</button>
+                                <div class="comment-header">
+                                    <div class="comment-title" th:text="${comment.user.name}">Media heading</div>
+                                    <button type="button" class="reply-button" sec:authorize="isAuthenticated()" th:id="|reply-button-${comment.id}|">reply</button>
+                                    <div class="comment-date" th:text="${comment.createdDate}"></div>
                                 </div>
                                 <div th:text="${comment.text}" class="comment-text">Cras sit amet nibh libero,
                                     in gravida nulla. Nulla vel metus scelerisque ante
@@ -128,13 +132,14 @@
                         <div sec:authorize="isAuthenticated()" class="d-none" th:id="|reply-textarea-div-${comment.id}|">
                             <ul>
                                 <li class="media">
-                                  <img src="..." class="mr-3" alt="...">
-                                  <div class="media-body">
-                                    <h5 class="mt-0" th:text="${user.name}">Media heading</h5>
-                                    <textarea class="form-control my-textarea" th:id="|reply-textarea-${comment.id}|" rows="1"></textarea>
-                                  </div>
-                                  <button type="submit" class="btn btn-primary send-button-reply" th:id="|send-button-${comment.id}|">Send</button>
-                                  <button type="button" class="btn btn-info close-button" th:id="|close-button-${comment.id}|">Close</button>
+                                    <img th:src="@{${comment.user.imageURL}}" class="user-image">
+                                    <div class="media-body">
+                                    	<textarea class="my-textarea" th:id="|reply-textarea-${comment.id}|" rows="1"></textarea>
+	                                  	<div class="new-comment-buttons">
+	                                  		<button type="button" class="btn btn-info btn-feature close-button" th:id="|close-button-${comment.id}|">Close</button>
+	                                  		<button type="submit" class="btn btn-primary btn-feature send-button send-button-reply" th:id="|send-button-${comment.id}|">Send</button>
+	                                  	</div>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
@@ -142,8 +147,10 @@
                     </ul>
                 </div>
             </div>
-        </div>
-    </div>
+        </div> <!-- other-comments -->
+	    <div class="no-comments" th:if="${#lists.isEmpty(comments)}">Leave comment first</div>
+    </div> <!-- comments -->
+    
 
 </div>
 

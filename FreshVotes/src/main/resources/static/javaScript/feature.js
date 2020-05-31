@@ -3,9 +3,7 @@ window.onload=function() {
 	
 	for (var textarea of textareas){
 		textarea.addEventListener('input', autoResize, false);
-		textarea.style.height = 'auto';
-		textarea.style.height = textarea.scrollHeight + 'px';
-	};
+	}
 	
 	var comments = document.getElementById("commentsDiv");
 	var textarea = document.getElementById("textarea-comment");
@@ -19,6 +17,7 @@ window.onload=function() {
 	const csrfToken = document.getElementById("csrfToken").value
 	
 	var name=$("#name");
+	var userImage = document.getElementById("userImage").src;
 	
     sendButton.click(function( event ) {
     	var text=$("#textarea-comment");
@@ -45,11 +44,12 @@ window.onload=function() {
             success:  function (data) {
                 comments.innerHTML = '<ul id="comment-div-' + data + '">' +
 			                		      '<li class="media" id="comment-' + data + '">' +
-				        			          '<img src="..." class="mr-3" alt="...">' +
+				        			          '<img src="' + userImage + '" class="user-image">' +
 				        			  	      '<div class="media-body">' +
-				        			  	      	  '<div class="row">' +
-				        			  	      	  	  '<h5 class="mt-0">' + name.val() + '</h5>' +
-												      '<button type="button" class="btn btn-sm btn-info reply-button" id="reply-button-' + data + '">reply</button>' +
+					        			  	      '<div class="comment-header">' +
+			        			  	      	  	  	  '<div class="comment-title">' + name.val() + '</div>' +
+			        			  	      	  	  	  '<button type="button" class="reply-button" id="reply-button-' + data + '">reply</button>' +
+			        			  	      	  	  	  '<div class="comment-date">Right now</div>' +
 											      '</div>' +
 				        			  		      '<div class="comment-text">' + text.val() + '</div>' +
 				        			  	      '</div>' +
@@ -57,12 +57,14 @@ window.onload=function() {
 				        			      '<div class="d-none" id="reply-textarea-div-' + data + '">' +
 											'<ul>' +
 												'<li class="media">' +
-												  '<img src="..." class="mr-3" alt="...">' +
+												  '<img src="' + userImage + '" class="user-image">' +
 												  '<div class="media-body">' +
-													'<textarea class="form-control my-textarea" id="reply-textarea-' + data + '" rows="1"></textarea>' +
+													  '<textarea class="my-textarea" id="reply-textarea-' + data + '" rows="1"></textarea>' +
+													  '<div class="new-comment-buttons">' +
+													  	  '<button type="button" class="btn btn-info btn-feature close-button new-close-button" id="close-button-' + data + '">Close</button>' +
+												      	  '<button type="submit" class="btn btn-primary btn-feature send-button send-button-reply" id="send-button-' + data + '">Send</button>' +
+												      '</div>' +
 												  '</div>' +
-												  '<button type="submit" class="btn btn-primary send-button-reply" id="send-button-' + data + '">Send</button>' +
-												  '<button type="button" class="btn btn-info close-button" id="close-button-' + data + '">Close</button>' +
 												'</li>' +	
 											'</ul>' +
 										  '</div>' +
@@ -72,6 +74,7 @@ window.onload=function() {
                 textarea.style.height = 'auto';
                 textarea.style.height = textarea.scrollHeight + 'px';
                 bindButtons();
+                hideNoComments();
             }, error: function(data){
                 comments.innerHTML = "Server Error.";
             }
@@ -127,11 +130,12 @@ window.onload=function() {
                 comment.innerHTML = comment.innerHTML +
                 					  '<ul id="comment-div-' + data + '">' +
 			                		      '<li class="media" id="comment-' + data + '">' +
-				        			          '<img src="..." class="mr-3" alt="...">' +
+			                		      	'<img src="' + userImage + '" class="user-image">' +
 				        			  	      '<div class="media-body">' +
-				        			  	      	  '<div class="row">' +
-				        			  	      	  	  '<h5 class="mt-0">' + name.val() + '</h5>' +
-												      '<button type="button" class="btn btn-sm btn-info reply-button" id="reply-button-' + data + '">reply</button>' +
+				        			  	      	  '<div class="comment-header">' +
+				        			  	      	  	  '<div class="comment-title">' + name.val() + '</div>' +
+												      '<button type="button" class="reply-button" id="reply-button-' + data + '">reply</button>' +
+												      '<div class="comment-date">Right now</div>' +
 											      '</div>' +
 				        			  		      '<div class="comment-text">' + text.val() + '</div>' +
 				        			  	      '</div>' +
@@ -139,12 +143,14 @@ window.onload=function() {
 				        			      '<div class="d-none" id="reply-textarea-div-' + data + '">' +
 											'<ul>' +
 												'<li class="media">' +
-												  '<img src="..." class="mr-3" alt="...">' +
+												  '<img src="' + userImage + '" class="user-image">' +
 												  '<div class="media-body">' +
-													'<textarea class="form-control my-textarea" id="reply-textarea-' + data + '" rows="1"></textarea>' +
+													  '<textarea class="my-textarea" id="reply-textarea-' + data + '" rows="1"></textarea>' +
+													  '<div class="new-comment-buttons">' +
+													  	  '<button type="button" class="btn btn-info btn-feature close-button new-close-button" id="close-button-' + data + '">Close</button>' +
+												      	  '<button type="submit" class="btn btn-primary btn-feature send-button send-button-reply" id="send-button-' + data + '">Send</button>' +
+												      '</div>' +
 												  '</div>' +
-												  '<button type="submit" class="btn btn-primary send-button-reply" id="send-button-' + data + '">Send</button>' +
-												  '<button type="button" class="btn btn-info close-button" id="close-button-' + data + '">Close</button>' +
 												'</li>' +	
 											'</ul>' +
 										  '</div>' +
@@ -191,5 +197,14 @@ window.onload=function() {
 		    	commentTextarea.addEventListener('input', autoResize, false)
 		    };
 	    }
+    }
+    
+    function hideNoComments(){
+    	noComments = document.getElementsByClassName("no-comments");
+    	if(noComments.length != 0 && !noComments[0].classList.Contains("d-none")){
+    		for(var noComment of noComments){
+    			noComment.classList.add("d-none");
+    		}
+    	}
     }
 }

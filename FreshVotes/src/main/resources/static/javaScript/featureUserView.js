@@ -1,5 +1,12 @@
 var likeBtn = document.getElementById("likeBtn");
 var dislikeBtn = document.getElementById("dislikeBtn");
+var btns = document.getElementsByClassName("btn");
+	
+for(var btn of btns){
+	btn.onclick = function(){
+		this.blur();
+	};
+}
 
 var likeNum = document.getElementById("likeNum");
 var dislikeNum = document.getElementById("dislikeNum");

@@ -31,6 +31,7 @@ public class User {
 	
 	private String password;
 	private String name;
+	private String imageURL = "/images/User_Placeholder.jpg";
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="user")
 	@JsonIgnore
@@ -87,6 +88,12 @@ public class User {
 	}
 	public void setFeatures(Set<Feature> features) {
 		this.features = features;
+	}
+	public String getImageURL() {
+		return imageURL;
+	}
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
 	}
 	@Override
 	public String toString() {
