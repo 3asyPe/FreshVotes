@@ -83,7 +83,81 @@ function doVote(upvote, previousUpvote){
             previousUpvote: previousUpvote
     };
 	
-	console.log(parameters);
+    $.ajaxSetup({
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+        }
+    });
+    
+    $.ajax({
+        type:  'POST',
+        contentType: "application/json; charset=utf-8",
+        data:  JSON.stringify(parameters), 
+        dataType: "json",
+        url: postUrl
+   });
+}
+
+
+likeBtn.onclick = checkStateLike;
+dislikeBtn.onclick = checkStateDislike;
+checkActiveClasses();
+
+var comments = document.getElementById("commentsDiv");
+var textarea = document.getElementById("textarea-comment");
+
+var sendButton=$("#send-button");
+var replyButtons = document.getElementsByClassName("reply-button");
+var closeButtons = document.getElementsByClassName("close-button");
+var sendButtonsReply = document.getElementsByClassName("send-button-reply");
+
+const postUrl = window.location.href + "/comments";
+const csrfToken = document.getElementById("csrfToken").value
+
+var name=$("#name").val();
+var userImage = document.getElementById("userImage").src;
+
+bindButtons();
+
+function getNewCommentHTML(commentId, text){
+	return  '<ul id="comment-div-' + commentId + '">' +
+			    '<li class="media" id="comment-' + commentId + '">' +
+			 		'<img src="' + userImage + '" class="user-image">' +
+			 		'<div class="media-body">' +
+			 			'<div class="comment-header">' +
+			 				'<div class="comment-title">' + name + '</div>' +
+			 				'<button type="button" class="reply-button" id="reply-button-' + commentId + '">reply</button>' +
+			 				'<div class="comment-date">Right now</div>' +
+			 			'</div>' +
+			 			'<div class="comment-text">' + text + '</div>' +
+			 		'</div>' +
+			 	'</li>' +
+			 	'<div class="d-none" id="reply-textarea-div-' + commentId + '">' +
+			 		'<ul>' +
+			 			'<li class="media">' +
+			 				'<img src="' + userImage + '" class="user-image">' +
+			 				'<div class="media-body">' +
+			 					'<textarea class="my-textarea" id="reply-textarea-' + commentId + '" rows="1"></textarea>' +
+			 					'<div class="new-comment-buttons">' +
+			 						'<button type="button" class="btn btn-info btn-feature close-button new-close-button" id="close-button-' + commentId + '">Close</button>' +
+			 						'<button type="submit" class="btn btn-primary btn-feature send-button send-button-reply" id="send-button-' + commentId + '">Send</button>' +
+			 					'</div>' +
+			 				'</div>' +
+			 			'</li>' +	
+			 		'</ul>' +
+			 	'</div>' +
+			'</ul>';
+}
+
+sendButton.click(function( event ) {
+	var text=$("#textarea-comment");
+	
+	if(text.val() == ""){
+    	return;
+    }
+    var parameters={
+        text: text.val()
+    };
 	
     $.ajaxSetup({
         beforeSend: function(xhr) {
@@ -97,16 +171,101 @@ function doVote(upvote, previousUpvote){
         data:  JSON.stringify(parameters), 
         dataType: "json",
         url: postUrl,
-        success:  function () {
-           console.log("success");
-        }, 
-        error: function(){
-        	console.log("hueccess");
+        success:  function (data) {
+            comments.innerHTML = getNewCommentHTML(data, text.val()) + comments.innerHTML;
+            textarea.value = "";
+            textarea.style.height = 'auto';
+            textarea.style.height = textarea.scrollHeight + 'px';
+            bindButtons();
+            hideNoComments();
+        }, error: function(data){
+            comments.innerHTML = "Server Error.";
         }
    });
+});
+
+function sendReplyComment(){
+	commentIdVal = this.getAttribute("id").split("-")[2];
+	text=$("#reply-textarea-" + commentIdVal)
+	if(text.val() == ""){
+		return;
+	}
+	
+	var parameters={
+			text: text.val(),
+			commentId: commentIdVal
+	};
+	
+	$.ajaxSetup({
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+		}
+	});
+	
+	$.ajax({
+		type:  'POST',
+		contentType: "application/json; charset=utf-8",
+		data:  JSON.stringify(parameters), 
+		dataType: "json",
+		url: postUrl,
+		success:  function (data) {
+			var comment = document.getElementById("comment-div-" + commentIdVal)
+			comment.innerHTML = comment.innerHTML + getNewCommentHTML(data, text.val());
+			bindButtons();
+			closeCommentTextarea(commentIdVal);
+		}, error: function(data){
+			comment.innerHTML = "Server Error.";
+		}
+	});
 }
 
+function bindButtons(){
+	bindSendButtons();
+	bindClose();
+	bindReply();
+}
 
-likeBtn.onclick = checkStateLike;
-dislikeBtn.onclick = checkStateDislike;
-checkActiveClasses();
+function bindSendButtons(){
+	for(var sendButton of sendButtonsReply){
+		sendButton.addEventListener('click', sendReplyComment, false);
+	}
+}
+
+function bindClose(){
+	for(var closeButton of closeButtons){
+		closeButton.addEventListener('click', bindCloseCommentTextarea, false);
+		function bindCloseCommentTextarea(){
+			let commentId = this.getAttribute("id").split("-")[2];	
+			closeCommentTextarea(commentId);
+		}
+	}
+}
+
+function closeCommentTextarea(commentId){
+	commentTextareaDiv = document.getElementById("reply-textarea-div-" + commentId);
+	commentTextareaDiv.classList.add("d-none");
+}
+
+function bindReply(){
+    for(var replyButton of replyButtons){
+	    replyButton.addEventListener('click', replyComment, false);
+	    function replyComment(){
+	    	let commentId = this.getAttribute("id").split("-")[2];
+	    	console.log(commentId);
+	    	
+	    	commentTextareaDiv = document.getElementById("reply-textarea-div-" + commentId);
+	    	commentTextareaDiv.classList.remove("d-none");
+	    	
+	    	commentTextarea = document.getElementById("reply-textarea-" + commentId);
+	    	commentTextarea.focus();
+	    	commentTextarea.addEventListener('input', autoResize, false)
+	    };
+    }
+}
+
+function hideNoComments(){
+	noComments = document.getElementsByClassName("no-comments");
+	for(var noComment of noComments){
+		noComment.classList.add("d-none");
+	}
+}

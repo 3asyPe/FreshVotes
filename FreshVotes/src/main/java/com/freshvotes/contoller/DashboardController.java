@@ -45,7 +45,7 @@ public class DashboardController {
 	
 	@GetMapping("/dashboard/createProduct")
 	public String showCreateProduct(@AuthenticationPrincipal User user,
-								Model model) {
+									Model model) {
 		Product product = new Product(); 
 		product.setPublished(false);
 		product.setUser(user);

@@ -31,7 +31,7 @@ ul{
 
 .reply-button{
 	display: inline-block;
-	margin: auto 5px;
+	margin: auto 0 auto 5px;
 	
 	height: 18px;
 	width: 33px;
@@ -188,7 +188,7 @@ ul{
 .comment-date{
 	font-size: 11px;
 	color: rgba(0, 0, 0, 0.5);
-	margin: auto 0;
+	margin: auto 5px;
 }
 
 .media{

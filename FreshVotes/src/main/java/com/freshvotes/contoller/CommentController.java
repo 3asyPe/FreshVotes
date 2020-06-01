@@ -1,5 +1,6 @@
 package com.freshvotes.contoller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -32,10 +33,7 @@ public class CommentController {
 	
 	@Autowired
 	private FeatureService featureService;
-	
-	@Autowired
-	private ObjectMapper objectMapper;
-	
+		
 	@GetMapping("/comments")
 	@ResponseBody
 	public List<Comment> getComments(@PathVariable int featureId){
@@ -45,11 +43,12 @@ public class CommentController {
 	@PostMapping("/comments")
 	@ResponseBody
 	public Integer createComment(@AuthenticationPrincipal User user,
-							    @RequestBody Object obj,
-							    @PathVariable int featureId) throws JsonProcessingException {
+							     @RequestBody Object obj,
+							     @PathVariable int featureId) throws JsonProcessingException, ParseException {
 		Comment comment = new Comment();
 
-		Date date = new Date();  
+		Date date = new Date();
+		
 		Map<String, String> json = (Map<String, String>)obj;
 		String text = json.get("text");
 		String commentId = json.get("commentId");
