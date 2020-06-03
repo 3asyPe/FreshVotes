@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>FreshVotes User</title>
+
+    <script th:replace="fragments/header :: headerElement"></script>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/userProfile.css}" />
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+
+	<div th:text="${user.name}"></div>
+    
+</div>
+
+</body>
+</html>

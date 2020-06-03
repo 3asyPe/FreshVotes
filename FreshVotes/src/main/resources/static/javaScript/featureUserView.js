@@ -122,7 +122,9 @@ bindButtons();
 function getNewCommentHTML(commentId, text){
 	return  '<ul id="comment-div-' + commentId + '">' +
 			    '<li class="media" id="comment-' + commentId + '">' +
-			 		'<img src="' + userImage + '" class="user-image">' +
+			    	'<a th:href="@{/user/{userId}/profile(userId=${#authentication.getPrincipal().getId()})}">' +
+                    	'<img src="' + userImage + '" class="user-image">' +
+                    '</a>' +
 			 		'<div class="media-body">' +
 			 			'<div class="comment-header">' +
 			 				'<div class="comment-title">' + name + '</div>' +
@@ -250,9 +252,7 @@ function bindReply(){
     for(var replyButton of replyButtons){
 	    replyButton.addEventListener('click', replyComment, false);
 	    function replyComment(){
-	    	let commentId = this.getAttribute("id").split("-")[2];
-	    	console.log(commentId);
-	    	
+	    	let commentId = this.getAttribute("id").split("-")[2];	
 	    	commentTextareaDiv = document.getElementById("reply-textarea-div-" + commentId);
 	    	commentTextareaDiv.classList.remove("d-none");
 	    	
@@ -269,3 +269,8 @@ function hideNoComments(){
 		noComment.classList.add("d-none");
 	}
 }
+
+function autoResize() { 
+    this.style.height = 'auto'; 
+    this.style.height = this.scrollHeight + 'px';
+} 

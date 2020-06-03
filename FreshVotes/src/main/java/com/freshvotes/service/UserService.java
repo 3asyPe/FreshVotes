@@ -1,5 +1,7 @@
 package com.freshvotes.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,5 +29,19 @@ public class UserService {
 		
 		user.getAuthorities().add(authority);
 		return userRepo.save(user);
+	}
+	
+	public User findById(Integer userId) {
+		Optional<User> userOpt = userRepo.findById(userId);
+		User user = null;
+		
+		if(userOpt.isPresent()) {
+			user = userOpt.get();
+		}
+		else {
+			throw new RuntimeException("There is no user with id - " + userId);
+		}
+		
+		return user;
 	}
 }

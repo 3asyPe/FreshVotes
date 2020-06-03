@@ -107,4 +107,8 @@ public class FeatureService {
 		}
 		save(feature);
 	}
+
+	public List<Feature> findByUser(User user) {
+		return featureRepo.findByUser(user);
+	}
 }

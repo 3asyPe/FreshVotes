@@ -2,6 +2,14 @@
 	margin: 15px auto;
 }
 
+.header-container{
+	margin: 0 auto;
+}
+
+#loginBtn{
+	display: none;
+}
+
 .container-inner{
 	margin: auto;
 }

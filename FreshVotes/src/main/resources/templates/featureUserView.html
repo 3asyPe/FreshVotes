@@ -116,7 +116,10 @@
                     <ul th:each="comment : ${comments}"
                         th:with="comments = ${comment.comments}" th:id="|comment-div-${comment.id}|">
                         <li class="media" th:id="|comment-${comment.id}|">
-                            <img th:src="@{${comment.user.imageURL}}" class="user-image">
+                            <a th:href="@{/user/{userId}/profile(userId=${comment.user.id})}">
+                            	<img th:src="@{${comment.user.imageURL}}" class="user-image">
+                            </a>
+                            
                             <div class="media-body">
                                 <div class="comment-header">
                                     <div class="comment-title" th:text="${comment.user.name}">Media heading</div>
