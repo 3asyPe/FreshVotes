@@ -1,5 +1,6 @@
 package com.freshvotes.domain;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,6 +33,10 @@ public class User {
 	private String password;
 	private String name;
 	private String imageURL = "/images/User_Placeholder.jpg";
+	private Date birthday;
+	private String website;
+	private String company;
+	private String city;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="user")
 	@JsonIgnore
@@ -94,6 +99,31 @@ public class User {
 	}
 	public void setImageURL(String imageURL) {
 		this.imageURL = imageURL;
+	}
+	
+	public Date getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+	public String getWebsite() {
+		return website;
+	}
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+	public String getCompany() {
+		return company;
+	}
+	public void setCompany(String company) {
+		this.company = company;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
 	}
 	@Override
 	public String toString() {

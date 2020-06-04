@@ -14,12 +14,65 @@
 </head>
 <body>
 
+<svg style="display: none">
+    <symbol id="more" viewBox="0 0 515.555 515.555">
+        <g>
+            <path d="m303.347 18.875c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138c25.166-25.167 65.97-25.167 91.138 0"/><path d="m303.347 212.209c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138c25.166-25.167 65.97-25.167 91.138 0"/><path d="m303.347 405.541c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138c25.166-25.167 65.97-25.167 91.138 0"/>
+        </g>
+    </symbol>
+</svg>
+
 <div th:replace="fragments/header :: header"></div>
 
-<div class="container">
+<div class="container profile-container">
+    <div class="profile-header">
+        <div class="profile-icon-div">
+            <img class="profile-icon" th:src="@{${user.imageURL}}">
+        </div>
 
-	<div th:text="${user.name}"></div>
-    
+        <div class="profile-description">
+            <div class="profile-name-div">
+                <div class="profile-name" th:text="${user.name}"></div>
+            </div>
+            <div class="profile-info">
+                <div class="profile-info-item" th:if="${user.city != null}">
+                    <div class="profile-info-label">City of residence:</div>
+                    <div class="profile-info-value" th:text="${user.city}"></div>
+                </div>
+                <div class="profile-info-item" th:if="${user.birthday != null}">
+                    <div class="profile-info-label">Birthday:</div>
+                    <div class="profile-info-value" th:text="${#dates.format(user.birthday, 'yyyy-MMM-dd')}"></div>
+                </div>
+                <div class="profile-info-item" th:if="${user.website != null}">
+                    <div class="profile-info-label">Website:</div>
+                    <a class="profile-info-value" th:href="${user.website}">[[${user.website}]]</a>
+                </div>
+                <div class="profile-info-item" th:if="${user.company != null}">
+                    <div class="profile-info-label">Company:</div>
+                    <a class="profile-info-value" th:href="${user.company}">[[${user.company}]]</a>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${#authentication.getPrincipal().getId() == user.id}" class="dropdown more-dropdown">
+            <svg class="dropdown-toggle more-icon" id="dropdownMoreButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <use xlink:href="#more"></use>
+            </svg>
+            <div class="dropdown-menu dropdown-menu-right"
+                 aria-labelledby="dropdownMoreButton">
+                <div class="dropdown-item more-dropdown-item">
+                    <div class="dropdown-item-inner">
+                        <a class="dropdown-item-content more-dropdown-first" th:href="@{/user/{userId}/profile/edit(userId=${#authentication.getPrincipal().getId()})}">Edit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-lists">
+
+    </div>
 </div>
 
 </body>

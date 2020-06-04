@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.freshvotes.domain.Feature;
@@ -30,6 +31,24 @@ public class UserController {
 		User user = userService.findById(userId);
 		
 		model.addAttribute("user", user);
+		
+		return "userProfile";
+	}
+	
+	@GetMapping("/profile/edit")
+	public String editUserProfile(@PathVariable int userId,
+								  Model model) {
+		User user = userService.findById(userId);
+		
+		model.addAttribute("user", user);
+		
+		return "editUserProfile";
+	}
+	
+	@PostMapping("/profile/edit")
+	public String saveUserProfile(@PathVariable int userId,
+								  User user) {
+		userService.save(user);
 		
 		return "userProfile";
 	}

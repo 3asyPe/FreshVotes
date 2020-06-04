@@ -7,7 +7,7 @@
 }
 
 .header-container{
-	margin: 0 auto;
+    margin: 0 auto;
 }
 
 .header-dropdown{
@@ -54,21 +54,21 @@
     margin-right: -1px;
     padding: 0;
 
-	border-radius: 10px;
-	overflow: hidden;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-#dropdown-first{
-	padding-top: 10px;
+.dropdown-first{
+    padding-top: 6px !important;
 }
 
-#dropdown-last{
-	padding-bottom: 8px;
+.dropdown-last{
+    padding-bottom: 6px !important;
 }
 
-#dropdown-first,
-#dropdown-last{
-	height: 46px;
+.dropdown-first,
+.dropdown-last{
+    height: 46px !important;
 }
 
 
@@ -132,10 +132,10 @@
 }
 
 @media(max-width: 576px){
-	
-	.navbar{
-		padding: 0 15px;
-	}
+
+    .navbar{
+        padding: 0 15px;
+    }
 }
 
 

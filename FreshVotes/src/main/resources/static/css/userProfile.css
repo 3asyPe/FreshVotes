@@ -1,0 +1,112 @@
+.profile-container{
+    max-width: 950px;
+}
+
+.profile-header{
+    display: flex;
+    position: relative;
+
+    width: 100%;
+    padding: 2em;
+
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3)
+}
+
+
+.profile-description{
+    margin: 0 2em 0 4em;
+    width: 100%;
+}
+
+.profile-icon-div{
+
+}
+
+.profile-icon{
+    width: 200px;
+    height: 200px;
+}
+
+.profile-name-div{
+    width: 100%;
+
+    padding-bottom: 0.7em;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3)
+}
+
+.profile-name{
+    margin: 0 auto;
+
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 1;
+}
+
+.profile-info{
+    margin-top: 0.7em;
+    margin-left: 0.7em;
+}
+
+.profile-info-item{
+    display: flex;
+    width: 100%;
+    margin-top: 5px;
+
+    font-size: 14px;
+}
+
+.profile-info-label{
+    width: 25%;
+    color: #939191;
+}
+
+.profile-info-value{
+    width: 75%;
+}
+
+.more-dropdown{
+    position: absolute;
+
+    right: 10px;
+    top: 30px;
+}
+
+.more-icon{
+    height: 15px;
+    width: 15px;
+}
+
+.more-icon:hover{
+    fill: #939191;
+}
+
+.more-dropdown-item{
+    min-height: 30px !important;
+    min-width: 130px !important;
+
+    font-size: 16px !important;
+}
+
+.more-dropdown-first{
+    padding-top: 5px !important
+}
+
+.more-dropdown-first,
+.more-dropdown-last{
+    height: 35px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
