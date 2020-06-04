@@ -20,6 +20,10 @@ public class UserService {
 	private PasswordEncoder encoder;
 	
 	public User save(User user) {
+		return userRepo.save(user);
+	}
+	
+	public User createUser(User user) {
 		String password = encoder.encode(user.getPassword());
 		user.setPassword(password);
 		

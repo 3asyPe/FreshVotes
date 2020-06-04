@@ -1,0 +1,17 @@
+.edit-container{
+    max-width: 800px;
+}
+
+.container-inner{
+    margin-top: 15px;
+}
+
+.edit-title{
+    font-size: 40px;
+    text-align: center;
+}
+
+.save-btn{
+    float: right;
+    width: 100px;
+}

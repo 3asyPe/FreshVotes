@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -33,10 +35,12 @@ public class User {
 	private String password;
 	private String name;
 	private String imageURL = "/images/User_Placeholder.jpg";
-	private Date birthday;
 	private String website;
 	private String company;
 	private String city;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date birthday;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="user")
 	@JsonIgnore

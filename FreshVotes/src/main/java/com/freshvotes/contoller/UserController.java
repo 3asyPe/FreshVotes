@@ -46,8 +46,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/profile/edit")
-	public String saveUserProfile(@PathVariable int userId,
-								  User user) {
+	public String saveUserProfile(User user) {
 		userService.save(user);
 		
 		return "userProfile";

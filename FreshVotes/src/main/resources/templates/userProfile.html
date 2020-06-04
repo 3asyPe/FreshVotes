@@ -35,7 +35,7 @@
                 <div class="profile-name" th:text="${user.name}"></div>
             </div>
             <div class="profile-info">
-                <div class="profile-info-item" th:if="${user.city != null}">
+                <div class="profile-info-item" th:if="${user.city != '' and user.city != null}">
                     <div class="profile-info-label">City of residence:</div>
                     <div class="profile-info-value" th:text="${user.city}"></div>
                 </div>
@@ -43,13 +43,13 @@
                     <div class="profile-info-label">Birthday:</div>
                     <div class="profile-info-value" th:text="${#dates.format(user.birthday, 'yyyy-MMM-dd')}"></div>
                 </div>
-                <div class="profile-info-item" th:if="${user.website != null}">
+                <div class="profile-info-item" th:if="${user.company != '' and user.company != null}">
+                    <div class="profile-info-label">Company:</div>
+                    <div class="profile-info-value" th:text="${user.company}"></div>
+                </div>
+                <div class="profile-info-item" th:if="${user.website != '' and user.website != null}">
                     <div class="profile-info-label">Website:</div>
                     <a class="profile-info-value" th:href="${user.website}">[[${user.website}]]</a>
-                </div>
-                <div class="profile-info-item" th:if="${user.company != null}">
-                    <div class="profile-info-label">Company:</div>
-                    <a class="profile-info-value" th:href="${user.company}">[[${user.company}]]</a>
                 </div>
             </div>
         </div>
