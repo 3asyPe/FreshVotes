@@ -26,6 +26,7 @@ public class UserService {
 	public User createUser(User user) {
 		String password = encoder.encode(user.getPassword());
 		user.setPassword(password);
+		user.setImageURL("/images/User_Placeholder.jpg");
 		
 		Authority authority = new Authority();
 		authority.setAuthority("ROLE_USER");

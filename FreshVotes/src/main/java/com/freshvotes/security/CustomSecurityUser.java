@@ -20,6 +20,7 @@ public class CustomSecurityUser extends User implements UserDetails{
 		this.setName(user.getName());
 		this.setPassword(user.getPassword());
 		this.setUsername(user.getUsername());
+		this.setImageURL(user.getImageURL());
 	}
 
 	@Override

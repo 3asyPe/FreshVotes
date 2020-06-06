@@ -19,12 +19,47 @@
 }
 
 .profile-icon-div{
+    position: relative;
+}
 
+.profile-icon-div:hover .profile-icon-edit-link{
+    opacity: 1;
 }
 
 .profile-icon{
     width: 200px;
     height: 200px;
+}
+
+.profile-icon-edit{
+    position: absolute;
+    bottom: 0;
+
+    width: 100%;
+}
+
+.profile-icon-edit-link{
+    width: 100%;
+    padding: 7px 0;
+    opacity: 0;
+
+    border: none;
+
+    color: #aca8a8;
+
+    transition: opacity .2s linear;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.profile-icon-edit-link:active,
+.profile-icon-edit-link:focus{
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+.profile-icon-edit-link:hover{
+    color: #e6e5e5;
 }
 
 .profile-name-div{
@@ -95,7 +130,6 @@
 .more-dropdown-last{
     height: 35px;
 }
-
 
 
 

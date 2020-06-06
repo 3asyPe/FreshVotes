@@ -34,7 +34,7 @@ public class User {
 	
 	private String password;
 	private String name;
-	private String imageURL = "/images/User_Placeholder.jpg";
+	private String imageURL;
 	private String website;
 	private String company;
 	private String city;
