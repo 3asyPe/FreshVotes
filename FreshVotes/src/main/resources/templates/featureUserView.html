@@ -64,28 +64,35 @@
                         <h3><span class="badge badge-secondary" th:text="${feature.status}"></span></h3>
                     </div>
                 </div>
-
-                <div class="rates" sec:authorize="isAuthenticated()">
-                    <form>
-                        <fieldset class="rates-row">
-	                            <input class="radio-input" type="checkbox" name="like" id="likeBtn" th:checked="${like}">
-	                            <label for="likeBtn" class="rate-label" id="likeLabel">
-	                                <svg class="rate-icon">
-			                            <use xlink:href="#like"></use>
-			                        </svg>
-			                        <span class="rate-num" th:text="${upvotes}" id="likeNum">123</span>
-	                            </label>
-                            
-	                            <input class="radio-input" type="checkbox" name="dislike" id="dislikeBtn" th:checked="${dislike}">
-	                            <label for="dislikeBtn" class="rate-label" id="dislikeLabel">
-									<svg class="rate-icon dislike-icon">
-			                            <use xlink:href="#like"></use>
-			                        </svg>
-			                        <span class="rate-num" th:text="${downvotes}" id="dislikeNum">321</span>
-	                            </label>
-                        </fieldset>
-                    </form>
-                </div>
+				
+				<div class="header-right">
+					<div class="feature-owner-div">
+						<div class="feature-owner-label">owner:</div>
+						<a class="feature-owner" th:href="@{/user/{userId}/profile(userId=${feature.user.id})}" th:text="${feature.user.name}"></a>
+					</div>
+				
+	                <div class="rates" sec:authorize="isAuthenticated()">
+	                    <form>
+	                        <fieldset class="rates-row">
+		                            <input class="radio-input" type="checkbox" name="like" id="likeBtn" th:checked="${like}">
+		                            <label for="likeBtn" class="rate-label" id="likeLabel">
+		                                <svg class="rate-icon">
+				                            <use xlink:href="#like"></use>
+				                        </svg>
+				                        <span class="rate-num" th:text="${upvotes}" id="likeNum">123</span>
+		                            </label>
+	                            
+		                            <input class="radio-input" type="checkbox" name="dislike" id="dislikeBtn" th:checked="${dislike}">
+		                            <label for="dislikeBtn" class="rate-label" id="dislikeLabel">
+										<svg class="rate-icon dislike-icon">
+				                            <use xlink:href="#like"></use>
+				                        </svg>
+				                        <span class="rate-num" th:text="${downvotes}" id="dislikeNum">321</span>
+		                            </label>
+	                        </fieldset>
+	                    </form>
+	                </div>
+				</div>
             </div>
         </div>
 
