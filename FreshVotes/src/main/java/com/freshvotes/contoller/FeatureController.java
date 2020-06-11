@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.freshvotes.domain.Feature;
 import com.freshvotes.domain.User;
@@ -111,6 +112,17 @@ public class FeatureController {
 												  "UTF-8");
 	}
 	
+	@GetMapping("/features/{featureId}/status")
+	public String changeFeatureStatus(@RequestParam String status,
+									  @PathVariable int productId,
+									  @PathVariable int featureId) {
+		
+		Feature feature = featureService.findById(featureId);
+		feature.setStatus(status);
+		featureService.save(feature);
+		
+		return "redirect:/products/" + productId + "/features/" + featureId;
+	}
 }
 
 

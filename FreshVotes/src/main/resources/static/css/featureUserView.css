@@ -1,3 +1,7 @@
+h1{
+	margin: 0;
+}
+
 ul{
 	padding-left: 45px;
 	margin-bottom: 1.5rem;
@@ -12,6 +16,44 @@ ul{
 
 .header-title{
 	margin: auto 15px;
+	line-height: 1;
+}
+
+.header-title-top{
+	display: flex;
+}
+
+.badge{
+	float: bottom;
+}
+
+.badge-status{
+	line-height: 1;
+	margin: auto 0 0 7px;
+	
+	display: flex;
+	align-items: middle;
+	
+	background: none;
+	border: none;
+}
+
+.badge-status::after{
+	margin: auto 5px;
+}
+
+.badge-status:focus,
+.badge-status:active{
+	outline: none;
+	border: none;
+}
+
+.dropdown-menu{
+	margin-top: -7px;
+}
+
+.modal-alert{
+	line-height: 1.5;
 }
 
 .description-header{
@@ -73,16 +115,13 @@ ul{
 
 .feature-owner-div{
 	display: flex;
-	justify-content: center;
-	
-	align-items: center;
 	
 	margin-right: 20px;
 }
 
 .feature-owner-label{
 	text-transform: uppercase;
-	font-size: 10px;
+	font-size: 9px;
 	line-height: 1;
 	
 	margin-right: 5px;
@@ -92,8 +131,8 @@ ul{
 
 .feature-owner{
 	color: black;
-	font-weight: 500;
-	font-size: 20px;
+	font-weight: 400;
+	font-size: 18px;
 	line-height: 1;
 	
 	align-self: flex-end;

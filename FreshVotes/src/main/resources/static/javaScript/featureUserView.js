@@ -274,3 +274,31 @@ function autoResize() {
     this.style.height = 'auto'; 
     this.style.height = this.scrollHeight + 'px';
 } 
+
+var statusAccept = document.getElementById("status-accept");
+var statusReview = document.getElementById("status-review");
+var statusPendingReview = document.getElementById("status-pending-review");
+var statusReject = document.getElementById("status-reject");
+var statusSave = document.getElementById("status-save");
+
+var statusBadge = document.getElementById("status-badge")
+var cur_status = statusBadge.innerHTML
+
+statusAccept.addEventListener("click", function(){tryChangeCurStatus("Accepted")}, false);
+statusReview.addEventListener("click", function(){tryChangeCurStatus("Review")}, false);
+statusPendingReview.addEventListener("click", function(){tryChangeCurStatus("Pending review")}, false);
+statusReject.addEventListener("click", function(){tryChangeCurStatus("Rejected")}, false);
+
+statusSave.addEventListener("click", saveStatusBadge, false);
+
+function tryChangeCurStatus(text){
+	cur_status = text; 
+}
+
+function saveStatusBadge(){
+	window.location.href = window.location.href + "/status?status=" + cur_status;
+}
+
+
+
+

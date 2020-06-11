@@ -69,7 +69,7 @@
 			<div class="card">
 			  <div class="card-body">
 			    <h5 class="card-title size size-title" th:text="${feature.title}">Card title</h5>
-			    <h6 class="card-subtitle mb-2 text-muted" th:text="|in ${feature.status}|">Card subtitle</h6>
+			    <h6 class="card-subtitle mb-2 text-muted" th:text="${feature.status}">Card subtitle</h6>
 			    <p class="card-text size size-desc" th:text="${feature.description}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 			    <div class="card-bottom">
 			    	<a th:href="@{/products/{productId}/features/{featureId}(productId=${product.id},featureId=${feature.id})}"

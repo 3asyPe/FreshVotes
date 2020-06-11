@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity5">
+	xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <title>FreshVotes Feature</title>
+<title>FreshVotes Feature</title>
 
-    <script th:replace="fragments/header :: headerElement"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment-with-locales.min.js"></script>
+<script th:replace="fragments/header :: headerElement"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment-with-locales.min.js"></script>
 
-    <link rel="stylesheet" type="text/css" th:href="@{/css/feature.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/featureUserView.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/feature.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/featureUserView.css}" />
 
 </head>
 <body>
 
-<svg style="display: none">
+	<svg style="display: none">
     <symbol id="like" viewBox="0 0 512 512">
         <g>
             <g>
-                <path d="M512,304c0-12.821-5.099-24.768-13.888-33.579c9.963-10.901,15.04-25.515,13.653-40.725
+                <path
+			d="M512,304c0-12.821-5.099-24.768-13.888-33.579c9.963-10.901,15.04-25.515,13.653-40.725
                     c-2.496-27.115-26.923-48.363-55.637-48.363H324.352c6.528-19.819,16.981-56.149,16.981-85.333c0-46.272-39.317-85.333-64-85.333
                     c-22.144,0-37.995,12.48-38.656,12.992c-2.539,2.027-4.011,5.099-4.011,8.341v72.341L173.205,237.44l-2.539,1.301v-4.075
                     c0-5.888-4.779-10.667-10.667-10.667H53.333C23.915,224,0,247.915,0,277.333V448c0,29.419,23.915,53.333,53.333,53.333h64
@@ -36,138 +40,212 @@
                     l64-138.667c0.64-1.408,0.981-2.944,0.981-4.48V37.781C260.437,35.328,268.139,32,277.333,32C289.024,32,320,61.056,320,96
                     c0,37.547-20.437,91.669-20.629,92.203c-1.237,3.264-0.811,6.955,1.173,9.856c2.005,2.88,5.291,4.608,8.789,4.608h146.795
                     c17.792,0,32.896,12.736,34.389,28.992c1.131,12.16-4.715,23.723-15.189,30.187c-3.264,2.005-5.205,5.632-5.056,9.493
-                    s2.368,7.317,5.781,9.088c9.024,4.587,14.613,13.632,14.613,23.573C490.667,317.461,480.491,328.768,467.008,330.325z"/>
+                    s2.368,7.317,5.781,9.088c9.024,4.587,14.613,13.632,14.613,23.573C490.667,317.461,480.491,328.768,467.008,330.325z" />
             </g>
         </g>
         <g>
             <g>
-                <path d="M160,245.333c-5.888,0-10.667,4.779-10.667,10.667v192c0,5.888,4.779,10.667,10.667,10.667s10.667-4.779,10.667-10.667
-                    V256C170.667,250.112,165.888,245.333,160,245.333z"/>
+                <path
+			d="M160,245.333c-5.888,0-10.667,4.779-10.667,10.667v192c0,5.888,4.779,10.667,10.667,10.667s10.667-4.779,10.667-10.667
+                    V256C170.667,250.112,165.888,245.333,160,245.333z" />
             </g>
         </g>
     </symbol>
 </svg>
 
-<div th:replace="fragments/header :: header"></div>
+	<div th:replace="fragments/header :: header"></div>
 
-<div class="container">
+	<div class="container">
 
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" id="csrfToken"/>
+		<input type="hidden" th:name="${_csrf.parameterName}"
+			th:value="${_csrf.token}" id="csrfToken" />
 
-    <div class="description-header">
-        <div class="title">
-            <div class="row header-top">
-                <div class="row header-title">
-                    <h1 th:text="${feature.title}">Product</h1>
+		<div class="description-header">
+			<div class="title">
+				<div class="row header-top">
+					<div class="header-title">
+						<div class="header-title-top">
+							<h1 th:text="${feature.title}">Product</h1>
+							<div class="badge-status" th:if="${user == null or user.id != feature.product.user.id}">
+								<h4>
+									<span class="badge badge-secondary" th:text="${feature.status}"></span>
+								</h4>
+							</div>
+							
+							<div class="btn-group" th:if="${user != null and user.id == feature.product.user.id}">
+								<button type="button" class="badge-status dropdown-toggle"
+										data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="false">
+									<h4>
+										<span id="status-badge" class="badge badge-secondary" th:text="${feature.status}"></span>
+									</h4>
+								</button>
+								<div class="dropdown-menu dropdown-menu-right">
+									<button type="button" id="status-accept" class="dropdown-item dropdown-first" data-toggle="modal" data-target="#exampleModal">
+									    Accept
+									</button>
+									<button type="button" id="status-review" class="dropdown-item" data-toggle="modal" data-target="#exampleModal">
+									    Review
+									</button>
+									<button type="button" id="status-pending-review" class="dropdown-item" data-toggle="modal" data-target="#exampleModal">
+									    Pending review
+									</button>
+									<button type="button" id="status-reject" class="dropdown-item dropdown-last" data-toggle="modal" data-target="#exampleModal">
+									    Reject
+									</button>
+								</div>
+							
+								<div class="modal fade" id="exampleModal" tabindex="-1"
+									  role="dialog" aria-labelledby="exampleModalLabel"
+									  aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Changing status</h5>
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<div class="modal-alert">Are you sure you want to change status?</div>
+												<div class="modal-alert">All users will be able to see this status</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-dismiss="modal">Close</button>
+												<button type="button" id="status-save" class="btn btn-primary">Save
+													changes</button>
+											</div>
+										</div>
+									</div>
+								</div>
 
-                    <div class="badge-status">
-                        <h3><span class="badge badge-secondary" th:text="${feature.status}"></span></h3>
-                    </div>
-                </div>
-				
-				<div class="header-right">
-					<div class="feature-owner-div">
-						<div class="feature-owner-label">owner:</div>
-						<a class="feature-owner" th:href="@{/user/{userId}/profile(userId=${feature.user.id})}" th:text="${feature.user.name}"></a>
+							</div>
+
+						</div>
+						<div class="header-title-bottom feature-owner-div">
+							<div class="feature-owner-label">owner:</div>
+							<a class="feature-owner"
+								th:href="@{/user/{userId}/profile(userId=${feature.user.id})}"
+								th:text="${feature.user.name}"></a>
+						</div>
 					</div>
-				
-	                <div class="rates" sec:authorize="isAuthenticated()">
-	                    <form>
-	                        <fieldset class="rates-row">
-		                            <input class="radio-input" type="checkbox" name="like" id="likeBtn" th:checked="${like}">
-		                            <label for="likeBtn" class="rate-label" id="likeLabel">
-		                                <svg class="rate-icon">
+
+					<div class="header-right">
+
+						<div class="rates" sec:authorize="isAuthenticated()">
+							<form>
+								<fieldset class="rates-row">
+									<input class="radio-input" type="checkbox" name="like"
+										id="likeBtn" th:checked="${like}"> <label
+										for="likeBtn" class="rate-label" id="likeLabel"> <svg
+											class="rate-icon">
 				                            <use xlink:href="#like"></use>
-				                        </svg>
-				                        <span class="rate-num" th:text="${upvotes}" id="likeNum">123</span>
-		                            </label>
-	                            
-		                            <input class="radio-input" type="checkbox" name="dislike" id="dislikeBtn" th:checked="${dislike}">
-		                            <label for="dislikeBtn" class="rate-label" id="dislikeLabel">
+				                        </svg> <span class="rate-num" th:text="${upvotes}"
+										id="likeNum">123</span>
+									</label> <input class="radio-input" type="checkbox" name="dislike"
+										id="dislikeBtn" th:checked="${dislike}"> <label
+										for="dislikeBtn" class="rate-label" id="dislikeLabel">
 										<svg class="rate-icon dislike-icon">
 				                            <use xlink:href="#like"></use>
-				                        </svg>
-				                        <span class="rate-num" th:text="${downvotes}" id="dislikeNum">321</span>
-		                            </label>
-	                        </fieldset>
-	                    </form>
-	                </div>
+				                        </svg> <span class="rate-num"
+										th:text="${downvotes}" id="dislikeNum">321</span>
+									</label>
+								</fieldset>
+							</form>
+						</div>
+					</div>
 				</div>
-            </div>
-        </div>
+			</div>
 
-        <div class="description" th:text="${feature.description}">Full Description</div>
-    </div>
+			<div class="description" th:text="${feature.description}">Full
+				Description</div>
+		</div>
 
-    <div class="comments">
-        <div class="comments-header">
-        	<div class="comments-title">Comments</div>
-        </div>
+		<div class="comments">
+			<div class="comments-header">
+				<div class="comments-title">Comments</div>
+			</div>
 
 
-        <div class="media" sec:authorize="isAuthenticated()">
-            <img th:src="@{${user.imageURL}}" class="user-image" id="userImage">
-            <div class="media-body">
-                <textarea class="my-textarea" id="textarea-comment" rows="1"></textarea>
-				<div class="new-comment-buttons">
-	          		<button type="submit" class="btn btn-primary btn-feature send-button" id="send-button">Send</button>	
-				</div>          
-            </div>
-        </div>
+			<div class="media" sec:authorize="isAuthenticated()">
+				<img th:src="@{${user.imageURL}}" class="user-image" id="userImage">
+				<div class="media-body">
+					<textarea class="my-textarea" id="textarea-comment" rows="1"></textarea>
+					<div class="new-comment-buttons">
+						<button type="submit"
+							class="btn btn-primary btn-feature send-button" id="send-button">Send</button>
+					</div>
+				</div>
+			</div>
 
-        <input sec:authorize="isAuthenticated()" type="hidden" id="name" th:value="${user.name}">
+			<input sec:authorize="isAuthenticated()" type="hidden" id="name"
+				th:value="${user.name}">
 
-        <div class="other-comments" id="commentsDiv">
-            <div th:fragment="fragment-comment" th:remove="tag">
-                <div th:if="${not #lists.isEmpty(comments)}">
-                    <ul th:each="comment : ${comments}"
-                        th:with="comments = ${comment.comments}" th:id="|comment-div-${comment.id}|">
-                        <li class="media" th:id="|comment-${comment.id}|">
-                            <a th:href="@{/user/{userId}/profile(userId=${comment.user.id})}">
-                            	<img th:src="@{${comment.user.imageURL}}" class="user-image">
-                            </a>
-                            
-                            <div class="media-body">
-                                <div class="comment-header">
-                                    <div class="comment-title" th:text="${comment.user.name}">Media heading</div>
-                                    <button type="button" class="reply-button" sec:authorize="isAuthenticated()" th:id="|reply-button-${comment.id}|">reply</button>
-                                    <div class="comment-date" th:text="${comment.createdDate}"></div>
-                                </div>
-                                <div th:text="${comment.text}" class="comment-text">Cras sit amet nibh libero,
-                                    in gravida nulla. Nulla vel metus scelerisque ante
-                                    sollicitudin. Cras purus odio, vestibulum in vulputate at,
-                                    tempus viverra turpis. Fusce condimentum nunc ac nisi
-                                    vulputate fringilla. Donec lacinia congue felis in faucibus.</div>
-                            </div>
-                        </li>
-                        <div sec:authorize="isAuthenticated()" class="d-none" th:id="|reply-textarea-div-${comment.id}|">
-                            <ul>
-                                <li class="media">
-                                    <img th:src="@{${comment.user.imageURL}}" class="user-image">
-                                    <div class="media-body">
-                                    	<textarea class="my-textarea" th:id="|reply-textarea-${comment.id}|" rows="1"></textarea>
-	                                  	<div class="new-comment-buttons">
-	                                  		<button type="button" class="btn btn-info btn-feature close-button" th:id="|close-button-${comment.id}|">Close</button>
-	                                  		<button type="submit" class="btn btn-primary btn-feature send-button send-button-reply" th:id="|send-button-${comment.id}|">Send</button>
-	                                  	</div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <li th:replace="this::fragment-comment">List Item</li>
-                    </ul>
-                </div>
-            </div>
-        </div> <!-- other-comments -->
-	    <div class="no-comments" th:if="${#lists.isEmpty(comments)}">Leave comment first</div>
-    </div> <!-- comments -->
-    
+			<div class="other-comments" id="commentsDiv">
+				<div th:fragment="fragment-comment" th:remove="tag">
+					<div th:if="${not #lists.isEmpty(comments)}">
+						<ul th:each="comment : ${comments}"
+							th:with="comments = ${comment.comments}"
+							th:id="|comment-div-${comment.id}|">
+							<li class="media" th:id="|comment-${comment.id}|"><a
+								th:href="@{/user/{userId}/profile(userId=${comment.user.id})}">
+									<img th:src="@{${comment.user.imageURL}}" class="user-image">
+							</a>
 
-</div>
+								<div class="media-body">
+									<div class="comment-header">
+										<div class="comment-title" th:text="${comment.user.name}">Media
+											heading</div>
+										<button type="button" class="reply-button"
+											sec:authorize="isAuthenticated()"
+											th:id="|reply-button-${comment.id}|">reply</button>
+										<div class="comment-date" th:text="${comment.createdDate}"></div>
+									</div>
+									<div th:text="${comment.text}" class="comment-text">Cras
+										sit amet nibh libero, in gravida nulla. Nulla vel metus
+										scelerisque ante sollicitudin. Cras purus odio, vestibulum in
+										vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
+										nisi vulputate fringilla. Donec lacinia congue felis in
+										faucibus.</div>
+								</div></li>
+							<div sec:authorize="isAuthenticated()" class="d-none"
+								th:id="|reply-textarea-div-${comment.id}|">
+								<ul>
+									<li class="media"><img
+										th:src="@{${comment.user.imageURL}}" class="user-image">
+										<div class="media-body">
+											<textarea class="my-textarea"
+												th:id="|reply-textarea-${comment.id}|" rows="1"></textarea>
+											<div class="new-comment-buttons">
+												<button type="button"
+													class="btn btn-info btn-feature close-button"
+													th:id="|close-button-${comment.id}|">Close</button>
+												<button type="submit"
+													class="btn btn-primary btn-feature send-button send-button-reply"
+													th:id="|send-button-${comment.id}|">Send</button>
+											</div>
+										</div></li>
+								</ul>
+							</div>
+							<li th:replace="this::fragment-comment">List Item</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- other-comments -->
+			<div class="no-comments" th:if="${#lists.isEmpty(comments)}">Leave
+				comment first</div>
+		</div>
+		<!-- comments -->
 
-<script th:src="@{/javaScript/feature.js}"></script>
-<script th:src="@{/javaScript/featureUserView.js}"></script>
-<script th:src="@{/javaScript/dateFormater.js}"></script>
+
+	</div>
+
+	<script th:src="@{/javaScript/feature.js}"></script>
+	<script th:src="@{/javaScript/featureUserView.js}"></script>
+	<script th:src="@{/javaScript/dateFormater.js}"></script>
 
 
 </body>
