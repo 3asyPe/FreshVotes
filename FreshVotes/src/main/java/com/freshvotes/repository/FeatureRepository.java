@@ -15,5 +15,7 @@ public interface FeatureRepository extends JpaRepository<Feature, Integer>{
 	void deleteByTitle(String title);
 
 	List<Feature> findByUser(User user);
+
+	List<Feature> findByProductAndStatusIn(Product product, String[] status);
 	
 }

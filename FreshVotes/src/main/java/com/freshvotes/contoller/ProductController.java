@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.freshvotes.domain.Feature;
 import com.freshvotes.domain.Product;
@@ -56,16 +57,33 @@ public class ProductController {
 	
 	@GetMapping("/products/{productName}")
 	public String productUserView(@PathVariable String productName, Model model,
+								  @RequestParam(required = false) String[] filters,
 								  HttpServletResponse response,
 								  @AuthenticationPrincipal User user) throws IOException {
 		if(productName != null) {
 			try {
 				String decodedProductName = URLDecoder.decode(productName, StandardCharsets.UTF_8.name());
+			
 				Optional<Product> productOpt = productRepo.findByName(decodedProductName);
 				
 				if(productOpt.isPresent()) {
 					Product product = productOpt.get();
-					List<Feature> features = featureService.findByProduct(product);
+					List<Feature> features;
+					
+					if(filters == null || filters.length == 0) {
+						filters = new String[]{"Review", "Pending review"};
+						features = featureService.findByProductAndStatusIn(product, filters);
+					}
+					else if(filters[0].equals("all")) {
+						features = featureService.findByProduct(product);
+					}
+					else {
+						features = featureService.findByProductAndStatusIn(product, filters);	
+					}
+					
+					for(String filter : filters) {
+						model.addAttribute(filter, true);
+					}
 					
 					model.addAttribute("product", productOpt.get());
 					model.addAttribute("user", user);

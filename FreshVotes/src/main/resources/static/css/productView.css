@@ -14,6 +14,9 @@
 .title{
 	display: flex;
 	justify-content: space-between;
+	
+	margin-top: 15px;
+	
 	text-align: center;	
 }
 
@@ -43,10 +46,54 @@
 	margin: 15px 0;
 }
 
+.filters{
+	display: flex;
+	justify-content: center;
+	
+	margin-top: 1em;
+}
+
+.filter-item{
+	margin: 0 10px;
+	padding: 2px 6px;
+	min-width: 70px;
+	
+	background: none;
+	border: 1px solid #c5c4c4;
+	border-radius: 45%;
+	
+	font-size: 12px;
+	color: #545454;
+	
+	transition: border-color .1s, background-color .1s, color .1s;
+}
+
+.filter-item:focus,
+.filter-item:active{
+	outline: none;
+	
+	background-color: none;
+	color: #545454;
+}
+
+.filter-item:hover{
+	outline: none;
+	
+	background-color: #f8f8f8;
+	color: #343434;
+}
+
+.activatedFilter{
+	outline: none;
+	
+	border-color: #c5c4c4;
+	background-color: #f8f8f8;
+	color: #343434;
+}
+
 .cards{
 	display: flex;
 	flex-wrap: wrap;
-	
 }
 
 .card-place{

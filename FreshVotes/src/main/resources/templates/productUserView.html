@@ -63,6 +63,29 @@
 		
 	</div>
 	
+	<div class="filters">
+		<button type="button" id="filter-all" class="filter-item"
+			    th:classappend="${all} ? activatedFilter : ''">
+			All
+		</button>
+		<button type="button" id="filter-accepted" class="filter-item" 
+				th:classappend="${Accepted} ? activatedFilter : ''">
+			Accepted
+		</button>
+		<button type="button" id="filter-review" class="filter-item" 
+				th:classappend="${Review} ? activatedFilter : ''">
+			Reveiw
+		</button>
+		<button type="button" id="filter-pending" class="filter-item" 
+				th:classappend="${#vars.getVariable('Pending review')} ? activatedFilter : ''">
+			Pending
+		</button>
+		<button type="button" id="filter-rejected" class="filter-item" 
+				th:classappend="${Rejected} ? activatedFilter : ''">
+			Rejected
+		</button>
+	</div>
+	
 	<div class="cards">
 		
 		<div class="card-place" th:each="feature : ${features}">
@@ -98,6 +121,8 @@
 	<div th:if="${#lists.isEmpty(features)}" class="no-features">There is no features yet. Request one!</div>
 	
 </div>
+
+<script th:src="@{/javaScript/productUserView.js}"></script>
 
 </body>
 </html>

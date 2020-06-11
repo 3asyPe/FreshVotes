@@ -111,4 +111,8 @@ public class FeatureService {
 	public List<Feature> findByUser(User user) {
 		return featureRepo.findByUser(user);
 	}
+	
+	public List<Feature> findByProductAndStatusIn(Product product, String[] status) {
+		return featureRepo.findByProductAndStatusIn(product, status);
+	}
 }
