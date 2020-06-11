@@ -60,6 +60,10 @@ public class Feature {
 		downvotes -= 1;
 	}
 	
+	public int countVotes() {
+		return upvotes + downvotes;
+	}
+	
 	public int getId() {
 		return id;
 	}

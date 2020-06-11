@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -84,6 +85,8 @@ public class ProductController {
 					for(String filter : filters) {
 						model.addAttribute(filter, true);
 					}
+					
+					features.sort((Feature f1, Feature f2) -> f2.countVotes() - f1.countVotes());
 					
 					model.addAttribute("product", productOpt.get());
 					model.addAttribute("user", user);
