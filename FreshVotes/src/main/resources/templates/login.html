@@ -7,7 +7,9 @@
 
 <title>Fresh Votes Login Page</title>
 
+<script th:replace="fragments/import :: importElement"></script>
 <script th:replace="fragments/header :: headerElement"></script>
+<script th:replace="fragments/footer :: footerElement"></script>
 
 <link rel="stylesheet" type="text/css" th:href="@{css/login.css}" />
 
@@ -26,10 +28,12 @@
 </head>
 <body>
 	
-<div th:replace="fragments/header :: header"></div>
+<div class="page">
 	
-<div class="container">
-
+	<div th:replace="fragments/header :: header"></div>
+		
+	<div class="container">
+	
 		<div class="col-sm-10 col-md-8 col-lg-6 container-inner card">
 		
 			<div class="card-header">
@@ -76,6 +80,11 @@
 				</form>
 			</div>
 		</div>
+		
+	</div>
+	
+	<div th:replace="fragments/footer :: footer"></div>
+
 </div>
 
 </body>

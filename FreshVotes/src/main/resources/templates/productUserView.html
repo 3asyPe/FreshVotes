@@ -2,12 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 
-	<meta charset="UTF-8">
-	<title th:text="${product.name}">FreshVotes Product</title>
+<meta charset="UTF-8">
+<title th:text="${product.name}">FreshVotes Product</title>
 
-	<script th:replace="fragments/header :: headerElement"></script>
-	
-	<link rel="stylesheet" type="text/css" th:href="@{/css/productView.css}" />
+<script th:replace="fragments/import :: importElement"></script>
+<script th:replace="fragments/header :: headerElement"></script>
+<script th:replace="fragments/footer :: footerElement"></script>
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/productView.css}" />
 
 </head>
 <body>
@@ -43,83 +45,89 @@
     </symbol>
 </svg>
 	
-<div th:replace="fragments/header :: header"></div>
+<div class="page">
 	
-<div class="container" th:if="${product != null}">	
+	<div th:replace="fragments/header :: header"></div>
+		
+	<div class="container" th:if="${product != null}">	
+	
+		<div class="description-header">
+			<div class="title">
+				<h1 th:text="${product.name}">Product</h1>
+				<div class="title-buttons">
+					<a th:href="@{/products/{productId}/edit(productId=${product.id})}" th:if="${user != null and user.id == product.user.id}" class="btn btn-primary btn-open">Edit</a>
+					<form th:action="@{/products/{productId}/createFeature(productId=${product.id})}" method="get" class="btn-create-form">
+						<button type="submit" class="btn btn-primary btn-create">Create Feature Request</button>
+					</form>
+				</div>
+			</div>
+			
+			<div class="short-description" th:text="${product.shortDescription}">Short Description</div>
+			<div class="description" th:text="${product.fullDescription}">Full Description</div>
+			
+		</div>
+		
+		<div class="filters">
+			<button type="button" id="filter-all" class="filter-item"
+				    th:classappend="${all} ? activatedFilter : ''">
+				All
+			</button>
+			<button type="button" id="filter-accepted" class="filter-item" 
+					th:classappend="${Accepted} ? activatedFilter : ''">
+				Accepted
+			</button>
+			<button type="button" id="filter-review" class="filter-item" 
+					th:classappend="${Review} ? activatedFilter : ''">
+				Reveiw
+			</button>
+			<button type="button" id="filter-pending" class="filter-item" 
+					th:classappend="${#vars.getVariable('Pending review')} ? activatedFilter : ''">
+				Pending
+			</button>
+			<button type="button" id="filter-rejected" class="filter-item" 
+					th:classappend="${Rejected} ? activatedFilter : ''">
+				Rejected
+			</button>
+		</div>
+		
+		<div class="cards">
+			
+			<div class="card-place" th:each="feature : ${features}">
+				<div class="card">
+				  <div class="card-body">
+				    <h5 class="card-title size size-title" th:text="${feature.title}">Card title</h5>
+				    <h6 class="card-subtitle mb-2 text-muted" th:text="${feature.status}">Card subtitle</h6>
+				    <p class="card-text size size-desc" th:text="${feature.description}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+				    <div class="card-bottom">
+				    	<a th:href="@{/products/{productId}/features/{featureId}(productId=${product.id},featureId=${feature.id})}"
+				    				 class="card-link">View</a>
+				    	<div class="feature-rates">
+				    		<div class="feature-rate">
+				    			<svg class="rate-icon">
+		                            <use xlink:href="#like"></use>
+		                        </svg>
+		                        <span class="rate-num" th:text="${feature.upvotes}">321</span>
+				    		</div>
+				    		<div class="feature-rate">
+				    			<svg class="rate-icon dislike-icon">
+		                            <use xlink:href="#like"></use>
+		                        </svg>
+		                        <span class="rate-num" th:text="${feature.downvotes}">321</span>
+				    		</div>
+				    	</div>
+				    </div>
+				  </div>
+				</div>
+			</div>
+			
+		</div>
+		
+		<div th:if="${#lists.isEmpty(features)}" class="no-features">There is no features yet. Request one!</div>
+		
+	</div>
 
-	<div class="description-header">
-		<div class="title">
-			<h1 th:text="${product.name}">Product</h1>
-			<div class="title-buttons">
-				<a th:href="@{/products/{productId}/edit(productId=${product.id})}" th:if="${user != null and user.id == product.user.id}" class="btn btn-primary btn-open">Edit</a>
-				<form th:action="@{/products/{productId}/createFeature(productId=${product.id})}" method="get" class="btn-create-form">
-					<button type="submit" class="btn btn-primary btn-create">Create Feature Request</button>
-				</form>
-			</div>
-		</div>
-		
-		<div class="short-description" th:text="${product.shortDescription}">Short Description</div>
-		<div class="description" th:text="${product.fullDescription}">Full Description</div>
-		
-	</div>
-	
-	<div class="filters">
-		<button type="button" id="filter-all" class="filter-item"
-			    th:classappend="${all} ? activatedFilter : ''">
-			All
-		</button>
-		<button type="button" id="filter-accepted" class="filter-item" 
-				th:classappend="${Accepted} ? activatedFilter : ''">
-			Accepted
-		</button>
-		<button type="button" id="filter-review" class="filter-item" 
-				th:classappend="${Review} ? activatedFilter : ''">
-			Reveiw
-		</button>
-		<button type="button" id="filter-pending" class="filter-item" 
-				th:classappend="${#vars.getVariable('Pending review')} ? activatedFilter : ''">
-			Pending
-		</button>
-		<button type="button" id="filter-rejected" class="filter-item" 
-				th:classappend="${Rejected} ? activatedFilter : ''">
-			Rejected
-		</button>
-	</div>
-	
-	<div class="cards">
-		
-		<div class="card-place" th:each="feature : ${features}">
-			<div class="card">
-			  <div class="card-body">
-			    <h5 class="card-title size size-title" th:text="${feature.title}">Card title</h5>
-			    <h6 class="card-subtitle mb-2 text-muted" th:text="${feature.status}">Card subtitle</h6>
-			    <p class="card-text size size-desc" th:text="${feature.description}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-			    <div class="card-bottom">
-			    	<a th:href="@{/products/{productId}/features/{featureId}(productId=${product.id},featureId=${feature.id})}"
-			    				 class="card-link">View</a>
-			    	<div class="feature-rates">
-			    		<div class="feature-rate">
-			    			<svg class="rate-icon">
-	                            <use xlink:href="#like"></use>
-	                        </svg>
-	                        <span class="rate-num" th:text="${feature.upvotes}">321</span>
-			    		</div>
-			    		<div class="feature-rate">
-			    			<svg class="rate-icon dislike-icon">
-	                            <use xlink:href="#like"></use>
-	                        </svg>
-	                        <span class="rate-num" th:text="${feature.downvotes}">321</span>
-			    		</div>
-			    	</div>
-			    </div>
-			  </div>
-			</div>
-		</div>
-		
-	</div>
-	
-	<div th:if="${#lists.isEmpty(features)}" class="no-features">There is no features yet. Request one!</div>
-	
+	<div th:replace="fragments/footer :: footer"></div>
+
 </div>
 
 <script th:src="@{/javaScript/productUserView.js}"></script>

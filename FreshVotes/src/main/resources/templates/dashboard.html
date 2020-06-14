@@ -8,7 +8,9 @@
 
 <title>FreshVotes dashboard</title>
 
+<script th:replace="fragments/import :: importElement"></script>
 <script th:replace="fragments/header :: headerElement"></script>
+<script th:replace="fragments/footer :: footerElement"></script>
 
 <link rel="stylesheet" th:href="@{css/dashboard.css}"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -16,48 +18,54 @@
 </head>
 <body>
 
-<div th:replace="fragments/header :: header"></div>
+<div class="page">
 
-<div class="container">
-	<div class="row header">
-		<div class="header-left">
-			<div class="dashboard-title">FreshVotes Dashboard</div>
-			
-			<form class="search" th:action="@{/dashboard}" method="get">
-			  <input type="text" placeholder="Search.." th:name="search" class="search-text" th:value="${param.search}">
-			  <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
-			</form>
+	<div th:replace="fragments/header :: header"></div>
+	
+	<div class="container">
+		<div class="row header">
+			<div class="header-left">
+				<div class="dashboard-title">FreshVotes Dashboard</div>
+				
+				<form class="search" th:action="@{/dashboard}" method="get">
+				  <input type="text" placeholder="Search.." th:name="search" class="search-text" th:value="${param.search}">
+				  <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
+				</form>
+			</div>
+				
+			<div class="row form">
+				<form th:action="@{/dashboard/createProduct}" method="get">
+					<button type="submit" class="btn btn-primary create-product">Create a Product</button>		
+				</form>
+			</div>
 		</div>
+		
+		<div class="jumbotron">
+			<div th:if="${products != null}">
 			
-		<div class="row form">
-			<form th:action="@{/dashboard/createProduct}" method="get">
-				<button type="submit" class="btn btn-primary create-product">Create a Product</button>		
-			</form>
+				<h1>Products</h1>
+				
+				<div th:each="product : ${products}">
+					<div class="card">
+					    <div class="card-header">
+					    	<h5 th:text="${product.name}"></h5>
+	
+					    </div>
+					    <div class="card-body">
+					        <h5 class="card-title size" th:text="${product.shortDescription}">Main description</h5>
+				        	<p class="card-text size" th:text="${product.fullDescription}">Long description with full information</p>
+						        
+					        <a th:href="@{/products/{productName}(productName=${product.name})}" class="btn btn-primary btn-open">View</a>
+					    </div>
+					</div>
+				</div>		
+			</div>
 		</div>
+	
 	</div>
 	
-	<div class="jumbotron">
-		<div th:if="${products != null}">
-		
-			<h1>Products</h1>
-			
-			<div th:each="product : ${products}">
-				<div class="card">
-				    <div class="card-header">
-				    	<h5 th:text="${product.name}"></h5>
-
-				    </div>
-				    <div class="card-body">
-				        <h5 class="card-title size" th:text="${product.shortDescription}">Main description</h5>
-			        	<p class="card-text size" th:text="${product.fullDescription}">Long description with full information</p>
-					        
-				        <a th:href="@{/products/{productName}(productName=${product.name})}" class="btn btn-primary btn-open">View</a>
-				    </div>
-				</div>
-			</div>		
-		</div>
-	</div>
-
+	<div th:replace="fragments/footer :: footer"></div>
+	
 </div>
 
 </body>

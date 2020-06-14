@@ -7,11 +7,12 @@
 
 <title>FreshVotes Feature</title>
 
+<script th:replace="fragments/import :: importElement"></script>
 <script th:replace="fragments/header :: headerElement"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment-with-locales.min.js"></script>
+<script th:replace="fragments/footer :: footerElement"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment-with-locales.min.js"></script>
 
 <link rel="stylesheet" type="text/css" th:href="@{/css/feature.css}" />
 <link rel="stylesheet" type="text/css"
@@ -20,7 +21,7 @@
 </head>
 <body>
 
-	<svg style="display: none">
+<svg style="display: none">
     <symbol id="like" viewBox="0 0 512 512">
         <g>
             <g>
@@ -52,6 +53,8 @@
         </g>
     </symbol>
 </svg>
+
+<div class="page">
 
 	<div th:replace="fragments/header :: header"></div>
 
@@ -235,17 +238,18 @@
 				</div>
 			</div>
 			<!-- other-comments -->
-			<div class="no-comments" th:if="${#lists.isEmpty(comments)}">Leave
-				comment first</div>
+			<div class="no-comments" th:if="${#lists.isEmpty(comments)}">Leave comment first</div>
 		</div>
-		<!-- comments -->
-
 
 	</div>
 
-	<script th:src="@{/javaScript/feature.js}"></script>
-	<script th:src="@{/javaScript/featureUserView.js}"></script>
-	<script th:src="@{/javaScript/dateFormater.js}"></script>
+	<div th:replace="fragments/footer :: footer"></div>
+
+</div>
+
+<script th:src="@{/javaScript/feature.js}"></script>
+<script th:src="@{/javaScript/featureUserView.js}"></script>
+<script th:src="@{/javaScript/dateFormater.js}"></script>
 
 
 </body>

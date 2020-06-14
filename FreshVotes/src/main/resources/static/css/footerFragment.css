@@ -1,0 +1,31 @@
+.footer{
+	margin-top: auto;
+	height: 50px;
+	
+	display: flex;
+	align-items: middle;
+	
+	background-color: #343a40!important;
+}
+
+.footer-items{
+	margin: auto;
+	
+	display: flex;
+	justify-content: center;
+}
+
+.footer-item{
+	margin: 0 40px;
+	
+	line-height: 1;
+	font-size: 13px;
+	color: #bdbdbd;
+	
+	transition: color .1s linear;
+}
+
+.footer-item:hover{
+	color: #d9d9d9;
+	text-decoration: none;
+}

@@ -8,7 +8,9 @@
 
 <title>FreshVotes dashboard</title>
 
+<script th:replace="fragments/import :: importElement"></script>
 <script th:replace="fragments/header :: headerElement"></script>
+<script th:replace="fragments/footer :: footerElement"></script>
 
 <link rel="stylesheet" th:href="@{/css/dashboard.css}"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -16,52 +18,56 @@
 </head>
 <body>
 
-<div th:replace="fragments/header :: header"></div>
+<div class="page">
+	<div th:replace="fragments/header :: header"></div>
 
-<div class="container">
-	<div class="row header">
-		<div class="header-left">
-			<div class="dashboard-title">My products</div>
+	<div class="container">
+		<div class="row header">
+			<div class="header-left">
+				<div class="dashboard-title">My products</div>
+				
+				<form class="search" th:action="@{/dashboard/private}" method="get">
+				  <input type="text" placeholder="Search.." th:name="search" class="search-text" th:value="${param.search}">
+				  <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
+				</form>
+			</div>
 			
-			<form class="search" th:action="@{/dashboard/private}" method="get">
-			  <input type="text" placeholder="Search.." th:name="search" class="search-text" th:value="${param.search}">
-			  <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
-			</form>
+			<div class="row form">
+				<form th:action="@{/dashboard/createProduct}" method="get">
+					<button sec:authorize="isAuthenticated()" type="submit" class="btn btn-primary create-product">Create a Product</button>		
+				</form>
+			</div>
 		</div>
 		
-		<div class="row form">
-			<form th:action="@{/dashboard/createProduct}" method="get">
-				<button sec:authorize="isAuthenticated()" type="submit" class="btn btn-primary create-product">Create a Product</button>		
-			</form>
-		</div>
+	
+			<div th:if="${not #lists.isEmpty(products)}">
+				<div th:each="product : ${products}">
+					<div class="card">
+					    <div class="card-header">
+					    	<h5 th:text="${product.name}"></h5>
+					    	
+					    	<h6><span class="badge badge-secondary" th:if="${product.published}">Published</span></h6>
+	
+					    </div>
+					    <div class="card-body">
+					        <h5 class="card-title size" th:text="${product.shortDescription}">Main description</h5>
+				        	<p class="card-text size" th:text="${product.fullDescription}">Long description with full information</p>
+						    
+						    <a th:href="@{/products/{productId}/edit(productId=${product.id})}" class="btn btn-info btn-open">Edit</a>
+					        <a th:href="@{/products/{productName}(productName=${product.name})}" class="btn btn-primary btn-open">View</a>
+					    </div>
+					</div>
+				</div>		
+			</div>
+			
+			<div th:if="${#lists.isEmpty(products)}">
+				
+			</div>
+	
 	</div>
 	
-
-		<div th:if="${not #lists.isEmpty(products)}">
-			<div th:each="product : ${products}">
-				<div class="card">
-				    <div class="card-header">
-				    	<h5 th:text="${product.name}"></h5>
-				    	
-				    	<h6><span class="badge badge-secondary" th:if="${product.published}">Published</span></h6>
-
-				    </div>
-				    <div class="card-body">
-				        <h5 class="card-title size" th:text="${product.shortDescription}">Main description</h5>
-			        	<p class="card-text size" th:text="${product.fullDescription}">Long description with full information</p>
-					    
-					    <a th:href="@{/products/{productId}/edit(productId=${product.id})}" class="btn btn-info btn-open">Edit</a>
-				        <a th:href="@{/products/{productName}(productName=${product.name})}" class="btn btn-primary btn-open">View</a>
-				    </div>
-				</div>
-			</div>		
-		</div>
-		
-		<div th:if="${#lists.isEmpty(products)}">
-			
-		</div>
-
-
+	<div th:replace="fragments/footer :: footer"></div>
+	
 </div>
 
 </body>

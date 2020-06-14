@@ -3,13 +3,15 @@
       xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <title>FreshVotes User</title>
+<title>FreshVotes User</title>
 
-    <script th:replace="fragments/header :: headerElement"></script>
+<script th:replace="fragments/import :: importElement"></script>
+<script th:replace="fragments/header :: headerElement"></script>
+<script th:replace="fragments/footer :: footerElement"></script>
 
-    <link rel="stylesheet" type="text/css" th:href="@{/css/userProfile.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/userProfile.css}" />
 
 </head>
 <body>
@@ -22,84 +24,92 @@
     </symbol>
 </svg>
 
-<div th:replace="fragments/header :: header"></div>
+<div class="page">
 
-<div class="container profile-container">
-    <div class="profile-header">
-        <div class="profile-icon-div">
-            <img class="profile-icon" th:src="@{${user.imageURL}}">
-            <div class="profile-icon-edit">
-                <button type="button" class="profile-icon-edit-link" data-toggle="modal" data-target="#profileIconModal">
-                    Upload picture
-                </button>
-                <div class="modal fade" id="profileIconModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalCenterTitle">Upload picture</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <form th:action="@{profile/pictureUpload}" method="post" enctype="multipart/form-data">
-                          <div class="modal-body">
-                          	  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" id="csrfToken"/>
-                              <input type="file" accept="image/png, image/jpeg" id="file" name="image">
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save image</button>
-                          </div>
-                         </form>
-                    </div>
-                  </div>
-                </div>
-            </div>
-        </div>
+	<div th:replace="fragments/header :: header"></div>
+	
+	<div class="container profile-container">
+	
+	    <div class="profile-header">
+	        <div class="profile-icon-div">
+	            <img class="profile-icon" th:src="@{${user.imageURL}}">
+	            <div class="profile-icon-edit">
+	                <button type="button" class="profile-icon-edit-link" data-toggle="modal" data-target="#profileIconModal">
+	                    Upload picture
+	                </button>
+	                <div class="modal fade" id="profileIconModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	                  <div class="modal-dialog modal-dialog-centered" role="document">
+	                    <div class="modal-content">
+	                      <div class="modal-header">
+	                        <h5 class="modal-title" id="exampleModalCenterTitle">Upload picture</h5>
+	                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                          <span aria-hidden="true">&times;</span>
+	                        </button>
+	                      </div>
+	                      <form th:action="@{profile/pictureUpload}" method="post" enctype="multipart/form-data">
+	                          <div class="modal-body">
+	                          	  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" id="csrfToken"/>
+	                              <input type="file" accept="image/png, image/jpeg" id="file" name="image">
+	                          </div>
+	                          <div class="modal-footer">
+	                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	                            <button type="submit" class="btn btn-primary">Save image</button>
+	                          </div>
+	                         </form>
+	                    </div>
+	                  </div>
+	                </div>
+	            </div>
+	        </div>
+	
+	        <div class="profile-description">
+	            <div class="profile-name-div">
+	                <div class="profile-name" th:text="${user.name}"></div>
+	            </div>
+	            <div class="profile-info">
+	                <div class="profile-info-item" th:if="${user.city != '' and user.city != null}">
+	                    <div class="profile-info-label">City of residence:</div>
+	                    <div class="profile-info-value" th:text="${user.city}"></div>
+	                </div>
+	                <div class="profile-info-item" th:if="${user.birthday != null}">
+	                    <div class="profile-info-label">Birthday:</div>
+	                    <div class="profile-info-value" th:text="${#dates.format(user.birthday, 'yyyy-MMM-dd')}"></div>
+	                </div>
+	                <div class="profile-info-item" th:if="${user.company != '' and user.company != null}">
+	                    <div class="profile-info-label">Company:</div>
+	                    <div class="profile-info-value" th:text="${user.company}"></div>
+	                </div>
+	                <div class="profile-info-item" th:if="${user.website != '' and user.website != null}">
+	                    <div class="profile-info-label">Website:</div>
+	                    <a class="profile-info-value" th:href="${user.website}">[[${user.website}]]</a>
+	                </div>
+	            </div>
+	        </div>
+	
+	        <div sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getId() == user.id}" class="dropdown more-dropdown">
+	            <svg class="dropdown-toggle more-icon" id="dropdownMoreButton" data-toggle="dropdown"
+	                aria-haspopup="true" aria-expanded="false">
+	                <use xlink:href="#more"></use>
+	            </svg>
+	            <div class="dropdown-menu dropdown-menu-right"
+	                 aria-labelledby="dropdownMoreButton">
+	                <div class="dropdown-item more-dropdown-item">
+	                    <div class="dropdown-item-inner">
+	                        <a class="dropdown-item-content more-dropdown-first" th:href="@{/user/{userId}/profile/edit(userId=${#authentication.getPrincipal().getId()})}">Edit</a>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        
+	    </div>
+	
+	    <div class="profile-lists">
+	
+	    </div>
+	</div>
+	
+	<div th:replace="fragments/footer :: footer"></div>
 
-        <div class="profile-description">
-            <div class="profile-name-div">
-                <div class="profile-name" th:text="${user.name}"></div>
-            </div>
-            <div class="profile-info">
-                <div class="profile-info-item" th:if="${user.city != '' and user.city != null}">
-                    <div class="profile-info-label">City of residence:</div>
-                    <div class="profile-info-value" th:text="${user.city}"></div>
-                </div>
-                <div class="profile-info-item" th:if="${user.birthday != null}">
-                    <div class="profile-info-label">Birthday:</div>
-                    <div class="profile-info-value" th:text="${#dates.format(user.birthday, 'yyyy-MMM-dd')}"></div>
-                </div>
-                <div class="profile-info-item" th:if="${user.company != '' and user.company != null}">
-                    <div class="profile-info-label">Company:</div>
-                    <div class="profile-info-value" th:text="${user.company}"></div>
-                </div>
-                <div class="profile-info-item" th:if="${user.website != '' and user.website != null}">
-                    <div class="profile-info-label">Website:</div>
-                    <a class="profile-info-value" th:href="${user.website}">[[${user.website}]]</a>
-                </div>
-            </div>
-        </div>
-
-        <div th:if="${#authentication.getPrincipal().getId() == user.id}" class="dropdown more-dropdown">
-            <svg class="dropdown-toggle more-icon" id="dropdownMoreButton" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <use xlink:href="#more"></use>
-            </svg>
-            <div class="dropdown-menu dropdown-menu-right"
-                 aria-labelledby="dropdownMoreButton">
-                <div class="dropdown-item more-dropdown-item">
-                    <div class="dropdown-item-inner">
-                        <a class="dropdown-item-content more-dropdown-first" th:href="@{/user/{userId}/profile/edit(userId=${#authentication.getPrincipal().getId()})}">Edit</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="profile-lists">
-
-    </div>
 </div>
 
 </body>

@@ -3,73 +3,81 @@
       xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <title>FreshVotes User Edit</title>
+<title>FreshVotes User Edit</title>
 
-    <script th:replace="fragments/header :: headerElement"></script>
+<script th:replace="fragments/import :: importElement"></script>
+<script th:replace="fragments/header :: headerElement"></script>
+<script th:replace="fragments/footer :: footerElement"></script>
 
-    <link rel="stylesheet" type="text/css" th:href="@{/css/editUserProfile.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/editUserProfile.css}" />
 
 </head>
 <body>
 
-<div th:replace="fragments/header :: header"></div>
+<div class="page">
 
-<div class="container edit-container">
-    <div class="container-inner card">
+	<div th:replace="fragments/header :: header"></div>
+	
+	<div class="container edit-container">
+	    <div class="container-inner card">
+	
+	        <div class="card-header edit-title">
+	            Account information
+	        </div>
+	
+	        <div class="card-body">
+	            <form action="" method="post" class="editForm">
+	                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" id="csrfToken"/>
+	                <input type="hidden" th:field="${user.id}">
+	                <input type="hidden" th:field="${user.username}">
+	                <input type="hidden" th:field="${user.password}">
+	                <input type="hidden" th:field="${user.imageURL}">
+	
+	                <div class="form-group row">
+	                    <label for="name" class="col-lg-4 col-xl-3 col-form-label">Name</label>
+	                    <div class="col-lg-8 col-xl-9">
+	                        <input type="text" th:field="${user.name}" class="form-control" th:required="required">
+	                    </div>
+	                </div>
+	
+	                <div class="form-group row">
+	                    <label for="birthday" class="col-lg-4 col-xl-3 col-form-label">Birthday</label>
+	                    <div class="col-lg-8 col-xl-9">
+	                        <input type="date" th:field="${user.birthday}" class="form-control">
+	                    </div>
+	                </div>
+	
+	                <div class="form-group row">
+	                    <label for="website" class="col-lg-4 col-xl-3 col-form-label">Website</label>
+	                    <div class="col-lg-8 col-xl-9">
+	                        <input type="text" th:field="${user.website}" class="form-control">
+	                    </div>
+	                </div>
+	
+	                <div class="form-group row">
+	                    <label for="company" class="col-lg-4 col-xl-3 col-form-label">Company</label>
+	                    <div class="col-lg-8 col-xl-9">
+	                        <input type="text" th:field="${user.company}" class="form-control">
+	                    </div>
+	                </div>
+	
+	                <div class="form-group row">
+	                    <label for="company" class="col-lg-4 col-xl-3 col-form-label">City of residence</label>
+	                    <div class="col-lg-8 col-xl-9">
+	                        <input type="text" th:field="${user.city}" class="form-control">
+	                    </div>
+	                </div>
+	
+	                <button type="submit" class="btn btn-primary save-btn">Save</button>
+	            </form>
+	        </div>
+	    </div>
+	</div>
 
-        <div class="card-header edit-title">
-            Account information
-        </div>
+	<div th:replace="fragments/footer :: footer"></div>
 
-        <div class="card-body">
-            <form action="" method="post" class="editForm">
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" id="csrfToken"/>
-                <input type="hidden" th:field="${user.id}">
-                <input type="hidden" th:field="${user.username}">
-                <input type="hidden" th:field="${user.password}">
-                <input type="hidden" th:field="${user.imageURL}">
-
-                <div class="form-group row">
-                    <label for="name" class="col-lg-4 col-xl-3 col-form-label">Name</label>
-                    <div class="col-lg-8 col-xl-9">
-                        <input type="text" th:field="${user.name}" class="form-control" th:required="required">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="birthday" class="col-lg-4 col-xl-3 col-form-label">Birthday</label>
-                    <div class="col-lg-8 col-xl-9">
-                        <input type="date" th:field="${user.birthday}" class="form-control">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="website" class="col-lg-4 col-xl-3 col-form-label">Website</label>
-                    <div class="col-lg-8 col-xl-9">
-                        <input type="text" th:field="${user.website}" class="form-control">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="company" class="col-lg-4 col-xl-3 col-form-label">Company</label>
-                    <div class="col-lg-8 col-xl-9">
-                        <input type="text" th:field="${user.company}" class="form-control">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="company" class="col-lg-4 col-xl-3 col-form-label">City of residence</label>
-                    <div class="col-lg-8 col-xl-9">
-                        <input type="text" th:field="${user.city}" class="form-control">
-                    </div>
-                </div>
-
-                <button type="submit" class="btn btn-primary save-btn">Save</button>
-            </form>
-        </div>
-    </div>
 </div>
 
 </body>

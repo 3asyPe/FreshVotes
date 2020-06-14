@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+    xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+</head>
+<body>
+
+<div th:fragment="footerElement" th:remove="tag">
+    <link rel="stylesheet" type="text/css"
+        th:href="@{/css/footerFragment.css}">
+</div>
+
+<div th:fragment="footer" th:remove="tag">
+
+    <footer class="footer">
+    	<div class="footer-items">
+			<a href="#" class="footer-item">Creator</a>
+			<a th:href="@{/about}" class="footer-item">About Project</a>
+			<a th:href="@{/help}" class="footer-item">Help</a>
+    	</div>
+	</footer>
+
+</div>
+
+</body>
+</html>
