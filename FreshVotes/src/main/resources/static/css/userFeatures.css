@@ -1,0 +1,177 @@
+.features-header{
+	display: flex;
+	
+	padding: 10px 0;
+}
+
+.features-title{
+	font-size: 50px;
+}
+
+.search{
+	margin: auto 0;
+	margin-left: 15px;
+	color: #212529;
+}
+
+.search-text:focus,
+.search-button:focus {
+    outline: none;
+}
+
+.search-text{
+	border: none;
+	border-bottom: 2px solid #212529;
+	
+	font-size: 16px;
+	line-height: 2.1;
+	
+	width: 200px;
+}
+
+.search-button{
+	padding: 0;
+	border: none;
+	background: none;
+}
+
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    
+    margin: 0 -1em 30px;
+    margin-bottom: 30px;
+}
+
+.card-place{
+    width: 50%;
+    padding: 0.7em;
+}
+
+.card-body{
+	padding: 15px;
+}
+
+.feature{
+    width: 100%;
+    min-height: 159px;
+}
+
+.card-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: middle;
+    text-align: center;
+
+    padding: 10px 20px;
+}
+
+.feature-title{
+    line-height: 1;
+    text-align: center;
+    margin: auto 0;
+}
+
+.feature-status{
+	margin: auto 0;
+}
+
+.delete-feature-form{
+	display: none;
+	opacity: 0;
+	
+	font-size: 16px;
+	line-height: 1.2;
+	
+	transition: opacity .1s linear;
+}
+
+.delete-btn{
+	padding: 3px 4.8px;
+	width: 57.83px;
+	
+	font-size: 12px;
+	line-height: 1;
+	text-align: center;
+	text-transform: uppercase;
+	
+	outline: none;
+	box-shadow: none;
+	border:none;
+	border-radius: .25em;
+
+	color: #fff;	
+	background-color: red;
+	
+}
+
+.card-text{
+	min-height: 48px;
+}
+
+.rejected-feature{
+	opacity: 0.5;
+	
+	transition: opacity .1s linear;
+}
+
+.rejected-feature:hover{
+	opacity: 1;
+}
+
+.rejected-feature:hover .delete-feature-form{
+	display: inline-block;
+	opacity: 1;
+}
+
+.rejected-feature:hover .feature-status{
+	display: none;
+}
+
+.card-bottom{
+    display: flex;
+    justify-content: space-between;
+    
+    float: bottom;
+}
+
+.size{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+}
+
+.size-title{
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+}
+
+.size-desc{
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -moz-box;
+      -moz-box-orient: vertical;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      line-clamp: 2;
+      box-orient: vertical;
+}
+
+.feature-rates{
+    display: flex;
+}
+
+.rate-icon{
+    width: 20px;
+    height: 20px;
+}
+
+.rate-num{
+    font-size: 12px;
+    margin: auto 5px auto 0;
+}

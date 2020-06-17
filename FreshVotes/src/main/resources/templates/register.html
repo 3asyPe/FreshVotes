@@ -12,6 +12,7 @@
 <script th:replace="fragments/footer :: footerElement"></script>
 
 <link rel="stylesheet" type="text/css" th:href="@{css/login.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{css/register.css}">
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 	integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
@@ -65,9 +66,10 @@
 							</div>
 						</div>
 					</div>
-						
-						<a href="login" class="btn btn-info">Back</a>
-						<button type="submit" class="btn btn-primary float-right" id="createAccount">Create Account</button>
+					<div class="register-buttons">
+						<a href="login" class="btn btn-info long-btn">Back</a>
+						<button type="submit" class="btn btn-primary long-btn" id="createAccount">Create Account</button>
+					</div>
 				</form>
 			</div>
 		</div>

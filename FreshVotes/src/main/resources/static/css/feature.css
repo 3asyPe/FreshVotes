@@ -1,5 +1,9 @@
-.feature{
-	margin-left: 15px;
+.feature-container{
+	max-width: 900px;
+}
+
+.card{
+	margin-top: 30px;
 }
 
 .my-textarea{
@@ -10,14 +14,14 @@
 	min-height: 30px;
 }
 
-.comments{
-	margin-top: 30px;
-}
-
-
 .description{
 	white-space: pre-line;
 	word-break: break-all;
 	
 	margin: 15px 0;
+}
+
+.feature-buttons{
+	display: flex;
+	justify-content: space-between;
 }

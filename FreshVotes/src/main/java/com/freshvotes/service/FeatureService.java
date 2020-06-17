@@ -112,7 +112,15 @@ public class FeatureService {
 		return featureRepo.findByUser(user);
 	}
 	
+	public List<Feature> findByUserAndTitleContaining(User user, String name){
+		return featureRepo.findByUserAndTitleContaining(user, name);
+	}
+	
 	public List<Feature> findByProductAndStatusIn(Product product, String[] status) {
 		return featureRepo.findByProductAndStatusIn(product, status);
+	}
+
+	public void deleteById(int featureId) {
+		featureRepo.deleteById(featureId);
 	}
 }

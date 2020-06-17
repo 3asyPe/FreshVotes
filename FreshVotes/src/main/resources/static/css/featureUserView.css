@@ -56,8 +56,19 @@ ul{
 	line-height: 1.5;
 }
 
+.description{
+	white-space: pre-line;
+	word-break: break-all;
+	
+	margin: 15px 0;
+}
+
 .description-header{
 	border-bottom: 1px rgba(0, 0, 0, 0.3) solid;
+}
+
+.feature{
+	margin-left: 15px;
 }
 
 .btn-feature{
@@ -163,10 +174,6 @@ ul{
 	transition: fill .1s linear;
 }
 
-.dislike-icon{
-	transform: rotate(180deg);
-}
-
 .rate-label:hover{
 	fill: black;
 	color: black;
@@ -232,6 +239,12 @@ ul{
 	border-radius: 0;
 	
 	transition: border-color .2s linear;
+	
+	line-height: 1.5;
+	height: auto;
+	resize: none;
+	overflow: hidden;
+	min-height: 30px;
 }
 
 .my-textarea:focus{

@@ -4,3 +4,53 @@
 	
 	min-height: 100vh;
 }
+
+.btn{
+	border-radius: .35rem;
+}
+
+.long-btn{
+	min-width: 130px;
+}
+
+.medium-btn{
+	min-width: 110px;
+}
+
+.btn-info{
+	background-color: #a0a0a0!important;
+	border-color: #a0a0a0!important;
+}
+
+.btn-info:hover{
+	background-color: #306d77!important;
+	border-color: #306d77!important;
+}
+
+.btn-primary{
+	background-color: #4a5259!important;
+	border-color: #4a5259!important;
+}
+
+.btn-primary:hover{
+	background-color: #17a2b8!important;
+	border-color: #17a2b8!important;
+}
+
+.card{
+	border: none;
+	border-radius: 10px;
+	
+	overflow: hidden;
+	
+	box-shadow: 0 0 7px rgba(0,0,0,0.5);
+}
+
+.card-header{
+	background-color: #4a5259;
+	color: white;	
+}
+
+.dislike-icon{
+    transform: rotate(180deg);
+}

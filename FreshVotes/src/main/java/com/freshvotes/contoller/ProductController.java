@@ -53,6 +53,8 @@ public class ProductController {
 			response.sendError(HttpStatus.NOT_FOUND.value(), "There is no product with id " + productId);
 		}
 		
+		model.addAttribute("productExist", true);
+		
 		return "product";
 	}
 	

@@ -41,6 +41,10 @@ public class Feature {
 	@JsonIgnore
 	private Set<Comment> comments = new HashSet<>();
 	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="primaryKey.feature")
+	@JsonIgnore
+	private Set<Vote> votes = new HashSet<>();
+	
 	private Integer upvotes = 0;
 	private Integer downvotes = 0;
 	
@@ -121,6 +125,11 @@ public class Feature {
 
 	public void setDownvotes(Integer downvotes) {
 		this.downvotes = downvotes;
+	}
+
+	@Override
+	public String toString() {
+		return "Feature [id=" + id + ", title=" + title + ", status=" + status + "]";
 	}
 
 

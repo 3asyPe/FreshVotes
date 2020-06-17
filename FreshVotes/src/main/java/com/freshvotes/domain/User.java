@@ -54,6 +54,10 @@ public class User {
 	@JsonIgnore
 	private Set<Feature> features = new HashSet<>();
 	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="primaryKey.user")
+	@JsonIgnore
+	private Set<Vote> votes = new HashSet<>();
+	
 	public int getId() {
 		return id;
 	}

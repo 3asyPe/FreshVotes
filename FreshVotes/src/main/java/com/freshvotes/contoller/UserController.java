@@ -1,20 +1,14 @@
 package com.freshvotes.contoller;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URI;
-import java.nio.file.CopyOption;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.tomcat.util.http.fileupload.FileUtils;
-import org.aspectj.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -44,6 +38,15 @@ public class UserController {
 	
 	@Autowired
     private HttpServletRequest request;
+	
+	private Map<String, Integer> statuses = new HashMap<String, Integer>() {
+		{
+			put("Accepted", 4);
+			put("Review", 3);
+			put("Pending review", 2);
+			put("Rejected", 1);
+		}
+	};
 	
 	@GetMapping("/profile")
 	public String showUserProfile(@PathVariable int userId,
@@ -93,9 +96,28 @@ public class UserController {
 	
 	@GetMapping("/features")
 	public String showUserFeatureRequests(@PathVariable int userId,
+										  @RequestParam(required = false) String search,
 										  Model model) {
 		User user = userService.findById(userId);
-		List<Feature> features = featureService.findByUser(user);
+		List<Feature> features;
+		
+		if(search == null) {
+			features = featureService.findByUser(user);
+		}
+		else {
+			features = featureService.findByUserAndTitleContaining(user, search);
+		}
+		
+		if(features != null) {
+			features.sort((Feature f1, Feature f2) -> {
+				int statusesResult = statuses.get(f2.getStatus()) - statuses.get(f1.getStatus());
+				if(statusesResult != 0) {
+					return statusesResult;
+				}
+				
+				return f2.countVotes() - f1.countVotes();
+			}); 
+		}
 		
 		model.addAttribute("features", features);
 		

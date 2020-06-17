@@ -1,5 +1,5 @@
 .container{
-	margin: 15px auto;
+	margin: 0 auto;
 }
 
 .nav{
@@ -38,7 +38,7 @@
 }
 
 .card{
-	margin-top: 15px;
+	margin-top: 30px;
 	padding: 0;
 }
 
@@ -50,6 +50,10 @@
 .title-register{
 	font-size: 45px;
 	maring: 30px auto;
+}
+
+form{
+	margin: 0;
 }
 
 .form-groups{

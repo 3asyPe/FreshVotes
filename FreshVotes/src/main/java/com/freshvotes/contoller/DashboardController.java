@@ -51,6 +51,7 @@ public class DashboardController {
 		product.setUser(user);
 	
 		model.addAttribute("product", product);
+		model.addAttribute("productExist", false);
 		
 		return "product";
 	}

@@ -38,9 +38,11 @@ public class FeatureController {
 	private VoteRepository voteRepo;
 	
 	@GetMapping("/createFeature")
-	public String showCreateFeature(Model model) {
+	public String showCreateFeature(Model model,
+									@PathVariable int productId) {
 		Feature feature = new Feature();
 		model.addAttribute("feature", feature);
+		model.addAttribute("productId", productId);
 		return "feature";
 	}
 	
@@ -112,16 +114,14 @@ public class FeatureController {
 												  "UTF-8");
 	}
 	
-	@GetMapping("/features/{featureId}/status")
-	public String changeFeatureStatus(@RequestParam String status,
-									  @PathVariable int productId,
-									  @PathVariable int featureId) {
+	@PostMapping("/features/{featureId}/delete")
+	public String deleteStatus(@PathVariable int featureId,
+							   @PathVariable int productId,
+							   @AuthenticationPrincipal User user) {
 		
-		Feature feature = featureService.findById(featureId);
-		feature.setStatus(status);
-		featureService.save(feature);
+		featureService.deleteById(featureId);
 		
-		return "redirect:/products/" + productId + "/features/" + featureId;
+		return "redirect:/user/" + user.getId() + "/features";
 	}
 }
 

@@ -40,26 +40,19 @@
 			</div>
 		</div>
 		
-		<div class="jumbotron">
-			<div th:if="${products != null}">
+		<div th:if="${products != null}">
 			
-				<h1>Products</h1>
-				
-				<div th:each="product : ${products}">
-					<div class="card">
-					    <div class="card-header">
-					    	<h5 th:text="${product.name}"></h5>
-	
-					    </div>
-					    <div class="card-body">
-					        <h5 class="card-title size" th:text="${product.shortDescription}">Main description</h5>
-				        	<p class="card-text size" th:text="${product.fullDescription}">Long description with full information</p>
-						        
-					        <a th:href="@{/products/{productName}(productName=${product.name})}" class="btn btn-primary btn-open">View</a>
-					    </div>
-					</div>
-				</div>		
-			</div>
+			<div class="card" th:each="product : ${products}">
+			    <div class="card-header">
+			    	<h5 th:text="${product.name}"></h5>
+			    </div>
+			    <div class="card-body">
+			        <h5 class="card-title size" th:text="${product.shortDescription}">Main description</h5>
+		        	<p class="card-text size" th:text="${product.fullDescription}">Long description with full information</p>
+				        
+			        <a th:href="@{/products/{productName}(productName=${product.name})}" class="btn btn-primary btn-open">View</a>
+			    </div>
+			</div>	
 		</div>
 	
 	</div>

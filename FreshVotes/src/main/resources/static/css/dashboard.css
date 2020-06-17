@@ -58,21 +58,27 @@
 	min-width: 120px;
 }
 
-.jumbotron{
-	padding-top: 16px;
-	padding-bottom: 16px;
-}
-
 .card{
 	margin-bottom: 20px;	
+	
+	border: none;
+	border-radius: 10px;
+	
+	overflow: hidden;
+	
+	box-shadow: 0 0 7px rgba(0,0,0,0.5);
+	
+}
+
+.card-header{
+	background-color: #4a5259;
+	color: white;	
 }
 
 .card-text{
 	min-height: 70px;
 	white-space: pre-line;
 }
-
-
 
 .size{
       overflow: hidden;

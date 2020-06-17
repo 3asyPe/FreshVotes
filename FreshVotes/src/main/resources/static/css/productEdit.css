@@ -1,3 +1,15 @@
+form{
+	margin-top: 0;
+}
+
+.card{
+	margin-top: 30px;
+}
+
+.product-container{
+	max-width: 900px;
+}
+
 .switcher{
 	cursor: pointer;
 }
@@ -11,19 +23,25 @@
 	margin-left: 15px;
 }
 
-.header{
-	position: relative;
+.product-edit-header{
+	display: flex;
+	
+	align-items: middle;
+	justify-content: space-between;
 }
 
-.header-title{
+.product-edit-header-title{
 	display: flex;
 }
 
 .header-form{
-	position: absolute;
-	right: 15px;
-	top:50%;
-	transform: translateY(-50%);
+	display: flex;
+	
+	align-items: middle;
+}
+
+.delete-btn{
+	margin: auto 0;
 }
 
 .row-bottom{
@@ -37,4 +55,5 @@
 	resize: none;
 	overflow: hidden
 }
+
 
