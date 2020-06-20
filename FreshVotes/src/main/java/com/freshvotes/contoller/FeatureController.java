@@ -123,6 +123,18 @@ public class FeatureController {
 		
 		return "redirect:/user/" + user.getId() + "/features";
 	}
+	
+	@GetMapping("/features/{featureId}/status")
+	public String changeFeatureStatus(@RequestParam String status,
+									  @PathVariable int featureId,
+									  @PathVariable int productId) {
+		
+		Feature feature = featureService.findById(featureId);
+		feature.setStatus(status);
+		featureService.save(feature);
+		
+		return "redirect:/products/" + productId + "/features/" + featureId;
+	}
 }
 
 

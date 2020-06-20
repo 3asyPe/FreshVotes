@@ -127,10 +127,6 @@
     width: 100%;
     height: 100%;
     padding: 9em;
-
-    animation-name: feature;
-    animation-duration: .5s;
-    animation-fill-mode: both;
 }
 
 .card-title{

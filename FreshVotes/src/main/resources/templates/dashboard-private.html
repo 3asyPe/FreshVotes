@@ -41,17 +41,17 @@
 		
 	
 			<div th:if="${not #lists.isEmpty(products)}">
-				<div th:each="product : ${products}">
+				<div class="card-animation" th:each="product : ${products}">
 					<div class="card">
 					    <div class="card-header">
-					    	<h5 th:text="${product.name}"></h5>
+					    	<h5 class="card-title-animation"  th:text="${product.name}"></h5>
 					    	
 					    	<h6><span class="badge badge-secondary" th:if="${product.published}">Published</span></h6>
 	
 					    </div>
 					    <div class="card-body">
-					        <h5 class="card-title size" th:text="${product.shortDescription}">Main description</h5>
-				        	<p class="card-text size" th:text="${product.fullDescription}">Long description with full information</p>
+					        <h5 class="card-title size card-text-animation" th:text="${product.shortDescription}">Main description</h5>
+				        	<p class="card-text size card-text-animation" th:text="${product.fullDescription}">Long description with full information</p>
 						    
 						    <a th:href="@{/products/{productId}/edit(productId=${product.id})}" class="btn btn-info btn-open">Edit</a>
 					        <a th:href="@{/products/{productName}(productName=${product.name})}" class="btn btn-primary btn-open">View</a>

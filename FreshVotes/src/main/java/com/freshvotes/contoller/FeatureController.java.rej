@@ -1,0 +1,9 @@
+diff a/FreshVotes/src/main/java/com/freshvotes/contoller/FeatureController.java b/FreshVotes/src/main/java/com/freshvotes/contoller/FeatureController.java	(rejected hunks)
+@@ -113,6 +113,7 @@
+ 									  @PathVariable int productId,
+ 									  @PathVariable int featureId) {
+ 		
++		Feature feature = featureService.findById(featureId);
+ 		feature.setStatus(status);
+ 		featureService.save(feature);
+ 		

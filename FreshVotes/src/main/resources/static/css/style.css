@@ -46,6 +46,47 @@
 	box-shadow: 0 0 7px rgba(0,0,0,0.5);
 }
 
+.card-animation{
+	animation-name: card-animation;
+    animation-duration: .7s;
+    animation-fill-mode: both;
+}
+
+.card-text-animation{
+	animation-name: card-text-animation;
+    animation-duration: .7s;
+    animation-fill-mode: both;
+}
+
+@keyframes card-animation{
+    0%{
+        opacity: 0;
+        padding: 9em;
+    }
+    100%{
+        opacity: 1;
+        padding: 1em;
+    }
+}
+
+@keyframes card-text-animation{
+	0%{
+		font-size: 0;
+	}
+	100%{
+		font-size: 16px;
+	}
+}
+
+@keyframes card-title-animation{
+	0%{
+		font-size: 0;
+	}
+	100%{
+		font-size: 18px;
+	}
+}
+
 .card-header{
 	background-color: #4a5259;
 	color: white;	

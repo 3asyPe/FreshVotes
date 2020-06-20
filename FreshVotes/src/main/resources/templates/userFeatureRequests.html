@@ -63,10 +63,10 @@
 		</div>
 	
 		<div class="cards">
-			<div class="card-place" th:each="feature : ${features}">
+			<div class="card-place card-animation" th:each="feature : ${features}">
 				<div class="card feature" th:classappend="${feature.status == 'Rejected'} ? rejected-feature : ''">
 					<div class="card-header">
-						<div class="feature-title" th:text="${feature.title}"></div>
+						<div class="feature-title card-text-animation" th:text="${feature.title}"></div>
 						<h6 class="feature-status"><span class="badge badge-secondary" th:text="${feature.status}"></span></h6>
 						<form th:action="@{/products/{productId}/features/{featureId}/delete(productId=${feature.product.id},featureId=${feature.id})}"
 							  method="post" th:if="${feature.status == 'Rejected'}" class="delete-feature-form">
@@ -76,7 +76,7 @@
 						</form>
 					</div>
 					<div class="card-body">
-	                    <p class="card-text size size-desc" th:text="${feature.description}"></p>
+	                    <p class="card-text size size-desc card-text-animation" th:text="${feature.description}"></p>
 	                    <div class="card-bottom">
 	                        <a th:href="@{/products/{productId}/features/{featureId}(productId=${feature.product.id},featureId=${feature.id})}"
 	                                     class="card-link">View</a>
