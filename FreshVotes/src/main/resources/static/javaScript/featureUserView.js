@@ -296,7 +296,33 @@ function tryChangeCurStatus(text){
 }
 
 function saveStatusBadge(){
-	window.location.href = window.location.href + "/status?status=" + cur_status;
+	const url = window.location.href + "/status";
+	const csrfToken = document.getElementById("csrfToken").value;
+		
+	var parameters={
+	    status: cur_status
+	};
+	
+	$.ajaxSetup({
+	    beforeSend: function(xhr) {
+	        xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+	    }
+	});
+	
+	$.ajax({
+	    type:  'POST',
+	    contentType: "application/json; charset=utf-8",
+	    data:  JSON.stringify(parameters), 
+	    dataType: "json",
+	    url: url,
+	    success:  function (data) {
+			console.log("success");
+			window.location.href = window.location.href;
+		}, error: function(data){
+			console.log("error");
+			window.location.href = window.location.href;
+		}
+	});
 }
 
 

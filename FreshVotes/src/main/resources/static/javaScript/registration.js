@@ -47,8 +47,6 @@ function matchingTheUsernames(){
 		});
 
 	}
-	
-	usernameEl.onchange = matchUsername;
 }
 
 validatingPasswords();

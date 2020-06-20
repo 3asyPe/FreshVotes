@@ -3,6 +3,7 @@ package com.freshvotes.contoller;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,8 +15,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.freshvotes.domain.Feature;
 import com.freshvotes.domain.User;
@@ -124,16 +127,17 @@ public class FeatureController {
 		return "redirect:/user/" + user.getId() + "/features";
 	}
 	
-	@GetMapping("/features/{featureId}/status")
-	public String changeFeatureStatus(@RequestParam String status,
+	@PostMapping("/features/{featureId}/status")
+	@ResponseBody
+	public void changeFeatureStatus(@RequestBody Object obj,
 									  @PathVariable int featureId,
 									  @PathVariable int productId) {
 		
-		Feature feature = featureService.findById(featureId);
-		feature.setStatus(status);
-		featureService.save(feature);
+		Map<String, String> json = (Map<String, String>)obj;
 		
-		return "redirect:/products/" + productId + "/features/" + featureId;
+		Feature feature = featureService.findById(featureId);
+		feature.setStatus(json.get("status"));
+		featureService.save(feature);
 	}
 }
 
