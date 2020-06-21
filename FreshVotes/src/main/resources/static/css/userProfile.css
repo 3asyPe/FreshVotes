@@ -16,6 +16,9 @@
 .profile-description{
     margin: 0 2em 0 4em;
     width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
 }
 
 .profile-icon-div{
@@ -97,6 +100,7 @@
 
 .profile-info-value{
     width: 75%;
+    text-overflow: ellipsis;
 }
 
 .more-dropdown{
@@ -131,6 +135,64 @@
     height: 35px;
 }
 
+@media(max-width: 991px){
+	.profile-header{
+		padding: 1em;
+	}
+	
+	.profile-description{
+		margin-left: 2em;
+		margin-right: 1em;
+	}
+	
+	.more-dropdown{
+		right: 0;
+		top: 15px;
+	}
+	
+	.profile-info-label{
+		width: 33%;
+	}
+	
+	.profile-info-value{
+		width: 67%;
+	}
+}
+
+@media(max-width: 767px){
+	
+	.profile-header{
+		padding: 1em 0;
+	}
+	
+	.profile-icon{
+		width: 150px;
+		height: 150px;
+	}
+}
+
+@media(max-width: 575px){
+	.profile-description{
+		margin-left: 1em;
+	}
+	
+	.profile-icon{
+		width: 55px;
+		height: 55px;
+		border-radius: 50%;
+	}
+	
+	.profile-name-div{
+		display: flex;
+		align-items: middle;
+		height: 55px;
+	}
+	
+	.profile-name{
+		font-size: 30px;
+		margin: auto auto;
+	}
+}
 
 
 

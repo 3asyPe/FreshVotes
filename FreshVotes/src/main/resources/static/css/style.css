@@ -71,18 +71,22 @@
 
 @keyframes card-text-animation{
 	0%{
+		opacity: 0;
 		font-size: 0;
 	}
 	100%{
+		opacity: 1;
 		font-size: 16px;
 	}
 }
 
 @keyframes card-title-animation{
 	0%{
+		opacity: 0;
 		font-size: 0;
 	}
 	100%{
+		opacity: 1;
 		font-size: 18px;
 	}
 }
@@ -94,4 +98,14 @@
 
 .dislike-icon{
     transform: rotate(180deg);
+}
+
+@media(max-width:450px){
+	.card{
+		margin-top: 1em;
+	}
+	
+	.long-btn{
+		min-width: 120px;
+	}
 }

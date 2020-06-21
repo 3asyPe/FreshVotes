@@ -23,18 +23,16 @@
 	<div th:replace="fragments/header :: header"></div>
 	
 	<div class="container">
-		<div class="row header">
-			<div class="header-left">
-				<div class="dashboard-title">FreshVotes Dashboard</div>
-				
-				<form class="search" th:action="@{/dashboard}" method="get">
+		<div class="header">
+			<div class="dashboard-title">Dashboard</div>
+			
+			<div class="dashboard-header-forms">
+				<form class="dashboard-form search" th:action="@{/dashboard}" method="get">
 				  <input type="text" placeholder="Search.." th:name="search" class="search-text" th:value="${param.search}">
 				  <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
 				</form>
-			</div>
-				
-			<div class="row form">
-				<form th:action="@{/dashboard/createProduct}" method="get">
+					
+				<form class="dashboard-form" th:action="@{/dashboard/createProduct}" method="get">
 					<button type="submit" class="btn btn-primary create-product">Create a Product</button>		
 				</form>
 			</div>
@@ -44,13 +42,15 @@
 			<div class="card-place card-animation" th:each="product : ${products}">
 				<div class="card">
 				    <div class="card-header">
-				    	<h5 class="card-title-animation"  th:text="${product.name}"></h5>
+				    	<div class="card-title card-title-animation"  th:text="${product.name}"></div>
 				    </div>
 				    <div class="card-body">
 				        <h5 class="card-title size card-text-animation" th:text="${product.shortDescription}">Main description</h5>
 			        	<p class="card-text size card-text-animation" th:text="${product.fullDescription}">Long description with full information</p>
-					        
-				        <a th:href="@{/products/{productName}(productName=${product.name})}" class="btn btn-primary btn-open">View</a>
+					       
+					    <div class="product-buttons">
+					        <a th:href="@{/products/{productName}(productName=${product.name})}" class="btn btn-primary btn-open">View</a>
+					    </div>
 				    </div>
 				</div>	
 			</div>

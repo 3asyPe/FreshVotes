@@ -1,5 +1,5 @@
-.container{
-	
+form{
+	display: inline-block;
 }
 
 .dashboard-title{
@@ -7,18 +7,27 @@
 }
 
 .header{
-	padding: 15px 15px;
-	position: relative;
+	padding: 15px 0;
+	
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	align-items: middle;
 }
 
-.header-left{
+.dashboard-header-forms{
 	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.dashboard-form{
+	margin: auto 0;
 }
 
 .search{
-	margin: auto 0;
-	margin-left: 15px;
 	color: #212529;
+	margin-right: 30px;
 }
 
 .search-text:focus,
@@ -33,7 +42,7 @@
 	font-size: 16px;
 	line-height: 2.1;
 	
-	width: 200px;
+	width: 250px;
 }
 
 .search-button{
@@ -42,11 +51,7 @@
 	background: none;
 }
 
-.form{
-	position: absolute;
-	right: 30px;
-	top: 50%;
-	transform: translateY(-50%);
+.create-product-form{
 }
 
 .create-product{
@@ -98,6 +103,10 @@
 	position: relative;
 }
 
+.product-buttons{
+	display: flex;
+}
+
 @keyframes card-animation{
     0%{
         opacity: 0;
@@ -109,7 +118,68 @@
     }
 }
 
+@media(max-width: 991px){
+	.dashboard-title{
+		font-size: 45px;
+	}
+	
+	.search-text{
+		width: 220px;
+	}
+}
 
+@media(max-width: 767px){
+	.dashboard-header-forms{
+		width: 100%;
+	}
+	
+	.dashboard-title{
+		width: 100%;
+		text-align: center;
+	}
+}
+
+@media(max-width: 450px){
+	.search{
+		margin: auto auto;
+		
+	}
+	
+	.search-text{
+		width: 250px;
+	}
+	
+	.dashboard-form{
+		margin: 10px auto;
+	}
+	
+	.card-title{
+		display: -webkit-box;
+		overflow: hidden;
+		white-space: pre-line;
+		text-overflow: ellipsis;
+		font-size: 16px;
+		-webkit-line-clamp: 1;
+    	-webkit-box-orient: vertical;
+	}
+	
+	.card-text{
+		height: 85px;
+		font-size: 14px !important;
+	}
+	
+	.size{
+		-webkit-line-clamp: 4;
+	}
+	
+	.btn-open{
+		margin: 0 auto;
+	}
+	
+	.product-buttons{
+		justify-content: space-between;
+	}
+}
 
 
 

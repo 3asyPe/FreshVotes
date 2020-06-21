@@ -6,6 +6,13 @@ form{
 	margin-top: 30px;
 }
 
+.card-header-title{
+	white-space: nowrap;
+	font-size: 40px;
+	line-height: 1;
+	margin: 5px 0 10px;
+}
+
 .product-container{
 	max-width: 900px;
 }
@@ -27,11 +34,12 @@ form{
 	display: flex;
 	
 	align-items: middle;
-	justify-content: space-between;
 }
 
-.product-edit-header-title{
+.product-control-buttons{
 	display: flex;
+	justify-content: space-between;
+	width: 100%;
 }
 
 .header-form{
@@ -54,6 +62,27 @@ form{
 	height: auto;
 	resize: none;
 	overflow: hidden
+}
+
+@media(max-width: 575px){
+	.card-header-title{
+		font-size: 30px;
+	}
+}
+
+@media(max-width: 450px){
+	.product-edit-header{
+		flex-direction: column;
+	}
+	
+	.custom-switch{
+		margin-left: 0;
+	}
+	
+	.card-header-title{
+		font-size: 35px;
+		text-align: center;
+	}
 }
 
 

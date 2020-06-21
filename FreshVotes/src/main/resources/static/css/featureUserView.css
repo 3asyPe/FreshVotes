@@ -8,19 +8,14 @@ ul{
 	list-style-type: none;
 }
 
-.header-top{
-	position: relative;
-	
-	margin-top: 15px;
-}
-
 .header-title{
-	margin: auto 15px;
+	margin: auto 0;
 	line-height: 1;
+	white-space: nowrap;
 }
 
-.header-title-top{
-	display: flex;
+.feature-title{
+	font-size: 40px;
 }
 
 .badge{
@@ -114,14 +109,18 @@ ul{
 	margin-right: 4.36px;
 }
 
-.header-right{
+.feature-header{
 	display: flex;
-	align-items: center;
-	
-	position: absolute;
-	right: 30px;
-	top: 50%;
-	transform: translateY(-50%);
+	margin: 10px 0;
+}
+
+.feature-header-buttons{
+	display: flex;
+	justify-content: space-between;
+	align-items: middle;
+	margin: auto;
+	width: 100%;
+	height: 100%;
 }
 
 .feature-owner-div{
@@ -156,10 +155,6 @@ ul{
 
 .rates{
 	display: flex;
-}
-
-.rates-row{
-	margin-right: -15px;
 }
 
 .radio-input{
@@ -291,11 +286,90 @@ ul{
 	margin-top: -5px;
 }
 
+@media(max-width: 767px){
+	.feature-header-buttons{
+		flex-direction: column;
+		align-items: flex-end;
+		margin: 0;
+	}
+	
+	.feature-header{
+		margin-bottom: 0;
+	}
+	
+	.header-title{
+		margin: 0;
+	}
+	
+	.badge-status{
+		padding: 0;
+	}
+	
+	.badge-status::after{
+		margin-right: 0;
+	}
+}
 
+@media(max-width: 575px){
+	.feature-title{
+		font-size: 30px;
+	}
+	
+	.feature-owner-label{
+		font-size: 8px;
+	}
+	
+	.feature-owner{
+		font-size: 16px;
+	}
+}
 
-
-
-
+@media(max-width: 450px){
+	
+	ul{
+		padding-left: 35px;
+	}
+	
+	.feature-header{
+		flex-direction: column;
+	}
+	
+	.feature-header-buttons{
+		flex-direction: row;
+	}
+	
+	.badge-status{
+		margin: 0;
+	}
+	
+	.other-comments{
+		margin-left: -35px;
+	}
+	
+	.comment-title{
+		font-size: 16px;
+	}
+	
+	.comment-text{
+		font-size: 14px;
+	}
+	
+	.comment-date{
+		font-size: 10px;
+	}
+	
+	.reply-button{
+		font-size: 9px;
+		height: 16px;
+		width: 30px;
+	}
+	
+	.user-image{
+		width: 40px;
+		height: 40px;
+		margin-right: 0.5em;
+	}
+}
 
 
 

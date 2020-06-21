@@ -22,47 +22,48 @@
 	<div th:replace="fragments/header :: header"></div>
 
 	<div class="container">
-		<div class="row header">
-			<div class="header-left">
-				<div class="dashboard-title">My products</div>
-				
-				<form class="search" th:action="@{/dashboard/private}" method="get">
+	
+		<div class="header">
+			<div class="dashboard-title">My products</div>
+			
+			<div class="dashboard-header-forms">
+				<form class="dashboard-form search" th:action="@{/dashboard/private}" method="get">
 				  <input type="text" placeholder="Search.." th:name="search" class="search-text" th:value="${param.search}">
 				  <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
 				</form>
-			</div>
-			
-			<div class="row form">
-				<form th:action="@{/dashboard/createProduct}" method="get">
-					<button sec:authorize="isAuthenticated()" type="submit" class="btn btn-primary create-product">Create a Product</button>		
+					
+				<form class="dashboard-form" th:action="@{/dashboard/createProduct}" method="get">
+					<button type="submit" class="btn btn-primary create-product">Create a Product</button>		
 				</form>
 			</div>
 		</div>
 		
 	
-			<div th:if="${not #lists.isEmpty(products)}">
-				<div class="card-animation" th:each="product : ${products}">
-					<div class="card">
-					    <div class="card-header">
-					    	<h5 class="card-title-animation"  th:text="${product.name}"></h5>
-					    	
-					    	<h6><span class="badge badge-secondary" th:if="${product.published}">Published</span></h6>
-	
-					    </div>
-					    <div class="card-body">
-					        <h5 class="card-title size card-text-animation" th:text="${product.shortDescription}">Main description</h5>
-				        	<p class="card-text size card-text-animation" th:text="${product.fullDescription}">Long description with full information</p>
-						    
+		<div th:if="${not #lists.isEmpty(products)}">
+			<div class="card-animation" th:each="product : ${products}">
+				<div class="card">
+				    <div class="card-header">
+				    	<h5 class="card-title card-title-animation"  th:text="${product.name}"></h5>
+				    	
+				    	<h6><span class="badge badge-secondary" th:if="${product.published}">Published</span></h6>
+
+				    </div>
+				    <div class="card-body">
+				        <h5 class="card-title size card-text-animation" th:text="${product.shortDescription}">Main description</h5>
+			        	<p class="card-text size card-text-animation" th:text="${product.fullDescription}">Long description with full information</p>
+					    
+					    <div class="product-buttons">
 						    <a th:href="@{/products/{productId}/edit(productId=${product.id})}" class="btn btn-info btn-open">Edit</a>
 					        <a th:href="@{/products/{productName}(productName=${product.name})}" class="btn btn-primary btn-open">View</a>
 					    </div>
-					</div>
-				</div>		
-			</div>
+				    </div>
+				</div>
+			</div>		
+		</div>
+		
+		<div th:if="${#lists.isEmpty(products)}">
 			
-			<div th:if="${#lists.isEmpty(products)}">
-				
-			</div>
+		</div>
 	
 	</div>
 	
