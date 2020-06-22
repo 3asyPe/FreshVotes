@@ -61,6 +61,7 @@ form{
 
 .btn-open{
 	min-width: 120px;
+	margin-right: 10px;
 }
 
 .card{
@@ -73,6 +74,10 @@ form{
 	
 	box-shadow: 0 0 7px rgba(0,0,0,0.5);
 	
+}
+
+.card-title{
+	font-size: 18px;
 }
 
 .card-header{
