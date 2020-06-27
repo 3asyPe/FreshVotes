@@ -24,21 +24,6 @@ public class CustomSecurityUser extends User implements UserDetails{
 	}
 
 	@Override
-	public Set<Authority> getAuthorities() {
-		return super.getAuthorities();
-	}
-
-	@Override
-	public String getPassword() {
-		return super.getPassword();
-	}
-
-	@Override
-	public String getUsername() {
-		return super.getUsername();
-	}
-
-	@Override
 	public boolean isAccountNonExpired() {
 		return true;
 	}
@@ -55,6 +40,11 @@ public class CustomSecurityUser extends User implements UserDetails{
 
 	@Override
 	public boolean isEnabled() {
+		for(Authority auth : this.getAuthorities()) {
+			if(auth.getAuthority().equals("ROLE_UNABLE")) {
+				return false;
+			}
+		}
 		return true;
 	}
 	

@@ -2,13 +2,13 @@ package com.freshvotes.contoller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -47,6 +47,19 @@ public class UserController {
 			put("Rejected", 1);
 		}
 	};
+	
+	@GetMapping("/verification/{encodedUsername}")
+	public String activateAccount(@PathVariable int userId,
+								  @PathVariable String encodedUsername,
+								  Model model) {
+		User user = userService.findById(userId);
+		
+		if(DigestUtils.sha256Hex(user.getUsername()).equals(encodedUsername)) {
+			userService.activateUser(user);
+		}
+		
+		return "redirect:/login?activated";
+	}
 	
 	@GetMapping("/profile")
 	public String showUserProfile(@PathVariable int userId,

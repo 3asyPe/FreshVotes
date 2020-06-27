@@ -194,8 +194,8 @@ function sendReplyComment(){
 	}
 	
 	var parameters={
-			text: text.val(),
-			commentId: commentIdVal
+		text: text.val(),
+		commentId: commentIdVal
 	};
 	
 	$.ajaxSetup({

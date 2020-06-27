@@ -1,5 +1,7 @@
 package com.freshvotes.contoller;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,8 +30,9 @@ public class LoginController {
 	}
 	
 	@PostMapping("/register")
-	public String registerPost(User user) {
+	public String registerPost(User user) throws MessagingException {
 		userService.createUser(user);
 		return "redirect:/login?registered";
 	}
+	
 }

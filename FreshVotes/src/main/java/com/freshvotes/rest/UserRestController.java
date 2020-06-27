@@ -3,6 +3,7 @@ package com.freshvotes.rest;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,5 +29,17 @@ public class UserRestController {
 		}
 		
 		return false;
+	}
+	
+	@PostMapping("/user/loggedin")
+	public boolean isLoggedIn(@AuthenticationPrincipal User user,
+							 @RequestBody Object obj) {
+		Map<String, String> json = (Map<String, String>)obj;
+
+		if(user == null || user.getUsername().equals(json.get("username"))) {
+			return false;
+		}
+		
+		return true;
 	}
 }

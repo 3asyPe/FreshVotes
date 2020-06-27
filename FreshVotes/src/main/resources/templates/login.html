@@ -53,7 +53,9 @@
 			
 					<div th:if="${param.logout != null}" class="alert alert-success">You have been logged out. </div>
 					
-					<div th:if="${param.registered != null}" class="alert alert-success">You have created new account. </div>
+					<div th:if="${param.registered != null}" class="alert alert-warning">Please check your email and activate your account. </div>
+					
+					<div th:if="${param.activated != null}" class="alert alert-success">You have activated your new account. </div>
 					
 					<div class="form-groups">
 						<div class="form-group row">
