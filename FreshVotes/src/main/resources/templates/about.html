@@ -5,7 +5,7 @@
 
 <meta charset="UTF-8">
 
-<title>FreshVotes User</title>
+<title>FreshVotes About</title>
 
 <script th:replace="fragments/import :: importElement"></script>
 <script th:replace="fragments/header :: headerElement"></script>
@@ -16,17 +16,114 @@
 </head>
 <body>
 
+<svg style="display: none">
+	<symbol id="github" viewBox="0 0 512 512">
+		<g>
+			<path d="M255.968,5.329C114.624,5.329,0,120.401,0,262.353c0,113.536,73.344,209.856,175.104,243.872
+				c12.8,2.368,17.472-5.568,17.472-12.384c0-6.112-0.224-22.272-0.352-43.712c-71.2,15.52-86.24-34.464-86.24-34.464
+				c-11.616-29.696-28.416-37.6-28.416-37.6c-23.264-15.936,1.728-15.616,1.728-15.616c25.696,1.824,39.2,26.496,39.2,26.496
+				c22.848,39.264,59.936,27.936,74.528,21.344c2.304-16.608,8.928-27.936,16.256-34.368
+				c-56.832-6.496-116.608-28.544-116.608-127.008c0-28.064,9.984-51.008,26.368-68.992c-2.656-6.496-11.424-32.64,2.496-68
+				c0,0,21.504-6.912,70.4,26.336c20.416-5.696,42.304-8.544,64.096-8.64c21.728,0.128,43.648,2.944,64.096,8.672
+				c48.864-33.248,70.336-26.336,70.336-26.336c13.952,35.392,5.184,61.504,2.56,68c16.416,17.984,26.304,40.928,26.304,68.992
+				c0,98.72-59.84,120.448-116.864,126.816c9.184,7.936,17.376,23.616,17.376,47.584c0,34.368-0.32,62.08-0.32,70.496
+				c0,6.88,4.608,14.88,17.6,12.352C438.72,472.145,512,375.857,512,262.353C512,120.401,397.376,5.329,255.968,5.329z"/>
+		</g>
+	</symbol>
+	<symbol id="linkedin" viewBox="0 0 512 512">
+		<path d="m256 0c-141.363281 0-256 114.636719-256 256s114.636719 256 256 256 256-114.636719 256-256-114.636719-256-256-256zm-74.390625 387h-62.347656v-187.574219h62.347656zm-31.171875-213.1875h-.40625c-20.921875 0-34.453125-14.402344-34.453125-32.402344 0-18.40625 13.945313-32.410156 35.273437-32.410156 21.328126 0 34.453126 14.003906 34.859376 32.410156 0 18-13.53125 32.402344-35.273438 32.402344zm255.984375 213.1875h-62.339844v-100.347656c0-25.21875-9.027343-42.417969-31.585937-42.417969-17.222656 0-27.480469 11.601563-31.988282 22.800781-1.648437 4.007813-2.050781 9.609375-2.050781 15.214844v104.75h-62.34375s.816407-169.976562 0-187.574219h62.34375v26.558594c8.285157-12.78125 23.109375-30.960937 56.1875-30.960937 41.019531 0 71.777344 26.808593 71.777344 84.421874zm0 0"/>
+	</symbol>
+	<symbol id="facebook" viewBox="0 0 512 512">
+		<path d="m512 256c0-141.4-114.6-256-256-256s-256 114.6-256 256 114.6 256 256 256c1.5 0 3 0 4.5-.1v-199.2h-55v-64.1h55v-47.2c0-54.7 33.4-84.5 82.2-84.5 23.4 0 43.5 1.7 49.3 2.5v57.2h-33.6c-26.5 0-31.7 12.6-31.7 31.1v40.8h63.5l-8.3 64.1h-55.2v189.5c107-30.7 185.3-129.2 185.3-246.1z"/>
+	</symbol>
+</svg>
+
 <div class="page">
 
-	<div th:replace="fragments/header :: header"></div>
+    <div th:replace="fragments/header :: header"></div>
+
+    <div class="container">
+
+        <div class="about-title">About FreshVotes Project</div>
+
+        <div class="about-description">
+            <div class="about-description-part">
+                FreshVotes is a resume project created by Alex Kvasha. Idea was taken from the YouTuber Trevore Page but the whole web-app was written by me. This is the app where people can offer new features for products.
+            </div>
+
+            <div class="about-description-part">
+                Imagin you have a product, for example some application. You want to make your application better but to make it better you have to know what to add or to update. This is the part where you need some reviews on your product but most of them are about nothing. To find really helpfull review isn't the easiest thing to do.
+            </div>
+            <div class="about-description-part">
+                That is where FreshVotes come. It allows users to offer features for the products or create their own products and ask other to offer new features. Users also are being able to like, dislike and comment other features. This is very helpfull for product owners to know what users want more. Every feature would have a status which is being set by the owner of the product. For example statuses "Accepted" or "Rejected". This way users would know did the product owner see their offer or he just ignored that.
+            </div>
+        </div>
+		
+		<div class="about-bottom">
+		
+	        <div class="about-stuff">
+	            <div class="about-stuff-title">
+	                Languages and Technologies
+	            </div>
+				
+				<div class="about-stuff-language">Java</div>
+	            <ul class="about-stuff-technologies">
+	                <li class="about-stuff-technology">Spring Boot</li>
+	                <li class="about-stuff-technology">Spring Core</li>
+	                <li class="about-stuff-technology">Spring MVC</li>
+	                <li class="about-stuff-technology">Spring Data</li>
+	                <li class="about-stuff-technology">Hibernate</li>
+	                <li class="about-stuff-technology">Spring Security</li>
+	                <li class="about-stuff-technology">Spring Mail</li>
+	                <li class="about-stuff-technology">Spring Rest</li>
+	            </ul>
+	            
+	            <div class="about-stuff-language">MySQL</div>
+	            
+	            <div class="about-stuff-language">HTML</div>
+	            <ul>
+	                <li class="about-stuff-technology">Thymeleaf</li>
+	            </ul>
+	            
+	            <div class="about-stuff-language">CSS</div>
+	            <ul>
+	                <li class="about-stuff-technology">BootStrap</li>
+	            </ul>
+	            
+	            <div class="about-stuff-language">JS</div>
+	        </div>
+	        
+	        <div class="about-links">
+	        	<div class="about-links-title">Links</div>
+	        	
+	        	<div class="about-links-row">
+					
+					<a class="about-link" href="https://github.com/3asyPe">
+			        	<svg class="about-link-icon">
+		                    <use xlink:href="#github"></use>
+		                </svg>
+					</a>
+					
+					<a class="about-link" href="#">
+			        	<svg class="about-link-icon">
+		                    <use xlink:href="#linkedin"></use>
+		                </svg>
+					</a>
+					
+					<a class="about-link" href="https://www.facebook.com/profile.php?id=100015766263739">
+			        	<svg class="about-link-icon">
+		                    <use xlink:href="#facebook"></use>
+		                </svg>
+					</a>
 	
-	<div class="container">
-	
-		<div>About</div>
-	    
-	</div>
-	
-	<div th:replace="fragments/footer :: footer"></div>
+	        	</div>
+	        </div>
+	        
+		</div>
+
+    </div>
+
+    <div th:replace="fragments/footer :: footer"></div>
 
 </div>
 

@@ -1,0 +1,91 @@
+ul{
+	margin-bottom: 0;
+}
+
+.about-title{
+    text-align: center;
+    font-size: 30px;
+    margin: 10px 0;
+}
+
+.about-description{	
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+
+    padding: 10px 0;
+    font-style: italic;
+}
+
+.about-description-part{
+    margin-bottom: 5px;
+}
+
+.about-description-part:last-child{
+    margin-bottom: 0;
+}
+
+.about-bottom{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.about-stuff{
+	width: 50%;
+	padding-left: 20px;
+}
+
+.about-stuff-title{
+    font-size: 25px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.about-stuff-language{
+	font-size: 18px;
+	font-weight: 500;
+	
+	margin-top: 10px;
+}
+
+.about-stuff-technologies{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.about-stuff-technology{
+	width: 35%;
+}
+
+.about-links{
+	width: 50%;
+}
+
+.about-links-title{
+	font-size: 25px;
+	text-align: center;
+    margin: 10px 0;
+}
+
+.about-links-row{
+	display: flex;
+	justify-content: center;
+}
+
+.about-link{
+	margin: auto 20px;
+}
+
+.about-link-icon{
+	width: 40px;
+	height: 40px;
+
+	fill: #494949;
+	transition: fill .1s linear;
+}
+
+.about-link-icon:hover{
+	fill: #000;
+}
+
+
+
