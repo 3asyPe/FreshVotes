@@ -1,0 +1,43 @@
+.verify-container{
+	max-width: 900px;
+}
+
+.card-header-title{
+	font-size: 20px;
+}
+
+.form-email{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.form-group{
+	display: flex;
+	justify-content: center;
+	margin: auto 0;
+	margin-bottom: 10px;
+}
+
+.form-label{
+	margin-right: 10px;
+	margin-bottom: 0;
+}
+
+.form-input{
+	border: none;
+	border-bottom: 2px solid #919192;
+	width: 250px;
+	transition: border-color .1s linear;
+	line-height: 1.7;
+}
+
+.submit-button{
+	margin: auto;
+}
+
+.form-input:focus,
+.form-input:active{
+	outline: none;
+	border-color: #000;
+}

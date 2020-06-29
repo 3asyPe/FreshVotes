@@ -23,6 +23,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.freshvotes.domain.Feature;
 import com.freshvotes.domain.User;
+import com.freshvotes.repository.EmailRepository;
+import com.freshvotes.service.EmailService;
 import com.freshvotes.service.FeatureService;
 import com.freshvotes.service.UserService;
 
@@ -32,6 +34,12 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private EmailService emailService;
+	
+	@Autowired
+	private EmailRepository emailRepo;
 		
 	@Autowired
 	private FeatureService featureService;
@@ -48,17 +56,22 @@ public class UserController {
 		}
 	};
 	
-	@GetMapping("/verification/{encodedUsername}")
+	@GetMapping("/verification")
 	public String activateAccount(@PathVariable int userId,
-								  @PathVariable String encodedUsername,
+								  @RequestParam(required = true) String key,
 								  Model model) {
 		User user = userService.findById(userId);
+		Boolean result = emailService.varifyKey(user, key);
 		
-		if(DigestUtils.sha256Hex(user.getUsername()).equals(encodedUsername)) {
+		if(result == true) {
 			userService.activateUser(user);
+			emailService.deleteByEmailAddress(user.getUsername());
+			return "redirect:/login?activated";
+		}
+		else {
+			return "redirect:/login?notactivated";
 		}
 		
-		return "redirect:/login?activated";
 	}
 	
 	@GetMapping("/profile")

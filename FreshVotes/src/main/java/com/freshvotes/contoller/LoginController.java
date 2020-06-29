@@ -32,7 +32,7 @@ public class LoginController {
 	@PostMapping("/register")
 	public String registerPost(User user) throws MessagingException {
 		userService.createUser(user);
-		return "redirect:/login?registered";
+		return "redirect:/login?activate";
 	}
 	
 }

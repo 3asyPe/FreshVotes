@@ -29,6 +29,10 @@
 	margin: auto;
 }
 
+.alert-verify{
+	display: flex;
+}
+
 .btn-main{
 	min-width: 135px;
 }

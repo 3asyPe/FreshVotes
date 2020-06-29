@@ -53,9 +53,14 @@
 			
 					<div th:if="${param.logout != null}" class="alert alert-success">You have been logged out. </div>
 					
-					<div th:if="${param.registered != null}" class="alert alert-warning">Please check your email and activate your account. </div>
+					<div th:if="${param.activate != null}" class="alert alert-warning">Please check your email and activate your account. </div>
 					
 					<div th:if="${param.activated != null}" class="alert alert-success">You have activated your new account. </div>
+					
+					<div th:if="${param.notactivated != null}" class="alert alert-danger alert-verify">
+						There was an error with activating your account.
+						<a th:href="@{/email/verifyEmail}" class="verifyEmail">Activate account</a>
+					</div>
 					
 					<div class="form-groups">
 						<div class="form-group row">
