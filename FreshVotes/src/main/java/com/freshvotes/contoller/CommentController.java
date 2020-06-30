@@ -1,7 +1,6 @@
 package com.freshvotes.contoller;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -17,10 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.freshvotes.domain.Comment;
 import com.freshvotes.domain.User;
-import com.freshvotes.repository.CommentRepository;
 import com.freshvotes.service.CommentService;
 import com.freshvotes.service.FeatureService;
 
@@ -44,7 +41,7 @@ public class CommentController {
 	@ResponseBody
 	public Integer createComment(@AuthenticationPrincipal User user,
 							     @RequestBody Object obj,
-							     @PathVariable int featureId) throws JsonProcessingException, ParseException {
+							     @PathVariable int featureId){
 		Comment comment = new Comment();
 
 		Date date = new Date();

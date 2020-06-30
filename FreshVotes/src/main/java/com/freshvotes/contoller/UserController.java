@@ -66,7 +66,8 @@ public class UserController {
 		if(result == true) {
 			userService.activateUser(user);
 			emailService.deleteByEmailAddress(user.getUsername());
-			return "redirect:/login?activated";
+			userService.authorizeUser(user);
+			return "redirect:/dashboard";
 		}
 		else {
 			return "redirect:/login?notactivated";
