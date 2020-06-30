@@ -39,7 +39,9 @@ public class DashboardController {
 		else {			
 			products = productRepo.findByPublished(true);
 		}
+		
 		model.addAttribute("products", products);
+		
 		return "dashboard";
 	}
 	
@@ -76,6 +78,7 @@ public class DashboardController {
 		}
 		
 		model.addAttribute("products", products);
+		
 		return "dashboard-private";
 	}
 

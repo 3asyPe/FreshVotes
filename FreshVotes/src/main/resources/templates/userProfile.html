@@ -33,7 +33,7 @@
 	    <div class="profile-header">
 	        <div class="profile-icon-div">
 	            <img class="profile-icon" th:src="@{${user.imageURL}}">
-	            <div class="profile-icon-edit">
+	            <div class="profile-icon-edit" sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getId() == user.id}">
 	                <button type="button" class="profile-icon-edit-link" data-toggle="modal" data-target="#profileIconModal">
 	                    Upload picture
 	                </button>

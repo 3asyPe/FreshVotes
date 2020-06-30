@@ -106,17 +106,9 @@ public class UserController {
 	public String saveUserImage(@RequestParam MultipartFile  image,
 								@PathVariable int userId,
 								@AuthenticationPrincipal User securityUser) throws IOException {
-
-		File file = new File(new ClassPathResource("static/images/").getFile().toString() + "/" + image.getOriginalFilename().trim());
-		image.transferTo(file);
-		
 		User user = userService.findById(userId);
-		String imageURL = "/images/" + image.getOriginalFilename().trim();
 		
-		user.setImageURL(imageURL);
-		securityUser.setImageURL(imageURL);
-		
-		userService.save(user);
+		userService.uploadUserImage(image, user, securityUser);
 		
 		return "redirect:/user/" + userId + "/profile";
 	}
