@@ -10,6 +10,8 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -28,11 +30,14 @@ public class EmailService{
 	@Autowired
 	private JavaMailSender emailSender;
 	
+	@Value("${baseUrl.string}")
+	private String baseUrl;
+	
 	public void sendAuthenticationEmail(User user){
 		try {
 			Integer keyLength = 40;
 			String key = RandomStringUtils.randomAlphanumeric(keyLength);
-			String url = "http://localhost:8080/user/" + user.getId() + "/verification?key=" + key;
+			String url = baseUrl + "/user/" + user.getId() + "/verification?key=" + key;
 			Boolean multipart = true;
 			
 			String htmlMsg = "<h1 style=\"text-align: center\">Please activate your account</h1>" + 

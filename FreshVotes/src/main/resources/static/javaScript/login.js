@@ -2,11 +2,9 @@ var loginBtn = document.getElementById("login");
 		
 loginBtn.addEventListener("click", function(){
 	
-	const url = "http://localhost:8080/user/loggedin";
+	const url = "http://" + window.location.host + "/user/loggedin";
 	const csrfToken = document.getElementById("csrfToken").value;
 	const usernameEl = document.getElementById("username");
-	
-	console.log("request");
 	
 	var response = fetch(url, {
 		method: "POST",

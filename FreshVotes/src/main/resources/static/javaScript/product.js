@@ -10,7 +10,7 @@ function autoResize() {
 var nameEl = document.getElementById("name");
 nameEl.onkeyup = function(){nameEl.setCustomValidity("");}
 
-const url = "http://localhost:8080/api/product/name/match";
+const url = "http://" + window.location.host + "/api/product/name/match";
 const csrfToken = document.getElementById("csrfToken").value;
 
 function matchName(){

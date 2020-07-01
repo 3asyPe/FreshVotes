@@ -37,7 +37,7 @@ function matchingTheUsernames(){
 		usernameEl.setCustomValidity("");
 	}
 	
-	const url = "http://localhost:8080/api/user/username/match";
+	const url = "http://" + window.location.host + "/api/user/username/match";
 	const csrfToken = document.getElementById("csrfToken").value;
 	
 	var parameters={

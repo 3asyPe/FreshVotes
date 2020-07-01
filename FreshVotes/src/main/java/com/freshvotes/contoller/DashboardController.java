@@ -5,6 +5,8 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -30,7 +32,7 @@ public class DashboardController {
 	
 	@GetMapping("/dashboard")
 	public String dashboard(@RequestParam(value="search", required=false) String search,
-							Model model) {
+							Model model, HttpServletRequest request) {
 		List<Product> products;
 		
 		if(search != null) {

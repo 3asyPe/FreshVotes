@@ -15,7 +15,7 @@ function verifyEmail(){
 	else{
 		emailEl.setCustomValidity("");
 		
-		const url = "http://localhost:8080/email/verifyEmail";
+		const url = "http://" + window.location.host + "/email/verifyEmail";
 		const csrfToken = document.getElementById("csrfToken").value;
 		
 		var parameters={

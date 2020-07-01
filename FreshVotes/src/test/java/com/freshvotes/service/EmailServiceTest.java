@@ -2,6 +2,8 @@ package com.freshvotes.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,7 +14,7 @@ import org.junit.jupiter.api.Test;
 class EmailServiceTest {
 
 	@Test
-	void test() throws ParseException {
+	void test1() throws ParseException {
 	         
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		
@@ -25,6 +27,11 @@ class EmailServiceTest {
             System.out.println("The date is not expired");
         }
         System.out.println(testDate);
+	}
+	
+	@Test
+	void test2() throws UnknownHostException{
+		
 	}
 	
 }
