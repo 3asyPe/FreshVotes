@@ -2,6 +2,10 @@
 	max-width: 900px;
 }
 
+.card{
+	margin-top: 30px;
+}
+
 .card-header-title{
 	font-size: 20px;
 }

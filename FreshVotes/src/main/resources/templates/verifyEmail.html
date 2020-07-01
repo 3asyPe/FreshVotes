@@ -24,26 +24,24 @@
 	
 	<div class="container verify-container">
 	
-		<div class="card-animation">
-			<div class="card">
-				<div class="card-header">
-					<div class="card-header-title">Request a new verification email</div>
+		<div class="card">
+			<div class="card-header">
+				<div class="card-header-title">Request a new verification email</div>
+			</div>
+			
+			<div class="card-body">
+				<div class="card-description">
+					<p>Enter the email you use to sign in to your FreshVotes Account.</p>
+					<p>We will send an email with a link to verify your email address. Click the link when you receive the email.</p>
 				</div>
-				
-				<div class="card-body">
-					<div class="card-description">
-						<p class="card-text-animation">Enter the email you use to sign in to your FreshVotes Account.</p>
-						<p class="card-text-animation">We will send an email with a link to verify your email address. Click the link when you receive the email.</p>
+				<form class="form-email" action="" method="post">
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" id="csrfToken"/>
+					<div class="form-group">
+						<label for="email" class="form-label">Email</label>
+						<input type="text" id="email" name="email" class="form-input" th:required="required"/>
 					</div>
-					<form class="form-email" action="" method="post">
-						<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" id="csrfToken"/>
-						<div class="form-group">
-							<label for="email" class="form-label">Email</label>
-							<input type="text" id="email" name="email" class="form-input" th:required="required"/>
-						</div>
-						<button type="button" id="submit-form" class="btn btn-primary submit-button">Sumbit</button>
-					</form>
-				</div>
+					<button type="button" id="submit-form" class="btn btn-primary submit-button">Sumbit</button>
+				</form>
 			</div>
 		</div>
 	    

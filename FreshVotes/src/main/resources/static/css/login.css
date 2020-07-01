@@ -25,6 +25,10 @@
 	display: none;
 }
 
+.verifyEmail{
+	margin-left: 5px;
+}
+
 .container-inner{
 	margin: auto;
 }

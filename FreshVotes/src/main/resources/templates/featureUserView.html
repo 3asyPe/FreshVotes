@@ -44,8 +44,7 @@
         </g>
         <g>
             <g>
-                <path
-			d="M160,245.333c-5.888,0-10.667,4.779-10.667,10.667v192c0,5.888,4.779,10.667,10.667,10.667s10.667-4.779,10.667-10.667
+                <path d="M160,245.333c-5.888,0-10.667,4.779-10.667,10.667v192c0,5.888,4.779,10.667,10.667,10.667s10.667-4.779,10.667-10.667
                     V256C170.667,250.112,165.888,245.333,160,245.333z" />
             </g>
         </g>
@@ -58,8 +57,7 @@
 
 	<div class="container">
 
-		<input type="hidden" th:name="${_csrf.parameterName}"
-			th:value="${_csrf.token}" id="csrfToken" />
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" id="csrfToken" />
 
 		<div class="description-header">
 			<div class="feature-header">
@@ -67,9 +65,7 @@
 					<div class="feature-title" th:text="${feature.title}">Product</div>
 					<div class="feature-owner-div">
 						<div class="feature-owner-label">owner:</div>
-						<a class="feature-owner"
-							th:href="@{/user/{userId}/profile(userId=${feature.user.id})}"
-							th:text="${feature.user.name}"></a>
+						<a class="feature-owner" th:href="@{/user/{userId}/profile(userId=${feature.user.id})}" th:text="${feature.user.name}"></a>
 					</div>
 				</div>
 
@@ -77,19 +73,14 @@
 					
 					<div class="status-change">
 						<div class="badge-status" th:if="${user == null or user.id != feature.product.user.id}">
-							<h4>
-								<span class="badge badge-secondary" th:text="${feature.status}"></span>
-							</h4>
+							<h4><span class="badge badge-secondary" th:text="${feature.status}"></span></h4>
 						</div>
 						
 						<div class="btn-group" th:if="${user != null and user.id == feature.product.user.id}">
-							<button type="button" class="badge-status dropdown-toggle"
-									data-toggle="dropdown" aria-haspopup="true"
-									aria-expanded="false">
-								<h4>
-									<span id="status-badge" class="badge badge-secondary" th:text="${feature.status}"></span>
-								</h4>
+							<button type="button" class="badge-status dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<h4><span id="status-badge" class="badge badge-secondary" th:text="${feature.status}"></span></h4>
 							</button>
+							
 							<div class="dropdown-menu dropdown-menu-right">
 								<button type="button" id="status-accept" class="dropdown-item dropdown-first" data-toggle="modal" data-target="#exampleModal">
 								    Accept
@@ -105,15 +96,12 @@
 								</button>
 							</div>
 						
-							<div class="modal fade" id="exampleModal" tabindex="-1"
-								  role="dialog" aria-labelledby="exampleModalLabel"
-								  aria-hidden="true">
+							<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
 										<div class="modal-header">
 											<h5 class="modal-title" id="exampleModalLabel">Changing status</h5>
-											<button type="button" class="close" data-dismiss="modal"
-												aria-label="Close">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 												<span aria-hidden="true">&times;</span>
 											</button>
 										</div>
@@ -122,10 +110,8 @@
 											<div class="modal-alert">All users will be able to see this status</div>
 										</div>
 										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary"
-												data-dismiss="modal">Close</button>
-											<button type="button" id="status-save" class="btn btn-primary">Save
-												changes</button>
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											<button type="button" id="status-save" class="btn btn-primary">Save changes</button>
 										</div>
 									</div>
 								</div>
@@ -136,20 +122,19 @@
 					<div class="rates" sec:authorize="isAuthenticated()">
 						<form>
 							<fieldset>
-								<input class="radio-input" type="checkbox" name="like"
-									id="likeBtn" th:checked="${like}"> <label
-									for="likeBtn" class="rate-label" id="likeLabel"> <svg
-										class="rate-icon">
+								<input class="radio-input" type="checkbox" name="like" id="likeBtn" th:checked="${like}">
+							 	<label for="likeBtn" class="rate-label" id="likeLabel">
+							 	 	<svg class="rate-icon">
 			                            <use xlink:href="#like"></use>
-			                        </svg> <span class="rate-num" th:text="${upvotes}"
-									id="likeNum">123</span>
-								</label> <input class="radio-input" type="checkbox" name="dislike"
-									id="dislikeBtn" th:checked="${dislike}"> <label
-									for="dislikeBtn" class="rate-label" id="dislikeLabel">
+			                        </svg>
+			                        <span class="rate-num" th:text="${upvotes}" id="likeNum">123</span>
+								</label> 
+								<input class="radio-input" type="checkbox" name="dislike" id="dislikeBtn" th:checked="${dislike}"> 
+								<label for="dislikeBtn" class="rate-label" id="dislikeLabel">
 									<svg class="rate-icon dislike-icon">
 			                            <use xlink:href="#like"></use>
-			                        </svg> <span class="rate-num"
-									th:text="${downvotes}" id="dislikeNum">321</span>
+			                        </svg> 
+			                        <span class="rate-num" th:text="${downvotes}" id="dislikeNum">321</span>
 								</label>
 							</fieldset>
 						</form>
@@ -157,8 +142,7 @@
 				</div> <!-- feature-header-buttons -->
 			</div> <!-- feature-header -->
 
-			<div class="description" th:text="${feature.description}">Full
-				Description</div>
+			<div class="description" th:text="${feature.description}">Full Description</div>
 		</div>
 
 		<div class="comments">
@@ -178,61 +162,48 @@
 				</div>
 			</div>
 
-			<input sec:authorize="isAuthenticated()" type="hidden" id="name"
-				th:value="${user.name}">
+			<input sec:authorize="isAuthenticated()" type="hidden" id="name" th:value="${user.name}">
 
 			<div class="other-comments" id="commentsDiv">
 				<div th:fragment="fragment-comment" th:remove="tag">
 					<div th:if="${not #lists.isEmpty(comments)}">
-						<ul th:each="comment : ${comments}"
-							th:with="comments = ${comment.comments}"
-							th:id="|comment-div-${comment.id}|">
-							<li class="media" th:id="|comment-${comment.id}|"><a
-								th:href="@{/user/{userId}/profile(userId=${comment.user.id})}">
+						<ul th:each="comment : ${comments}" th:with="comments = ${comment.comments}" th:id="|comment-div-${comment.id}|">
+							<li class="media" th:id="|comment-${comment.id}|">
+								<a th:href="@{/user/{userId}/profile(userId=${comment.user.id})}">
 									<img th:src="@{${comment.user.imageURL}}" class="user-image">
-							</a>
+								</a>
 
 								<div class="media-body">
 									<div class="comment-header">
-										<div class="comment-title" th:text="${comment.user.name}">Media
-											heading</div>
-										<button type="button" class="reply-button"
-											sec:authorize="isAuthenticated()"
-											th:id="|reply-button-${comment.id}|">reply</button>
+										<div class="comment-title" th:text="${comment.user.name}">Media heading</div>
+										<button type="button" class="reply-button" sec:authorize="isAuthenticated()" th:id="|reply-button-${comment.id}|">reply</button>
 										<div class="comment-date" th:text="${comment.createdDate}"></div>
 									</div>
-									<div th:text="${comment.text}" class="comment-text">Cras
-										sit amet nibh libero, in gravida nulla. Nulla vel metus
-										scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-										vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-										nisi vulputate fringilla. Donec lacinia congue felis in
-										faucibus.</div>
-								</div></li>
-							<div sec:authorize="isAuthenticated()" class="d-none"
-								th:id="|reply-textarea-div-${comment.id}|">
+									<div th:text="${comment.text}" class="comment-text"></div>
+								</div>
+							</li>
+							
+							<div sec:authorize="isAuthenticated()" class="d-none" th:id="|reply-textarea-div-${comment.id}|">
 								<ul>
-									<li class="media"><img
-										th:src="@{${comment.user.imageURL}}" class="user-image">
+									<li class="media">
+										<img th:src="@{${comment.user.imageURL}}" class="user-image">
 										<div class="media-body">
-											<textarea class="my-textarea"
-												th:id="|reply-textarea-${comment.id}|" rows="1"></textarea>
+											<textarea class="my-textarea" th:id="|reply-textarea-${comment.id}|" rows="1"></textarea>
 											<div class="new-comment-buttons">
-												<button type="button"
-													class="btn btn-info btn-feature close-button"
-													th:id="|close-button-${comment.id}|">Close</button>
-												<button type="submit"
-													class="btn btn-primary btn-feature send-button send-button-reply"
-													th:id="|send-button-${comment.id}|">Send</button>
+												<button type="button" class="btn btn-info btn-feature close-button" th:id="|close-button-${comment.id}|">Close</button>
+												<button type="submit" class="btn btn-primary btn-feature send-button send-button-reply" th:id="|send-button-${comment.id}|">Send</button>
 											</div>
-										</div></li>
+										</div>
+									</li>
 								</ul>
 							</div>
+							
 							<li th:replace="this::fragment-comment">List Item</li>
 						</ul>
 					</div>
 				</div>
 			</div>
-			<!-- other-comments -->
+			
 			<div class="no-comments" th:if="${#lists.isEmpty(comments)}">Leave comment first</div>
 		</div>
 
@@ -245,7 +216,6 @@
 <script th:src="@{/javaScript/feature.js}"></script>
 <script th:src="@{/javaScript/featureUserView.js}"></script>
 <script th:src="@{/javaScript/dateFormater.js}"></script>
-
 
 </body>
 </html>

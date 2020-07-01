@@ -2,6 +2,12 @@ form{
 	display: inline-block;
 }
 
+.no-products{
+	margin-top: 70px;
+	text-align: center;
+	font-size: 18px;
+}
+
 .dashboard-title{
 	font-size: 50px;
 }
@@ -49,9 +55,6 @@ form{
 	padding: 0;
 	border: none;
 	background: none;
-}
-
-.create-product-form{
 }
 
 .create-product{

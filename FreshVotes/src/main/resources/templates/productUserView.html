@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="UTF-8">
-<title th:text="${product.name}">FreshVotes Product</title>
+<title th:text="|FreshVotes ${product.name}|">FreshVotes Product</title>
 
 <script th:replace="fragments/import :: importElement"></script>
 <script th:replace="fragments/header :: headerElement"></script>
@@ -81,8 +81,7 @@
             <div class="title">
                 <div class="product-title" th:text="${product.name}">Product</div>
 				<div class="title-buttons">
-	                <a th:href="@{/products/{productId}/edit(productId=${product.id})}" th:if="${user != null and user.id == product.user.id}"
-	                          class="product-edit mobile-btn">
+	                <a th:href="@{/products/{productId}/edit(productId=${product.id})}" th:if="${user != null and user.id == product.user.id}" class="product-edit mobile-btn">
 						<svg class="edit-icon mobile-icon">
 	                        <use xlink:href="#edit"></use>
 	                    </svg>
@@ -105,29 +104,24 @@
 
         <div class="filters">
         	<div class="filters-row">
-	            <button type="button" id="filter-all" class="filter-item"
-	                    th:classappend="${all} ? activatedFilter : ''">
+	            <button type="button" id="filter-all" class="filter-item" th:classappend="${all} ? activatedFilter : ''">
 	                All
 	            </button>
-	            <button type="button" id="filter-accepted" class="filter-item"
-	                    th:classappend="${Accepted} ? activatedFilter : ''">
+	            <button type="button" id="filter-accepted" class="filter-item" th:classappend="${Accepted} ? activatedFilter : ''">
 	                Accepted
 	            </button>
         	</div>
 
         	<div class="filters-row">
-	            <button type="button" id="filter-review" class="filter-item"
-	                    th:classappend="${Review} ? activatedFilter : ''">
+	            <button type="button" id="filter-review" class="filter-item" th:classappend="${Review} ? activatedFilter : ''">
 	                Reveiw
 	            </button>
-	            <button type="button" id="filter-pending" class="filter-item"
-	                    th:classappend="${#vars.getVariable('Pending review')} ? activatedFilter : ''">
+	            <button type="button" id="filter-pending" class="filter-item" th:classappend="${#vars.getVariable('Pending review')} ? activatedFilter : ''">
 	                Pending
 	            </button>
-	            <button type="button" id="filter-rejected" class="filter-item"
-	                    th:classappend="${Rejected} ? activatedFilter : ''">
+	            <button type="button" id="filter-rejected" class="filter-item" th:classappend="${Rejected} ? activatedFilter : ''">
 	                Rejected
-            </button>
+            	</button>
         	</div>
         </div>
 
@@ -140,8 +134,7 @@
                     <h6 class="card-subtitle mb-2 text-muted card-text-animation" th:text="${feature.status}">Card subtitle</h6>
                     <p class="card-text size size-desc" th:text="${feature.description}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     <div class="card-bottom">
-                        <a th:href="@{/products/{productId}/features/{featureId}(productId=${product.id},featureId=${feature.id})}"
-                                     class="card-link">View</a>
+                        <a th:href="@{/products/{productId}/features/{featureId}(productId=${product.id},featureId=${feature.id})}" class="card-link">View</a>
                         <div class="feature-rates">
                             <div class="feature-rate">
                                 <svg class="rate-icon">

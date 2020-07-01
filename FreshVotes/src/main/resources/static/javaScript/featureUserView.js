@@ -30,7 +30,6 @@ function checkStateLike(){
 		doVote(null, true);
 		likeNum.innerHTML = parseInt(likeNum.innerHTML, 10) - 1;
 	}
-	consoleState();
 	checkActiveClasses();
 }
 
@@ -50,13 +49,7 @@ function checkStateDislike(){
 		doVote(null, false);
 		dislikeNum.innerHTML = parseInt(dislikeNum.innerHTML, 10) - 1;
 	}
-	consoleState();
 	checkActiveClasses();
-}
-
-function consoleState(){
-	console.log("dislikeBtn " + dislikeBtn.checked);
-	console.log("likeBtn " + likeBtn.checked);
 }
 
 function checkActiveClasses(){

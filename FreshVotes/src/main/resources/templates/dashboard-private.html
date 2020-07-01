@@ -4,7 +4,6 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <title>FreshVotes Private Dashboard</title>
 
@@ -19,6 +18,7 @@
 <body>
 
 <div class="page">
+
 	<div th:replace="fragments/header :: header"></div>
 
 	<div class="container">
@@ -44,9 +44,7 @@
 				<div class="card">
 				    <div class="card-header">
 				    	<h5 class="card-title card-title-animation"  th:text="${product.name}"></h5>
-				    	
 				    	<h6><span class="badge badge-secondary" th:if="${product.published}">Published</span></h6>
-
 				    </div>
 				    <div class="card-body">
 				        <h5 class="card-title size card-text-animation" th:text="${product.shortDescription}">Main description</h5>
@@ -62,7 +60,7 @@
 		</div>
 		
 		<div th:if="${#lists.isEmpty(products)}">
-			
+			<div class="no-products">You have no products yet.</div>
 		</div>
 	
 	</div>

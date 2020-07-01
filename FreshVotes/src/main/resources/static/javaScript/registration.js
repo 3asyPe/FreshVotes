@@ -78,6 +78,5 @@ function createAccountValidating(){
 	matchingTheUsernames();
 }
 
-var form = document.getElementById("myForm");
 var createAccountBtn = document.getElementById("createAccount");
 createAccount.onclick = createAccountValidating;

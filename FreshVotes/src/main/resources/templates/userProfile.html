@@ -87,12 +87,10 @@
 	        </div>
 	
 	        <div sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getId() == user.id}" class="dropdown more-dropdown">
-	            <svg class="dropdown-toggle more-icon" id="dropdownMoreButton" data-toggle="dropdown"
-	                aria-haspopup="true" aria-expanded="false">
+	            <svg class="dropdown-toggle more-icon" id="dropdownMoreButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                <use xlink:href="#more"></use>
 	            </svg>
-	            <div class="dropdown-menu dropdown-menu-right"
-	                 aria-labelledby="dropdownMoreButton">
+	            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMoreButton">
 	                <div class="dropdown-item more-dropdown-item">
 	                    <div class="dropdown-item-inner">
 	                        <a class="dropdown-item-content more-dropdown-first" th:href="@{/user/{userId}/profile/edit(userId=${#authentication.getPrincipal().getId()})}">Edit</a>

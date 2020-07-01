@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org"
-    xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 
 <meta charset="UTF-8">
-<title>Insert title here</title>
 
 </head>
 <body>
 
 <div th:fragment="footerElement" th:remove="tag">
-    <link rel="stylesheet" type="text/css"
-        th:href="@{/css/footerFragment.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footerFragment.css}">
 </div>
 
 <div th:fragment="footer" th:remove="tag">

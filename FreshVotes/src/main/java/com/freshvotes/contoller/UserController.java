@@ -1,16 +1,11 @@
 package com.freshvotes.contoller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.freshvotes.domain.Feature;
 import com.freshvotes.domain.User;
-import com.freshvotes.repository.EmailRepository;
 import com.freshvotes.service.EmailService;
 import com.freshvotes.service.FeatureService;
 import com.freshvotes.service.UserService;
@@ -37,17 +31,11 @@ public class UserController {
 	
 	@Autowired
 	private EmailService emailService;
-	
-	@Autowired
-	private EmailRepository emailRepo;
 		
 	@Autowired
 	private FeatureService featureService;
 	
-	@Autowired
-    private HttpServletRequest request;
-	
-	private Map<String, Integer> statuses = new HashMap<String, Integer>() {
+	private Map<String, Integer> statuses = new HashMap<String, Integer>(){
 		{
 			put("Accepted", 4);
 			put("Review", 3);
@@ -67,7 +55,7 @@ public class UserController {
 			userService.activateUser(user);
 			emailService.deleteByEmailAddress(user.getUsername());
 			userService.authorizeUser(user);
-			return "redirect:/dashboard";
+			return "redirect:/user/" + userId + "/profile/edit";
 		}
 		else {
 			return "redirect:/login?notactivated";
