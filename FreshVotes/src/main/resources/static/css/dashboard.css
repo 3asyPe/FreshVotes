@@ -118,7 +118,7 @@ form{
 @keyframes card-animation{
     0%{
         opacity: 0;
-        padding: 9em;
+        padding: 0;
     }
     100%{
         opacity: 1;

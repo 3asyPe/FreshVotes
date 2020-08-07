@@ -65,7 +65,9 @@
 					</div>
 					
 					<div class="row-bottom">
-						<a class="btn btn-info long-btn" th:href="@{/products/{productName}(productName=${product.name})}">Back</a>
+						<a class="btn btn-info long-btn" th:if="${productExist}"
+						   th:href="@{/products/{productName}(productName=${product.name})}">Back</a>
+						<a class="btn btn-info long-btn" th:if="${!productExist}" href="/">Back</a>
 						<button type="submit" id="submit-form" class="btn btn-primary long-btn">Save</button>
 					</div>
 			

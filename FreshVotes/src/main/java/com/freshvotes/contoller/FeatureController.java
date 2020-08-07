@@ -51,17 +51,9 @@ public class FeatureController {
 	@PostMapping("/createFeature")
 	public String createFeatures(@AuthenticationPrincipal User user,
 								 @PathVariable int productId,
-								 HttpServletResponse response,
-								 Feature feature) throws IOException {
-		try {
-			feature = featureService.createFeature(feature, productId, user);
-			return "redirect:/products/" + productId + "/features/" + feature.getId();
-		}
-		catch(Exception exc) {
-			response.sendError(HttpStatus.NOT_FOUND.value(), "There is no product with id " + productId);
-		}
-			
-		return "redirect:/";
+								 Feature feature){
+		feature = featureService.createFeature(feature, productId, user);
+		return "redirect:/products/" + productId + "/features/" + feature.getId();
 	}
 	
 	@GetMapping("/features/{featureId}")

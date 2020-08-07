@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.freshvotes.domain.User;
 import com.freshvotes.repository.UserRepository;
+import com.freshvotes.service.EmailService;
 
 @RestController
 @RequestMapping("/api/user")
@@ -19,13 +20,20 @@ public class UserRestController {
 	@Autowired
 	private UserRepository userRepo;
 	
+	@Autowired
+	private EmailService emailService;
+	
 	@PostMapping("/username/match")
 	public boolean checkUsernameMatching(@RequestBody Object obj) {
 		Map<String, String> json = (Map<String, String>)obj;
-		User result = userRepo.findByUsername(json.get("username"));
+		User user = userRepo.findByUsername(json.get("username"));
 		
-		if(result == null) {
+		if(user == null) {
 			return true;
+		}
+		
+		if(!emailService.varifyEmailExists(user.getUsername())) {
+			emailService.sendAuthenticationEmail(user);
 		}
 		
 		return false;

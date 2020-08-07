@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -96,6 +97,14 @@ public class EmailService{
 	@Transactional
 	public void deleteByEmailAddress(String emailAddress) {
 		emailRepo.deleteByEmailAddress(emailAddress);
+	}
+	
+	public boolean varifyEmailExists(String emailAddress) {
+		List<VarifyEmail> result = emailRepo.findByEmailAddress(emailAddress);
+		if(result == null || result.size() == 0) {
+			return false;
+		}
+		return true;
 	}
 	
 }

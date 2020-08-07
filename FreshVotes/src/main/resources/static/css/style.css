@@ -61,7 +61,7 @@
 @keyframes card-animation{
     0%{
         opacity: 0;
-        padding: 9em;
+        padding: 1em;
     }
     100%{
         opacity: 1;
@@ -72,22 +72,18 @@
 @keyframes card-text-animation{
 	0%{
 		opacity: 0;
-		font-size: 0;
 	}
 	100%{
 		opacity: 1;
-		font-size: 16px;
 	}
 }
 
 @keyframes card-title-animation{
 	0%{
 		opacity: 0;
-		font-size: 0;
 	}
 	100%{
 		opacity: 1;
-		font-size: 18px;
 	}
 }
 
